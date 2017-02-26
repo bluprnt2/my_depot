@@ -55,14 +55,14 @@
         courseID INT NOT NULL,  /* Folder the file goes in */
         userID   INT NOT NULL,  /* Original tutor to create the file */
         /*Will require html encoding before displaying: http://ca3.php.net/manual/en/function.htmlentities.php*/
-        fileName VARCHAR(48),
+        fileName VARCHAR(48) NOT NULL,
         content  LONGTEXT,  /* Hopefully not null, but wouldn't really break anything */
         approved BOOLEAN DEFAULT 0, /*Whether or not the admin has approved it */
         PRIMARY KEY(ID),
         UNIQUE(courseID, fileName)
     );
 
-    CREATE TABLE IF NOT EXISTS Punchcards(
+    CREATE TABLE IF NOT EXISTS PunchCards(
         ID        INT      NOT NULL AUTO_INCREMENT,
         userID    INT      NOT NULL,
         checkedIn BOOLEAN  NOT NULL, /* if false: checked out */
@@ -79,7 +79,7 @@
         PRIMARY KEY(ID)
     );
 
-    CREATE TABLE IF NOT EXISTS Timeslots(
+    CREATE TABLE IF NOT EXISTS TimeSlots(
         ID        INT NOT NULL AUTO_INCREMENT,
         locID     INT NOT NULL,
         deptID    INT NOT NULL,
@@ -109,7 +109,7 @@
         PRIMARY KEY(courseID, userID)
     );
 
-    CREATE TABLE IF NOT EXISTS TutorTimeslots(
+    CREATE TABLE IF NOT EXISTS TutorTimeSlots(
         userID  INT NOT NULL,
         tSlotID INT NOT NULL,
         PRIMARY KEY(userID, tSlotID)
