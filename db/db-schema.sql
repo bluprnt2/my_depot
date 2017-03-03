@@ -100,6 +100,17 @@
         PRIMARY KEY(ID)
     );
 
+    CREATE TABLE IF NOT EXISTS Announcements(
+        ID       INT NOT NULL AUTO_INCREMENT,
+        userID   INT NOT NULL, /* user who created the post */
+        title    VARCHAR(255) NOT NULL,
+        content  TEXT,
+        title    VARCHAR(255) NOT NULL, /* required */
+        deptID   INT, /* if needed for specific department */
+        tSlot    DATETIME NOT NULL, /* when it was posted */
+        PRIMARY KEY(ID)
+    );
+
 /* many-to-many relationships */
 
     CREATE TABLE IF NOT EXISTS CourseTutors(
