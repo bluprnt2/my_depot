@@ -105,7 +105,6 @@
         userID   INT NOT NULL, /* user who created the post */
         title    VARCHAR(255) NOT NULL,
         content  TEXT,
-        title    VARCHAR(255) NOT NULL, /* required */
         deptID   INT, /* if needed for specific department */
         tSlot    DATETIME NOT NULL, /* when it was posted */
         PRIMARY KEY(ID)
