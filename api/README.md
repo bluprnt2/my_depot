@@ -5,7 +5,7 @@
  - Working
    - Token requests
  - Not Working
-   - Login functionality (Will work on that tomorrow 3/14/17)
+   - Login functionality (Will work on that tomorrow 3/15/17)
    - Other endpoints (Will work on that after login works...)
 
 ## How to run
