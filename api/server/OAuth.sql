@@ -67,3 +67,13 @@ CREATE TABLE oauth_jwt (
     CONSTRAINT jwt_client_id_pk
     PRIMARY KEY (client_id)
 );
+
+INSERT INTO oauth_clients (
+    client_id,
+    client_secret,
+    redirect_uri
+) VALUES (
+    "testclient",
+    "testpass",
+    "http://fake/"
+);
