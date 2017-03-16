@@ -4,9 +4,11 @@
 
  - Working
    - Token requests
+   - Token storage client-side without needing JavaScript or query strings
  - Not Working
-   - Login functionality (Will work on that tomorrow 3/15/17)
+   - Login functionality
    - Other endpoints (Will work on that after login works...)
+   - Tokens refreshing when they are close to expiring, but still being used
 
 ## How to run
 
@@ -27,7 +29,9 @@ Open a web browser of your choosing and navigate to:
 JSON should appear showing a newly generated access code of type Bearer.
 
 Here's an example of a correct response:
-> {"access_token":"db74c136ad8e446c8d2c48904716e60eb358ba4a","expires_in":3600,"token_type":"Bearer","scope":null}
+> db74c136ad8e446c8d2c48904716e60eb358ba4a
+
+The token should remain across page refreshes and tabs.
 
 
 ## Structure
