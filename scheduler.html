@@ -1,176 +1,115 @@
 <!DOCTYPE html>
-
+<!-- Just tagging for potential usage in Senior Proj-->
+<!-- GNU GPL License -->
+<!-- For further integration with DB for Proj-->
+<!-- https://dhtmlx.com/docs/products/dhtmlxScheduler/ -->
+<!-- https://docs.dhtmlx.com/tutorials__connector_codeigniter__step1.html-->
 <html>
-  <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <title>Drop-in Tutoring Services Scheduler</title>
-  <style>
-	.container{
-		background-color:#5bc0de;
-		}
-	.jumbotron{
-		}
-	.table{
-		background-color: #ffffff;
-		}
-  </style>
-  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/
-  css/bootstrap.min.css" >
-  </head>
-  
-  <body>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<title>Drop-In Tutoring Page</title>
+</head>
+	<script src="codebase/dhtmlxscheduler.js?v=4.1" type="text/javascript" charset="utf-8"></script>
+	<script src="codebase/ext/dhtmlxscheduler_year_view.js?v=4.1" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="codebase/dhtmlxscheduler.css?v=4.1" type="text/css" media="screen" title="no title" charset="utf-8">
 
-  
-  <div class= "container">
 	
-	<div class="page-header">
-	<h3>	
-	<input type= "button" value= "<" class="btn-small btn-info ">
-	<input type= "button" value= ">" class="btn-small btn-info ">
-	DATE STUFFS
-	</h3>
+<style type="text/css" media="screen">
+
+	html, body{
+		margin:0px;
+		padding:0px;
+		height:100%;
+		overflow:hidden;
+	}	
+	.dhx_cal_event_line.custom, .dhx_cal_event.custom div{
+		background-color:#fd7;
+		border-color:#da6;
+		color:#444;
+	}
+	
+</style>
+<script type="text/javascript" charset="utf-8">
+	function init() {
+		window.resizeTo(950,700)
+		modSchedHeight();
+		scheduler.config.xml_date="%Y-%m-%d %H:%i";
+		scheduler.config.hour_date="%h:%i %A";
+		scheduler.config.first_hour = 8;
+		scheduler.config.last_hour = 18;
+		scheduler.config.multi_day = true;
+		scheduler.config.date_step = "5"
+		scheduler.init('scheduler_here', new Date());
+		scheduler.templates.event_class=function(s,e,ev){ return ev.custom?"custom":""; };
+		scheduler.load("./xml/events.xml?v=35");
+		
+		//trying to disable functionality of creating events for tutors
+		scheduler.config.dblclick_create = true;
+		
+		//Trying to swap today tabs and day week month tabs
+		scheduler.config.fix_tab_position = false;
+	}
+</script>
+
+<body onload="init();" onresize="modSchedHeight()">
+	
+    <style>
+        a img{
+            border: none;
+        }
+        li{
+            list-style: none;
+        }
+    </style>
+	<script>
+		function modSchedHeight(){
+			var headHeight = 100;
+			var sch = document.getElementById("scheduler_here");
+			sch.style.height = (parseInt(document.body.offsetHeight)-headHeight)+"px";
+			var contbox = document.getElementById("contbox");
+			contbox.style.width = (parseInt(document.body.offsetWidth)-300)+"px";
+		}
+	</script>
+	<div style="position: relative; height:60px;background-color:#A52A2A ;border-bottom:1px solid ; border-bottom-color: black">
+		
+		<div id="contbox" style="position: relative; padding: 22px 25px 0 75px; font: bold 17px Arial, ; color: ;">
+			<div style="position: absolute; left: 0px; top: 10px; border-right:5px solid #black;color:#fafafa ;width:175px;height:50px;text-align:right;padding-right:25px;">Drop-In Tutoring Services</div>
+			<div style="padding-left: 205px; min-width: 400px;">
+                <div style="font-size:12px;padding-left:20px;">Above this will be the navbar. </div>
+    			<div style="font-size:12px;padding-left:20px;margin-top:5px;color:#949292;">You can add/edit/delete events, but changes will be available only until the page is reloaded. Must enable functionality for admins.</div>
+            </div>
+		</div>
+		<a style="position: absolute; right: 25px; top: 22px;" href="https://en.wikipedia.org/wiki/Calendar"><img src="http://www.jamesvilledewitt.org/images/ICON_Calendar.png"></a>
+	</div>	
+	<!-- end of future banner/ navbar -->
+	
+	<!-- some spacing before schedule entity-->
+    <ul>
+        <li>
+            <a></a>
+            <span></span>
+        </li>
+    </ul>
+	
+	<div id="scheduler_here" class="dhx_cal_container" style='width:100%;height:100%;'>
+		<div class="dhx_cal_navline">
+		
+		
+			<div class="dhx_cal_prev_button">&nbsp;</div>
+			<div class="dhx_cal_next_button">&nbsp;</div>
+			<div class="dhx_cal_today_button"></div>
+			<div class="dhx_cal_date"></div>
+			<div class="dhx_cal_tab" name="day_tab" style="right:332px;"></div>
+			<div class="dhx_cal_tab" name="week_tab" style="right:268px;"></div>
+			<div class="dhx_cal_tab" name="month_tab" style="right:204px;"></div>
+			
+			
+			
+		</div>
+		<div class="dhx_cal_header"></div>
+		<div class="dhx_cal_data"></div>		
 	</div>
 	
-		<div class= "row">
-		 
-		<div class="col-lg-12 col-md-12 col-sm-6 col-xs-3">
-		<table class = "table table-bordered table-striped">
-
-			<tbody>
-			<tr>
-			<th class="col-lg-1 col-md-1 col-sm-1 col-sm-1"></td>
-			
-			<th class="text-center">Sunday</td>
-			<th class="text-center">Monday</td>
-			<th class="text-center">Tuesday</td>
-			<th class="text-center">Wednesday</td>
-			<th class="text-center">Thursday</td>
-			<th class="text-center">Friday</td>
-			<th class="text-center">Saturday</td>
-			</tr>
-			
-			
-			<tr>
-			<td>8 AM</td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			</tr>
-			
-			
-			<tr>
-			<td>9:00</td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			</tr>
-			
-			<tr>
-			<td>10:00</td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			</tr>
-			
-			
-			<tr>
-			<td>11:00 </td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			</tr>
-			
-			
-			<tr>
-			<td>12 PM</td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			</tr>
-			
-			
-			<tr>
-			<td>1:00</td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			</tr>
-			
-			<tr>
-			<td>2:00</td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			</tr>
-			
-			<tr>
-			<td>3:00</td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			</tr>
-			
-			<tr>
-			<td>4:00</td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			</tr>
-			
-			<tr>
-			<td>5:00</td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			</tr>
-			</tbody>
-		</table>
-	</div>
-  </div>
-
-  </body>
+	
+	</body>
 </html>
