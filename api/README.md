@@ -5,9 +5,9 @@
  - Working
    - Token requests
    - Token storage client-side without needing JavaScript or query strings
-   - Basic GET endpoint functionality
+   - Basic endpoint functionality
  - Not Working
-   - Login functionality
+   - Login functionality (passing parameters work, now just need to connect it up to the database)
    - Other endpoints (Will work on that after login works...)
    - Tokens refreshing when they are close to expiring, but still being used
 
@@ -34,12 +34,11 @@ Here's an example of a correct response:
 
 The token should remain across page refreshes and tabs.
 
-Also, using the token, the sample GET endpoint should work, and it can be tested by navigating to:
-`http://localhost:8080/getendpoint.php`
+Also, using the token, the sample login endpoint should work, and it can be tested by navigating to:
+`http://localhost:8080/login.php`
 
 Here's an example of a correct response:
-> {"success":true,"message":"You accessed my APIs!"}
-
+> {"success":true,"token":"97d54a633e3499ffc88091d66d2de9dd2cb406ef","username":"sample_user","password":"$2y$10$QnJ57gWVOoKLpe1z4D8mz.4Vknw.ZnHEhTdyO9UZKQ5PXjvrj29DG"}
 
 ## Structure
 Currently the test API is broken up into an API server and a web server, each in their own directories.  Yes, I have tried to run both directories on the same server, but it runs into an issue due to a deadlock...

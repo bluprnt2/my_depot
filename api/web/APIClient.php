@@ -65,29 +65,14 @@
             return self::getInstance()::$token;
         }
 
-        public static function getCall($url) {
+        public static function APICall($url, $params) {
+            //currently just a copy of the call above, will change after testing probably
             $curl = curl_init();
-            $params = array();
 
             $params['access_token'] = self::getToken();
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
-
-            $response = curl_exec($curl);
-            curl_close($curl);
-            return $response;
-        }
-
-        public static function postCall($url, $params) {
-            //currently just a copy of the call above, will change after testing probably
-            $curl = curl_init();
-            $params = array();
-
-            $params['access_token'] = self::getToken();
-            curl_setopt($curl, CURLOPT_URL, $url);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
 
             $response = curl_exec($curl);
             curl_close($curl);
