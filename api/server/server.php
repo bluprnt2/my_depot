@@ -14,5 +14,4 @@
 
     // Add the "Client Credentials" grant type (it is the simplest of the grant types)
     $server->addGrantType(new OAuth2\GrantType\ClientCredentials($storage));
-    $server->handleTokenRequest(OAuth2\Request::createFromGlobals())->send();
 ?>

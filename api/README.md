@@ -5,6 +5,7 @@
  - Working
    - Token requests
    - Token storage client-side without needing JavaScript or query strings
+   - Basic GET endpoint functionality
  - Not Working
    - Login functionality
    - Other endpoints (Will work on that after login works...)
@@ -32,6 +33,12 @@ Here's an example of a correct response:
 > db74c136ad8e446c8d2c48904716e60eb358ba4a
 
 The token should remain across page refreshes and tabs.
+
+Also, using the token, the sample GET endpoint should work, and it can be tested by navigating to:
+`http://localhost:8080/getendpoint.php`
+
+Here's an example of a correct response:
+> {"success":true,"message":"You accessed my APIs!"}
 
 
 ## Structure
