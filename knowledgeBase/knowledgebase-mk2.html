@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+<?Php
+// hostname or ip of server
+$servername='localhost';
+
+// username and password to log onto db server
+$dbusername='';
+$dbpassword='';
+
+// name of database
+$dbname='mydb_name';
+
+try {
+$dbo = new PDO('mysql:host='.$host_name.';dbname='.$database, $username, $password);
+} catch (PDOException $e) {
+print "Error!: " . $e->getMessage() . "<br/>";
+die();
+}
+require "config.php"; // database connection
+$sql="select id, primaryKey from tableName"; 
+$row=$dbo->prepare($sql);
+$row->execute();
+$result=$row->fetchAll(PDO::FETCH_ASSOC);
+
+echo json_encode(array('data'=>$result));
+?>
+
+<?php
+	require 'config.php';// connection to database 
+	$query= "SELECT DISTINCT subject FROM departments";
+	foreach ($dbo->query($query) as $row) {
+	echo "<option value=$row[subject]>$row[subject]</option>";
+	}
+?>
+						
+<html>
+	<head>
+        <title>Knowledge Base | Rowan University</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="style.css"/>
+    </head>
+	<?php include "dbConnection.php"; ?>
+	<script type="text/javascript" src="jquery/3.2.0/jquery.min.js"></script>
+	<script>
+	function getCourse(val)
+	{
+		$.ajax({
+			type:"POST",
+			url: "get_course.php",
+			data: 'subjectid='+val,
+			success: function(data){
+				$("#course-lost").html(data);
+			}
+		});
+	}
+	
+	function getFiles(val2)
+	{
+		$.ajax({
+			type:"POST",
+			url: "get_files.php",
+			data: 'courseid='+val2,
+			success: function(data){
+				$("#files-lost").html(data);
+			}
+		});
+	}
+	
+	//showMsg is the result of clicking submit. probably want to create a getFiles() method
+	function showFile()
+	{
+		//load the file from the database.
+	}
+	</script>
+	<body>
+		<div id="container">
+			<!--Yellow bar -->
+			<div id="header">
+				<!--yellow bar-->
+				<div class="yellowBox"></div>
+				<!--navigation bar-->
+				<div id="nav">
+					<a class="home" href="#">Home</a>
+					<a class="about" href="">About</a>
+					<a class="schedule" href="">Schedule</a>
+					<a class="feedback" href="">Feedback</a>
+					<a class="rowanHome" href="">RowanHome</a>
+					<input class="w3-input w3-border" type="text" placeholder="Search Rowan" style="width:15%" >	  
+					<a class="login" href="">Login</a>
+				</div>
+				
+				<!--title-->
+				<div id="title">
+					<h>Knowledge Base</h>
+				</div>
+			</div>
+			
+			<div id="divider">
+				<p></p>
+			</div>
+			
+			<div id="content">
+				<!--subject and course selection container-->
+				<div id="file-selector">
+					<select id=subject" onChange="getCourse(this.value);">
+						<option value="">Select a Subject</option>
+						<?php
+							$sql="SELECT DISTINCT subject FROM departments";
+							//accessing 'query()' is done using mysqli object '$dbhandle' 
+							//and passing variable '$sql'
+							$result=$dbhandle->query($sql);
+							while($rs=$result->fetch_assoc()){
+								?>
+								<option vaule="<?php $rs["subjectid"];?>">>?php echo $rs["subjectName"]; ?></option>
+					</select>
+					
+					<select id="course" onChange="getFiles(this.value);">
+						<option value="">Select a Course</option>
+					</select>
+					
+					<select id="filename">
+						<option selected="selected">Select a File</option>
+					</select>
+					
+					<button class="button" onClick="return showFile();">Submit</button>
+				</div>
+				
+				<div id="main">
+					<div class="subjectName">Sample Subject</div>
+					<div class="filesDisplay">File 1</div>
+				</div>
+			</div>
+			<div id="footer">
+			</div>
+		</div>
+	</body>
+</html>
