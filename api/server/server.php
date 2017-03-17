@@ -2,8 +2,8 @@
     //Replace username, password & location depending on configuration (Please don't push any passwords to the public git repository...)
 
     require_once('./oauth2-server-php/src/OAuth2/Autoloader.php');
-    $dsn      = 'mysql:dbname=oauthtables;host=localhost';
-    $username = 'root';
+    $dsn      = 'mysql:dbname=oauthtables;host=ec2-52-55-181-20.compute-1.amazonaws.com';
+    $username = 'tutoradmin';
     $password = '';
     //require_once("server.php");
     Oauth2\Autoloader::register();

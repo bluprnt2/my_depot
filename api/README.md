@@ -6,6 +6,7 @@
    - Token requests
    - Token storage client-side without needing JavaScript or query strings
    - Basic endpoint functionality
+   - Now fully on AWS for the database
  - Not Working
    - Login functionality (passing parameters work, now just need to connect it up to the database)
    - Other endpoints (Will work on that after login works...)
@@ -14,11 +15,7 @@
 ## How to run
 
 ### Setting up the server locally:
-Make sure sql is installed properly and locally and run the OAuth.sql file from the server directory.  If unsure on how to execute, the command that worked for me in PowerShell was:
-`mysql -u root -p -e ' source .\OAuth.sql'`
-Obviously change the username to match your respective setup.  Also, don't attempt to run this on the AWS server.  It won't break anything, but it won't work either.  It doesn't recognize the type TIMESLOT...  Need to look into that later.
-
-Edit the API.php file inside that same folder.  It should contain a username and password variable near the top.  Modify them to match your MySQL setup. __Do not keep these settings in the file when committing changes to the public repository!__
+Edit the server.php file:  It should contain a password variable near the top.  Modify them to match our MySQL setup. __Do not keep these settings in the file when committing changes to the public repository!__
 
 ### Starting the two servers:
 Run the following from the api/ folder:
