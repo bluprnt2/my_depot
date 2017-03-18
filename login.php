@@ -5,9 +5,9 @@
         <title>Login Form</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!With this we connect CSS and HTML>
+        //With this we connect CSS and HTML
         <link rel = "stylesheet" type = "text/css" href="style.css"/>
-        <!With this we connect font-awesome.css and index.html>
+        //With this we connect font-awesome.css and index.html
         <link rel = "stylesheet" type = "text/css" href ="font-awesome.css">
     </head>
     <body>
