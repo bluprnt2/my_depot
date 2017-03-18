@@ -7,9 +7,9 @@
    - Token storage client-side without needing JavaScript or query strings
    - Basic endpoint functionality
    - Now fully on AWS for the database
+   - Login functionality!
  - Not Working
-   - Login functionality (passing parameters work, now just need to connect it up to the database)
-   - Other endpoints (Will work on that after login works...)
+   - Other endpoints
    - Tokens refreshing when they are close to expiring, but still being used
 
 ## How to run
@@ -24,18 +24,27 @@ From a different command line run:
 `php -S localost:8000 -t web `
 Open a web browser of your choosing and navigate to:
 `http://localhost:8000`
-JSON should appear showing a newly generated access code of type Bearer.
 
 Here's an example of a correct response:
-> db74c136ad8e446c8d2c48904716e60eb358ba4a
+> Logged in: false
+> Admin privileges: false
 
 The token should remain across page refreshes and tabs.
 
 Also, using the token, the sample login endpoint should work, and it can be tested by navigating to:
-`http://localhost:8080/login.php`
+`http://localhost:8000/login.php`
 
 Here's an example of a correct response:
-> {"success":true,"token":"97d54a633e3499ffc88091d66d2de9dd2cb406ef","username":"sample_user","password":"$2y$10$QnJ57gWVOoKLpe1z4D8mz.4Vknw.ZnHEhTdyO9UZKQ5PXjvrj29DG"}
+> Logged in successfully
+
+Now that the token is marked as logged in, navigate back to the first page, the correct response should be:
+> Logged in: true
+> Admin privileges: true
+
+Navigating to `http://localhost:8000/logout.php` should result in:
+> Logged in successfully
+
+And the index page should look like how it started.
 
 ## Structure
 Currently the test API is broken up into an API server and a web server, each in their own directories.  Yes, I have tried to run both directories on the same server, but it runs into an issue due to a deadlock...

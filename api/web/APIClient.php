@@ -28,6 +28,7 @@
         }
 
         private static function tokenIsValid($ctime) {
+            //echo (int) $_COOKIE['token_expires']) . " " . $ctime;
             if(isset($_COOKIE['token']) && $_COOKIE['token'] != "" && ((int) $_COOKIE['token_expires']) < $ctime) {
                 self::setToken($_COOKIE['token'], $_COOKIE['token_expires']);
                 return true; // Will do extra checking later...
@@ -76,7 +77,33 @@
 
             $response = curl_exec($curl);
             curl_close($curl);
-            return $response;
+            return json_decode($response);
+        }
+
+        public static function login($username, $password) {
+            $params = array();
+            $params['username'] = $username;
+            $params['password'] = $password;
+
+            self::APICall("http://localhost:8080/login.php", $params);
+        }
+
+        public static function logout() {
+            //really just deletes the token cookie and gets another one...
+            setCookie('token', "");
+            setCookie('token_expires', "");
+            self::getToken();
+        }
+
+        public static function tokenInfo() {
+            return self::APICall("http://localhost:8080/tokenInfo.php", array());
+        }
+
+        public static function isLoggedIn(){
+            return self::tokenInfo()->{'logged_in'};
+        }
+        public static function isAdmin(){
+            return self::tokenInfo()->{'admin'};
         }
     }
 ?>

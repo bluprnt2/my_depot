@@ -124,3 +124,13 @@
         tSlotID INT NOT NULL,
         PRIMARY KEY(userID, tSlotID)
     );
+
+    INSERT INTO Users (
+        userName,
+        saltHash,  /* http://php.net/manual/en/function.password-hash.php (salt stored in same row!) */
+        admin  /* Whether or not the user has admin privileges */
+    ) VALUES (
+        "admin",
+        "$2y$10$KMSxWuUYD5c7DkwngaTf8.3vGhHWOdpWBgyua5Bba7l7tjEwNFbEy", /*Correspnds to '12345' purely to bootstrap a user */
+        1
+    );
