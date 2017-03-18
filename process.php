@@ -1,5 +1,6 @@
 <?php
 // get values passed from login.php file
+include('login.php');
  $username = $_POST['username'];
  $password = $_POST['password'];
  
