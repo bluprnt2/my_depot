@@ -26,7 +26,7 @@ Open a web browser of your choosing and navigate to:
 `http://localhost:8000`
 
 Here's an example of a correct response:
-> Logged in: false
+> Logged in: false  
 > Admin privileges: false
 
 The token should remain across page refreshes and tabs.
@@ -38,7 +38,7 @@ Here's an example of a correct response:
 > Logged in successfully
 
 Now that the token is marked as logged in, navigate back to the first page, the correct response should be:
-> Logged in: true
+> Logged in: true  
 > Admin privileges: true
 
 Navigating to `http://localhost:8000/logout.php` should result in:

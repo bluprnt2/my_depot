@@ -8,7 +8,14 @@
         private $admin;
         private $notify;
 
-        public function _construct($user_id, $mysql_server) {
+        public function _construct( $temp_id, $temp_username, $temp_firstname,
+                                    $temp_lastname, $temp_admin, $temp_notify) {
+            $id = $temp_id;
+            $username = $temp_username;
+            $firstname = $temp_firstname;
+            $lastname = $temp_lastname;
+            $admin = $temp_admin;
+            $notify = $temp_notify;
         }
 
         public function getID() {
