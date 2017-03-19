@@ -1,4 +1,6 @@
 <?php
+    require_once("APIClient/User.php");
+
     class APIClient {
         //Singleton-stuff:
         private static $instances = array();
@@ -36,11 +38,16 @@
             return false;
         }
 
+        public static function getAPIHost() {
+            $server = "http://" . $_SERVER['SERVER_NAME'] . ":";
+            $api_url = $server . "8080";
+            return $api_url;
+        }
+
         public static function getToken() {
             date_default_timezone_set("UTC");
             $current_time = time() * 1000;
-            $server = "http://" . $_SERVER['SERVER_NAME'] . ":";
-            $api_url = $server . "8080" . "/token.php";
+            $api_url = self::getAPIHost() . "/Auth/token.php";
             if(!self::tokenIsValid($current_time)) {
                 $curl = curl_init();
                 $params = array();
@@ -69,6 +76,7 @@
         public static function APICall($url, $params) {
             //currently just a copy of the call above, will change after testing probably
             $curl = curl_init();
+            $url = self::getAPIHost() . $url;
 
             $params['access_token'] = self::getToken();
             curl_setopt($curl, CURLOPT_URL, $url);
@@ -77,6 +85,7 @@
 
             $response = curl_exec($curl);
             curl_close($curl);
+
             return json_decode($response);
         }
 
@@ -85,7 +94,7 @@
             $params['username'] = $username;
             $params['password'] = $password;
 
-            self::APICall("http://localhost:8080/login.php", $params);
+            self::APICall("/Auth/login.php", $params);
         }
 
         public static function logout() {
@@ -96,14 +105,19 @@
         }
 
         public static function tokenInfo() {
-            return self::APICall("http://localhost:8080/tokenInfo.php", array());
+            return self::APICall("/Auth/tokenInfo.php", array());
         }
 
         public static function isLoggedIn(){
             return self::tokenInfo()->{'logged_in'};
         }
+
         public static function isAdmin(){
             return self::tokenInfo()->{'admin'};
+        }
+
+        public static function getAnnouncements($num) {
+            //self::APICall(self::getA);
         }
     }
 ?>

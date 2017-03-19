@@ -1,7 +1,7 @@
 <?php
+    //namespace API;
     //Replace password depending on configuration (Please don't push any passwords to the public git repository...)
 
-    require_once('./oauth2-server-php/src/OAuth2/Autoloader.php');
     $host     = 'ec2-52-55-181-20.compute-1.amazonaws.com';
     $dbname   = "oauthtables";
     $dsn      = 'mysql:dbname=' . oauthtables . ';host=' . $host;
@@ -18,4 +18,6 @@
 
     $tutorsql = new mysqli($host, $username, $password, "tutoroauthapi");
     $oauthsql = new mysqli($host, $username, $password, $dbname);
+
+    $global_request = OAuth2\Request::createFromGlobals();
 ?>

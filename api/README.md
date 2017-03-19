@@ -42,7 +42,7 @@ Now that the token is marked as logged in, navigate back to the first page, the 
 > Admin privileges: true
 
 Navigating to `http://localhost:8000/logout.php` should result in:
-> Logged in successfully
+> Logged out successfully
 
 And the index page should look like how it started.
 

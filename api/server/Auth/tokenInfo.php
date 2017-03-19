@@ -1,8 +1,6 @@
 <?php
-
-    require_once('server.php');
-
-    $global_request = OAuth2\Request::createFromGlobals();
+    require_once('../oauth2-server-php/src/OAuth2/Autoloader.php');
+    require_once('../server.php');
 
     function checkLogin($token, $oauthserver) {
         $query = "SELECT user_id FROM oauth_access_tokens WHERE access_token=?";

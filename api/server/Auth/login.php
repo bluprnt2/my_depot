@@ -1,8 +1,6 @@
 <?php
-
-    require_once('server.php');
-
-    $global_request = OAuth2\Request::createFromGlobals();
+    require_once('../oauth2-server-php/src/OAuth2/Autoloader.php');
+    require_once('../server.php');
 
     function checkPassword($uname, $pword, $tutorserver, $oauthserver) {
         $query = "SELECT saltHash, ID, admin FROM Users WHERE userName=?";
