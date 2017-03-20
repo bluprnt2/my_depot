@@ -15,6 +15,9 @@
 ## How to run
 
 ### Setting up the server locally:
+Just noticed this... In order to have the submodule loaded by git run:
+`git submodule update --init --recursive`
+
 Edit the server.php file:  It should contain a password variable near the top.  Modify them to match our MySQL setup. __Do not keep these settings in the file when committing changes to the public repository!__
 
 ### Starting the two servers:

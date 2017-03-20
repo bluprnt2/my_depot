@@ -1,4 +1,6 @@
 <?php
+    date_default_timezone_set("UTC");
+
     require_once('../oauth2-server-php/src/OAuth2/Autoloader.php');
     require_once('../server.php');
 
@@ -23,7 +25,7 @@
     }
 
     function setLoggedIn($userid, $server) {
-        $query = "UPDATE oauth_access_tokens SET user_id=? WHERE access_token=?";
+        $query = "UPDATE oauth_access_tokens SET user_id=?, expires=expires WHERE access_token=?";
 
         if($stmnt = $server->prepare($query)) {
             $stmnt->bind_param('is', $userid, $_POST['access_token']);

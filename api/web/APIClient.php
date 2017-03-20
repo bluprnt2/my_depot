@@ -1,5 +1,5 @@
 <?php
-    require_once("APIClient/User.php");
+    //require_once("APIClient/User.php");
 
     class APIClient {
         //Singleton-stuff:
@@ -31,7 +31,10 @@
 
         private static function tokenIsValid($ctime) {
             //echo (int) $_COOKIE['token_expires']) . " " . $ctime;
-            if(isset($_COOKIE['token']) && $_COOKIE['token'] != "" && ((int) $_COOKIE['token_expires']) < $ctime) {
+            //$current_time = time() * 1000;
+            echo    "Current: " . $ctime . "<br />" .
+                    "Expires: " . $_COOKIE['token_expires'] . "<br />";
+            if(isset($_COOKIE['token']) && $_COOKIE['token'] != "" && ((int) $_COOKIE['token_expires']) > $ctime) {
                 self::setToken($_COOKIE['token'], $_COOKIE['token_expires']);
                 return true; // Will do extra checking later...
             }
@@ -46,7 +49,7 @@
 
         public static function getToken() {
             date_default_timezone_set("UTC");
-            $current_time = time() * 1000;
+            $current_time = time();
             $api_url = self::getAPIHost() . "/Auth/token.php";
             if(!self::tokenIsValid($current_time)) {
                 $curl = curl_init();
@@ -60,12 +63,10 @@
                 curl_setopt($curl, CURLOPT_URL, $api_url);
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
-
                 $token_response = json_decode(curl_exec($curl));
                 curl_close($curl);
                 $temp_token = $token_response->{'access_token'};
                 $temp_token_expires = $current_time + $token_response->{'expires_in'};
-
                 self::setToken($temp_token, $temp_token_expires);
                 setCookie('token', $temp_token);
                 setCookie('token_expires', $temp_token_expires);
@@ -79,13 +80,14 @@
             $url = self::getAPIHost() . $url;
 
             $params['access_token'] = self::getToken();
+            echo $params['access_token'];
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
 
             $response = curl_exec($curl);
             curl_close($curl);
-
+            echo $response;
             return json_decode($response);
         }
 
@@ -93,7 +95,6 @@
             $params = array();
             $params['username'] = $username;
             $params['password'] = $password;
-
             self::APICall("/Auth/login.php", $params);
         }
 

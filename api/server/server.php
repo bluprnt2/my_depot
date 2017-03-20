@@ -1,10 +1,12 @@
 <?php
     //namespace API;
     //Replace password depending on configuration (Please don't push any passwords to the public git repository...)
+    date_default_timezone_set("UTC");
 
     $host     = 'ec2-52-55-181-20.compute-1.amazonaws.com';
     $dbname   = "oauthtables";
-    $dsn      = 'mysql:dbname=' . oauthtables . ';host=' . $host;
+    //$dsn      = 'mysql:dbname=oauthtables;host=ec2-52-55-181-20.compute-1.amazonaws.com';
+    $dsn      = 'mysql:dbname=' . $dbname . ';host=' . $host;
     $username = 'tutoradmin';
     $password = '';
     Oauth2\Autoloader::register();
