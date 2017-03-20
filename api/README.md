@@ -22,11 +22,11 @@ Edit the server.php file:  It should contain a password variable near the top.  
 
 ### Starting the two servers:
 Run the following from the api/ folder:
-`php -S localhost:8080 -t server`
+`php -S localhost:8080 -t api`
 From a different command line run:
-`php -S localost:8000 -t web `
+`php -S localost:8000`
 Open a web browser of your choosing and navigate to:
-`http://localhost:8000`
+`http://localhost:8000/api_index.php`
 
 Here's an example of a correct response:
 > Logged in: false  
@@ -35,7 +35,7 @@ Here's an example of a correct response:
 The token should remain across page refreshes and tabs.
 
 Also, using the token, the sample login endpoint should work, and it can be tested by navigating to:
-`http://localhost:8000/login.php`
+`http://localhost:8000/api_login.php`
 
 Here's an example of a correct response:
 > Logged in successfully
@@ -44,7 +44,7 @@ Now that the token is marked as logged in, navigate back to the first page, the 
 > Logged in: true  
 > Admin privileges: true
 
-Navigating to `http://localhost:8000/logout.php` should result in:
+Navigating to `http://localhost:8000/api_logout.php` should result in:
 > Logged out successfully
 
 And the index page should look like how it started.

@@ -32,9 +32,9 @@
         private static function tokenIsValid($ctime) {
             //echo (int) $_COOKIE['token_expires']) . " " . $ctime;
             //$current_time = time() * 1000;
-            echo    "Current: " . $ctime . "<br />" .
+            /*echo    "Current: " . $ctime . "<br />" .
                     "Expires: " . $_COOKIE['token_expires'] . "<br />";
-            if(isset($_COOKIE['token']) && $_COOKIE['token'] != "" && ((int) $_COOKIE['token_expires']) > $ctime) {
+            */if(isset($_COOKIE['token']) && $_COOKIE['token'] != "" && ((int) $_COOKIE['token_expires']) > $ctime) {
                 self::setToken($_COOKIE['token'], $_COOKIE['token_expires']);
                 return true; // Will do extra checking later...
             }
@@ -80,14 +80,14 @@
             $url = self::getAPIHost() . $url;
 
             $params['access_token'] = self::getToken();
-            echo $params['access_token'];
+            //echo $params['access_token'];
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
 
             $response = curl_exec($curl);
             curl_close($curl);
-            echo $response;
+            //echo $response;
             return json_decode($response);
         }
 
