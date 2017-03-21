@@ -66,7 +66,7 @@
         ID        INT      NOT NULL AUTO_INCREMENT,
         userID    INT      NOT NULL,
         checkedIn BOOLEAN  NOT NULL, /* if false: checked out */
-        tStamp    DATETIME NOT NULL, /* Should set to time of creation */
+        tStamp    TIMESTAMP NOT NULL, /* Should set to time of creation */
         PRIMARY KEY(ID)
     );
 
@@ -75,7 +75,7 @@
         userID   INT NOT NULL,
         courseID INT NOT NULL,
         comments TEXT,
-        tStamp   DATETIME NOT NULL, /* Should set to time of creation */
+        tStamp   TIMESTAMP NOT NULL, /* Should set to time of creation */
         PRIMARY KEY(ID)
     );
 
@@ -106,7 +106,7 @@
         title    VARCHAR(255) NOT NULL,
         content  TEXT,
         deptID   INT, /* if needed for specific department */
-        tStamp    DATETIME NOT NULL, /* when it was posted */
+        tStamp   TIMESTAMP NOT NULL, /* when it was posted */
         PRIMARY KEY(ID)
     );
 

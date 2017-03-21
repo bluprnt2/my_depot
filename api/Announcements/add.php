@@ -1,27 +1,23 @@
 <?php
     require_once('../oauth2-server-php/src/OAuth2/Autoloader.php');
     require_once('../server.php');
-
-    function addAnnouncement($userid, $title, , $tutorserver) {
-        $query = "INSERT INTO Announcements () VALUES () ?";
-
-        $announcements = array();
-        if($stmnt = $tutorserver->prepare($query)) {
-            $stmnt->bind_param('i', $num);
-            $stmnt->execute() or trigger_error($stmt->error, E_USER_ERROR);
-            $result = $stmnt->get_result();
-            while($a = $result->fetch_assoc()) {
-                $announcements[] = $a;
-            }
-            $stmnt->close();
-            return $announcements;
-        }
-    }
+    require_once('../Announcements.php');
+    require_once('../Auth.php');
 
     if (!$server->verifyResourceRequest($global_request)) {
         $server->getResponse()->send();
         die;
     } else {
-        echo json_encode(getAnnouncements((int) $_POST['amount'], $tutorsql));
+        $userid = checkLogin($_POST['access_token'], $oauthsql);
+        if($userid != NULL && checkAdmin($userid, $tutorsql)) {
+            echo json_encode(addAnnouncement(
+                $userid,
+                $_POST['title'],
+                $_POST['content'],
+                $_POST['deptID'],
+
+                $tutorsql
+            ));
+        }
     }
 ?>
