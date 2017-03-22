@@ -1,2 +1,3 @@
 # ignore temp files created by Word
 *.tmp
+~$*.docx
