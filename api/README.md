@@ -9,19 +9,19 @@
    - Now fully on AWS for the database
    - Login functionality!
  - Not Working
-   - Other endpoints
+   - Other endpoints (currently working on the users and announcements)
    - Tokens refreshing when they are close to expiring, but still being used
 
 ## How to run
 
 ### Setting up the server locally:
-Just noticed this... In order to have the submodule loaded by git run:
+In order to have the submodule loaded by git run:
 `git submodule update --init --recursive`
 
-Edit the server.php file:  It should contain a password variable near the top.  Modify them to match our MySQL setup. __Do not keep these settings in the file when committing changes to the public repository!__
+Edit the server.php file:  It should contain a password variable near the top.  Modify them to match our MySQL setup. __Do not keep the password in the file when committing changes to the public repository!__
 
 ### Starting the two servers:
-Run the following from the api/ folder:
+Run the following from the root directory:
 `php -S localhost:8080 -t api`
 From a different command line run:
 `php -S localost:8000`
@@ -50,7 +50,7 @@ Navigating to `http://localhost:8000/api_logout.php` should result in:
 And the index page should look like how it started.
 
 ## Structure
-Currently the test API is broken up into an API server and a web server, each in their own directories.  Yes, I have tried to run both directories on the same server, but it runs into an issue due to a deadlock...
+Currently the test API is broken up into an API server and a web server, with the api server as a sub-directory of the main web one  Yes, I have tried to run both directories on the same server, but it runs into an issue due to a deadlock...  They must be run independently.
 
 The client has no inherent dependencies due to the fact it is using the built in cURL library from PHP in order to communicate with the API server
 
