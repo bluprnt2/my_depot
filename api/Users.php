@@ -1,9 +1,16 @@
 <?php
-    function addUser($userid, $title, $content, $deptID, $tutorserver) {
+    function addUser($username, $firstName, $lastName, $password, $admin, $tutorserver) {
+        $saltHash = password_hash($password, PASSWORD_BCRYPT);
         $query = "INSERT INTO Users (userName, firstName, lastName, saltHash, admin) VALUES (?, ?, ?, ?)";
 
         if($stmnt = $tutorserver->prepare($query)) {
-            $stmnt->bind_param('issi', $userid, $title, $content, $deptID);
+            $stmnt->bind_param('ssssi',
+                $username,
+                $firstName,
+                $lastName,
+                $saltHash,
+                $admin
+            );
             $stmnt->execute() or trigger_error($stmt->error, E_USER_ERROR);
             $stmnt->close();
         }
@@ -25,13 +32,13 @@
         }
     }
 
-    function getUserNotify($userid, $tutorserver) {
+    function getNotify($userid, $tutorserver) {
         $user = getUser($userid, $tutorserver);
 
         return (boolean) $user['notify'];
     }
 
-    function toggleUserNotify($userid, $tutorserver) {
+    function toggleNotify($userid, $tutorserver) {
         $new_notify = !getUserNotify($userid, $tutorserver);
         $query = "UPDATE Users SET notify=? WHERE userID=?";
 
