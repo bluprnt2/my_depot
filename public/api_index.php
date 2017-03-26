@@ -1,5 +1,5 @@
 <?php
-    require("APIClient.php");
+    require("../APIClient.php");
 
     $params = array();
     $params['amount'] = 1;

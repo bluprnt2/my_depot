@@ -24,7 +24,7 @@ Edit the server.php file:  It should contain a password variable near the top.  
 Run the following from the root directory:
 `php -S localhost:8080 -t api`
 From a different command line run:
-`php -S localost:8000`
+`php -S localost:8000 -t public`
 Open a web browser of your choosing and navigate to:
 `http://localhost:8000/api_index.php`
 
@@ -50,7 +50,7 @@ Navigating to `http://localhost:8000/api_logout.php` should result in:
 And the index page should look like how it started.
 
 ## Structure
-Currently the test API is broken up into an API server and a web server, with the api server as a sub-directory of the main web one  Yes, I have tried to run both directories on the same server, but it runs into an issue due to a deadlock...  They must be run independently.
+Currently the test API is broken up into an API server and a web server, with both servers as a sub-directory of the root git.  That means that neither server would have the same files despite being the same repository.  Yes, I have tried to run both directories on the same server, but it runs into an issue due to a deadlock...  They must be run independently.
 
 The client has no inherent dependencies due to the fact it is using the built in cURL library from PHP in order to communicate with the API server
 
