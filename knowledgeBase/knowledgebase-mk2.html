@@ -1,36 +1,10 @@
 <!DOCTYPE html>
 
-<?Php
-// hostname or ip of server
-$servername='localhost';
-
-// username and password to log onto db server
-$dbusername='';
-$dbpassword='';
-
-// name of database
-$dbname='mydb_name';
-
-try {
-$dbo = new PDO('mysql:host='.$host_name.';dbname='.$database, $username, $password);
-} catch (PDOException $e) {
-print "Error!: " . $e->getMessage() . "<br/>";
-die();
-}
-require "config.php"; // database connection
-$sql="select id, primaryKey from tableName"; 
-$row=$dbo->prepare($sql);
-$row->execute();
-$result=$row->fetchAll(PDO::FETCH_ASSOC);
-
-echo json_encode(array('data'=>$result));
-?>
-
 <?php
-	require 'config.php';// connection to database 
-	$query= "SELECT DISTINCT subject FROM departments";
+	require 'connectiondb.php';// connection to database 
+	$query= "SELECT deptName FROM Departments";
 	foreach ($dbo->query($query) as $row) {
-	echo "<option value=$row[subject]>$row[subject]</option>";
+	echo "<option value=$row[deptName]>$row[deptName]</option>";
 	}
 ?>
 						
@@ -42,38 +16,31 @@ echo json_encode(array('data'=>$result));
 		<link rel="stylesheet" type="text/css" href="style.css"/>
     </head>
 	<?php include "dbConnection.php"; ?>
-	<script type="text/javascript" src="jquery/3.2.0/jquery.min.js"></script>
-	<script>
-	function getCourse(val)
-	{
-		$.ajax({
-			type:"POST",
-			url: "get_course.php",
-			data: 'subjectid='+val,
-			success: function(data){
-				$("#course-lost").html(data);
+	<?php
+		function getCourses(subject){
+			$query= "SELECT courseName FROM Courses";
+			foreach ($dbo->query($query) as $row) {
+			echo "<option value=$row[courseName]>$row[courseName]</option>";
+		}
+		
+		function getFiles(course){
+			$query= "SELECT fileName FROM KnowledgeFiles";
+			foreach ($dbo->query($query) as $row) {
+			echo "<option value=$row[fileName]>$row[fileName]</option>";
+		}
+		
+		function getFile(file){
+			$fileContent = mysql_query("SELECT fileName FROM KnowledgeFiles WHERE fileName ='file'");
+			if(!$fileContent){
+				echo 'Could not run query: ' . mysql_error();
+				exit;
 			}
-		});
-	}
-	
-	function getFiles(val2)
-	{
-		$.ajax({
-			type:"POST",
-			url: "get_files.php",
-			data: 'courseid='+val2,
-			success: function(data){
-				$("#files-lost").html(data);
-			}
-		});
-	}
-	
-	//showMsg is the result of clicking submit. probably want to create a getFiles() method
-	function showFile()
-	{
-		//load the file from the database.
-	}
-	</script>
+			$row = mysql_fetch_row($fileContent);
+			
+			echo $row[0];
+		}
+	?>
+	</php>
 	<body>
 		<div id="container">
 			<!--Yellow bar -->
@@ -104,16 +71,16 @@ echo json_encode(array('data'=>$result));
 			<div id="content">
 				<!--subject and course selection container-->
 				<div id="file-selector">
-					<select id=subject" onChange="getCourse(this.value);">
+					<select id=subject" onChange="getCourses(this.value);">
 						<option value="">Select a Subject</option>
 						<?php
-							$sql="SELECT DISTINCT subject FROM departments";
+							$sql="SELECT deptName FROM Departments";
 							//accessing 'query()' is done using mysqli object '$dbhandle' 
 							//and passing variable '$sql'
 							$result=$dbhandle->query($sql);
 							while($rs=$result->fetch_assoc()){
 								?>
-								<option vaule="<?php $rs["subjectid"];?>">>?php echo $rs["subjectName"]; ?></option>
+								<option vaule="<?php $rs["deptName"];?>">>?php echo $rs["deptName"]; ?></option>
 					</select>
 					
 					<select id="course" onChange="getFiles(this.value);">
