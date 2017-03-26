@@ -1,5 +1,5 @@
 <?php
-    require("APIClient.php");
+    require("../APIClient.php");
 
     APIClient::login('admin', '12345');
     if(APIClient::isLoggedIn())
