@@ -1,4 +1,5 @@
 <?php
+    //Not tested
     function addAnnouncement($userid, $title, $content, $deptID, $tutorserver) {
         $query = "INSERT INTO Announcements (userID, title, content, deptID) VALUES (?, ?, ?, ?)";
 
@@ -9,8 +10,9 @@
         }
     }
 
+    //Tested
     function getAnnouncements($num, $tutorserver) {
-        $query = "SELECT * FROM Announcements ORDER BY tSlot DESC LIMIT ?";
+        $query = "SELECT * FROM Announcements ORDER BY tStamp DESC LIMIT ?";
 
         $announcements = array();
         if($stmnt = $tutorserver->prepare($query)) {

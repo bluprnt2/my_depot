@@ -1,5 +1,6 @@
 <?php
     //require_once("APIClient/User.php");
+    require_once("APIClient/Announcement.php");
 
     class APIClient {
         //Singleton-stuff:
@@ -118,7 +119,28 @@
         }
 
         public static function getAnnouncements($num) {
-            //self::APICall(self::getA);
+            $params = array();
+            $params['amount'] = $num;
+            $json_array = self::APICall("/Announcements/get.php", $params);
+            $announcements = array();
+            foreach($json_array as $item) {
+                $announcements[] = new Announcement(
+                    $item->{'userID'},
+                    $item->{'title'},
+                    $item->{'content'},
+                    $item->{'deptID'},
+                    $item->{'tStamp'}
+                );
+            }
+            return $announcements;
+        }
+
+        public static function addAnnouncement($announcement) {
+            $params = array();
+            $params['title'] = $announcement->getTitle();
+            $params['content'] = $announcement->getContent();
+            $params['deptID'] = $announcement->getDepartmentID();
+            $json_array = self::APICall("/Announcements/add.php", $params);
         }
     }
 ?>
