@@ -1,6 +1,7 @@
 <?php
     //require_once("APIClient/User.php");
     require_once("APIClient/Announcement.php");
+    require_once("APIClient/User.php");
 
     class APIClient {
         //Singleton-stuff:
@@ -106,8 +107,26 @@
             self::getToken();
         }
 
+        public static function getUser($id) {
+            $params = array();
+            $params['userid'] = $id;
+            $user_array = self::APICall("/Users/get.php", $params);
+            $user = new User(
+                $user_array->{'userName'},
+                $user_array->{'firstName'},
+                $user_array->{'lastName'},
+                $user_array->{'admin'},
+                $user_array->{'notify'}
+            );
+            return $user;
+        }
+
         public static function tokenInfo() {
             return self::APICall("/Auth/tokenInfo.php", array());
+        }
+
+        public static function getCurrentUser() {
+            return self::getUser(self::tokenInfo()->{'userID'});
         }
 
         public static function isLoggedIn(){
@@ -125,7 +144,7 @@
             $announcements = array();
             foreach($json_array as $item) {
                 $announcements[] = new Announcement(
-                    $item->{'userID'},
+                    self::getUser($item->{'userID'}),
                     $item->{'title'},
                     $item->{'content'},
                     $item->{'deptID'},

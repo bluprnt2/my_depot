@@ -1,45 +1,39 @@
 <?php
 
     class User {
-        private $id;
         private $username;
         private $firstname;
         private $lastname;
         private $admin;
         private $notify;
 
-        public function _construct( $temp_id, $temp_username, $temp_firstname,
-                                    $temp_lastname, $temp_admin, $temp_notify) {
-            $id = $temp_id;
-            $username = $temp_username;
-            $firstname = $temp_firstname;
-            $lastname = $temp_lastname;
-            $admin = $temp_admin;
-            $notify = $temp_notify;
-        }
-
-        public function getID() {
-            return $id;
+        public function __construct( $username, $firstname,
+                                    $lastname, $admin, $notify) {
+            $this->username = $username;
+            $this->firstname = $firstname;
+            $this->lastname = $lastname;
+            $this->admin = $admin;
+            $this->notify = $notify;
         }
 
         public function getUsername() {
-            return $username;
+            return $this->username;
         }
 
         public function getFirstName() {
-            return $firstname;
+            return $this->firstname;
         }
 
         public function getLastName() {
-            return $lastname;
+            return $this->lastname;
         }
 
         public function getAdmin() {
-            return $admin;
+            return $this->admin;
         }
 
         public function getNotify() {
-            return $notify;
+            return $this->notify;
         }
     }
 

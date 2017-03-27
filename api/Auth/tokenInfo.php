@@ -10,6 +10,7 @@
         echo json_encode(array(
             'token' => $_POST['access_token'],
             'logged_in' => $id = checkLogin($_POST['access_token'], $oauthsql),
+            'userID' => $id,
             'admin' => checkAdmin($id, $tutorsql)
         ));
     }

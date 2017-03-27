@@ -17,16 +17,14 @@
     }
 
     function getUser($userid, $tutorserver) {
-        $query = "SELECT * FROM Users WHERE userID=?";
+        $query = "SELECT userName, firstName, lastName, admin, notify FROM Users WHERE ID=?";
 
         $user = array();
         if($stmnt = $tutorserver->prepare($query)) {
             $stmnt->bind_param('i', $userid);
             $stmnt->execute() or trigger_error($stmt->error, E_USER_ERROR);
             $result = $stmnt->get_result();
-            while($a = $result->fetch_assoc()) {
-                $user[] = $a;
-            }
+            $user = $result->fetch_assoc();
             $stmnt->close();
             return $user;
         }

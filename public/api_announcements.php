@@ -3,11 +3,11 @@
 
     if(APIClient::isAdmin()) {
         $announcement = new Announcement(
-            -1,
-            "Announcement: " . uniqid(),
+            null,
+            "Announcement - " . uniqid(),
             "Lorem ipsum stuff",
             null,
-            ""
+            null
         );
         APIClient::addAnnouncement($announcement);
     } else echo "You need to login as an administrator to add an announcement <br /><br/>";
@@ -16,6 +16,7 @@
     foreach($announcements as $item) {
         echo    'Title:      ' . $item->getTitle() . '<br />' .
                 'Content:    ' . $item->getContent() . '<br />' .
+                'Posted by:  ' . $item->getUser()->getUsername() . '<br />' .
                 'Department: ' . $item->getDepartmentID() . '<br />' .
                 'Timestamp:  ' . $item->getTimestamp() . '<br /> <br />';
     }

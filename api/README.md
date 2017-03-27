@@ -8,8 +8,11 @@
    - Basic endpoint functionality
    - Now fully on AWS for the database
    - Login functionality!
+   - Endpoints
+     - Announcements
+     - Users (get only)
  - Not Working
-   - Other endpoints (currently working on the users and announcements)
+   - Other endpoints (currently working users and courses)
    - Tokens refreshing when they are close to expiring, but still being used
 
 ## How to run
