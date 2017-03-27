@@ -20,6 +20,12 @@
 
             <a class="w3-bar-item w3-button w3-yellow" href="#">Twitter</a>
             <a class="w3-bar-item w3-button w3-yellow " href="#">Facebook</a>
-
-
+            
+            <?php
+              $announcements = APIClient::getAnnouncements(1);
+              foreach($announcements as $a){
+                echo "'$a.getTitle()'</br>";
+                echo "'$a.getContent()'</br>";
+              }
+            ?>
         </div>
