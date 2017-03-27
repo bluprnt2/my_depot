@@ -24,8 +24,8 @@
             <?php
               $announcements = APIClient::getAnnouncements(1);
               foreach($announcements as $a){
-                echo "'$a.getTitle()'</br>";
-                echo "'$a.getContent()'</br>";
+                echo $a->getTitle() . "</br>";
+                echo $a->getContent() . "</br>";
               }
             ?>
         </div>
