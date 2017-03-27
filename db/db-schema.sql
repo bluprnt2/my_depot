@@ -66,7 +66,7 @@
         ID        INT      NOT NULL AUTO_INCREMENT,
         userID    INT      NOT NULL,
         checkedIn BOOLEAN  NOT NULL, /* if false: checked out */
-        tStamp    DATETIME NOT NULL, /* Should set to time of creation */
+        tStamp    TIMESTAMP NOT NULL, /* Should set to time of creation */
         PRIMARY KEY(ID)
     );
 
@@ -75,7 +75,7 @@
         userID   INT NOT NULL,
         courseID INT NOT NULL,
         comments TEXT,
-        tStamp   DATETIME NOT NULL, /* Should set to time of creation */
+        tStamp   TIMESTAMP NOT NULL, /* Should set to time of creation */
         PRIMARY KEY(ID)
     );
 
@@ -106,7 +106,7 @@
         title    VARCHAR(255) NOT NULL,
         content  TEXT,
         deptID   INT, /* if needed for specific department */
-        tSlot    DATETIME NOT NULL, /* when it was posted */
+        tStamp   TIMESTAMP NOT NULL, /* when it was posted */
         PRIMARY KEY(ID)
     );
 
@@ -123,4 +123,14 @@
         userID  INT NOT NULL,
         tSlotID INT NOT NULL,
         PRIMARY KEY(userID, tSlotID)
+    );
+
+    INSERT INTO Users (
+        userName,
+        saltHash,  /* http://php.net/manual/en/function.password-hash.php (salt stored in same row!) */
+        admin  /* Whether or not the user has admin privileges */
+    ) VALUES (
+        "admin",
+        "$2y$10$KMSxWuUYD5c7DkwngaTf8.3vGhHWOdpWBgyua5Bba7l7tjEwNFbEy", /*Correspnds to '12345' purely to bootstrap a user */
+        1
     );
