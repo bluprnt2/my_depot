@@ -8,35 +8,35 @@
         private $content;
         private $approved;
 
-        public function _construct( $temp_id, $temp_courseID, $temp_userID,
-                                    $temp_filename, $temp_content,
-                                    $temp_approved) {
-            $id = $temp_id;
-            $courseID = $temp_courseID;
-            $userID = $temp_userID;
-            $filename = $temp_filename;
-            $content = $temp_content;
-            $approved = $temp_approved;
+        public function _construct( $id, $courseID, $userID,
+                                    $filename, $content,
+                                    $approved) {
+            $this->id = $id;
+            $this->courseID = $courseID;
+            $this->userID = $userID;
+            $this->filename = $filename;
+            $this->content = $content;
+            $this->approved = $approved;
         }
 
         public function getID() {
-            return $id;
+            return $this->id;
         }
 
         public function getCourseID() {
-            return $courseID;
+            return $this->courseID;
         }
 
         public function getUserID() {
-            return $userID;
+            return $this->userID;
         }
 
         public function getFilename() {
-            return $filename;
+            return $this->filename;
         }
 
         public function getContent() {
-            return $content;
+            return $this->content;
         }
 
         public function getApproved() {

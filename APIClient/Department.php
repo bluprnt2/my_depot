@@ -4,17 +4,17 @@
         private $id;
         private $name;
 
-        public function _construct($temp_id, $temp_name){
-            $id =   $temp_id;
-            $name = $temp_name;
+        public function __construct($id, $name){
+            $this->id = $id;
+            $this->name = $name;
         }
 
         public function getID() {
-            return $id;
+            return $this->id;
         }
 
         public function getName() {
-            return $name;
+            return $this->name;
         }
     }
 
