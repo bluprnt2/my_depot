@@ -1,1 +1,0 @@
-#DHTML Schedule JavaScript Plugin
