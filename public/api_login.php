@@ -1,5 +1,6 @@
 <?php
-    require("../APIClient.php");
+    define('__ROOT__', dirname(dirname(__FILE__)));
+    require(__ROOT__."/APIClient.php");
 
     APIClient::login('admin', '12345');
     if(APIClient::isLoggedIn())

@@ -1,4 +1,7 @@
 <?php
+    define('__ROOT__', dirname(dirname(__FILE__)));
+    require_once(__ROOT__.'/api/oauth2-server-php/src/OAuth2/Autoloader.php');
+
     //namespace API;
     //Replace password depending on configuration (Please don't push any passwords to the public git repository...)
     date_default_timezone_set("UTC");

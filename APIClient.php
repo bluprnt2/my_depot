@@ -1,7 +1,7 @@
 <?php
-    //require_once("APIClient/User.php");
-    require_once("APIClient/Announcement.php");
-    require_once("APIClient/User.php");
+    define('__ROOT__', dirname(__FILE__));
+    require_once(__ROOT__."/APIClient/Announcement.php");
+    require_once(__ROOT__."/APIClient/User.php");
 
     class APIClient {
         //Singleton-stuff:
@@ -14,21 +14,21 @@
         }
         private static function getInstance()
         {
-            $cls = get_called_class(); // late-static-bound class name
+            $cls = get_called_class();  //late-static-bound class name
             if (!isset(self::$instances[$cls])) {
                 self::$instances[$cls] = new static;
             }
             return self::$instances[$cls];
         }
 
-        //Actuall interesting code below:
+        //Actual interesting code below:
 
-        private static $token;
-        private static $token_expires;
+        private static $token = '';
+        private static $token_expires = '';
 
         private static function setToken($t_string, $t_expires) {
-            self::getInstance()::$token = $t_string;
-            self::getInstance()::$token_expires = $t_expires;
+            self::$token = $t_string;
+            self::$token_expires = $t_expires;
         }
 
         private static function tokenIsValid($ctime) {
@@ -38,15 +38,14 @@
                     "Expires: " . $_COOKIE['token_expires'] . "<br />";
             */if(isset($_COOKIE['token']) && $_COOKIE['token'] != "" && ((int) $_COOKIE['token_expires']) > $ctime) {
                 self::setToken($_COOKIE['token'], $_COOKIE['token_expires']);
-                return true; // Will do extra checking later...
+                return true;  //Will do extra checking later...
             }
             return false;
         }
 
         public static function getAPIHost() {
-            $server = "http://" . $_SERVER['SERVER_NAME'] . ":";
-            $api_url = $server . "8080";
-            return $api_url;
+            $server = __ROOT__ . '/api';
+            return $server;
         }
 
         public static function getToken() {
@@ -56,6 +55,7 @@
             if(!self::tokenIsValid($current_time)) {
                 $curl = curl_init();
                 $params = array();
+		echo 'hi';
 
                 //TODO: change the client username & password
                 $params['client_id'] = 'testclient';
@@ -65,15 +65,17 @@
                 curl_setopt($curl, CURLOPT_URL, $api_url);
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
+		curl_setopt($curl, CURLOPT_POST, 1);
+		echo curl_exec($curl);
                 $token_response = json_decode(curl_exec($curl));
                 curl_close($curl);
-                $temp_token = $token_response->{'access_token'};
-                $temp_token_expires = $current_time + $token_response->{'expires_in'};
+                $temp_token = $token_response{'access_token'};
+               $temp_token_expires = $current_time + $token_response{'expires_in'};
                 self::setToken($temp_token, $temp_token_expires);
                 setCookie('token', $temp_token);
                 setCookie('token_expires', $temp_token_expires);
             }
-            return self::getInstance()::$token;
+            return self::$token;
         }
 
         public static function APICall($url, $params) {
@@ -82,7 +84,7 @@
             $url = self::getAPIHost() . $url;
 
             $params['access_token'] = self::getToken();
-            //echo $params['access_token'];
+            echo $params['access_token'];
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
@@ -130,11 +132,13 @@
         }
 
         public static function isLoggedIn(){
-            return self::tokenInfo()->{'logged_in'};
+	    $info = self::tokenInfo();
+            return $info{'logged_in'};
         }
 
         public static function isAdmin(){
-            return self::tokenInfo()->{'admin'};
+            $info = self::tokenInfo();
+            return $info{'admin'};
         }
 
         public static function getAnnouncements($num) {
