@@ -1,4 +1,5 @@
 <?php
+    //Not Tested
     function addUser($username, $firstName, $lastName, $password, $admin, $tutorserver) {
         $saltHash = password_hash($password, PASSWORD_BCRYPT);
         $query = "INSERT INTO Users (userName, firstName, lastName, saltHash, admin) VALUES (?, ?, ?, ?)";
@@ -16,6 +17,7 @@
         }
     }
 
+    //Tested
     function getUser($userid, $tutorserver) {
         $query = "SELECT userName, firstName, lastName, admin, notify FROM Users WHERE ID=?";
 
@@ -30,12 +32,14 @@
         }
     }
 
+    //Not Tested
     function getNotify($userid, $tutorserver) {
         $user = getUser($userid, $tutorserver);
 
         return (boolean) $user['notify'];
     }
 
+    //Not Tested
     function toggleNotify($userid, $tutorserver) {
         $new_notify = !getUserNotify($userid, $tutorserver);
         $query = "UPDATE Users SET notify=? WHERE userID=?";
