@@ -1,5 +1,6 @@
 <?php
-    require_once("../APIClient.php");
+    define('__ROOT__', dirname(dirname(__FILE__)));
+    require_once(__ROOT__."/APIClient.php");
 
     if($_SERVER["REQUEST_METHOD"] == "POST") {
     // username and password sent from form
