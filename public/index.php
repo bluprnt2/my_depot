@@ -17,7 +17,7 @@
 </div>
 
 <div class="w3-container">
-    <?php include 'home.php'; ?>
+    <?php include 'feedbackform.php'; ?>
 </div>
 
 <div class="footer">
