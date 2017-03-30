@@ -29,7 +29,13 @@
 
     //Not Tested
     function setTimeSlot($timeslotID, $locID, $deptID, $courseID, $startTime, $endTime){
-        $query = "UPDATE TimeSlots SET locID=?, deptID=?, courseID=?, startTime=?, endTime=? WHERE ID=?";
+        $query = "UPDATE TimeSlots SET
+            locID    =COALESCE(?, locID),
+            deptID   =COALESCE(?, deptID),
+            courseID =COALESCE(?, courseID),
+            startTime=COALESCE(?, startTime),
+            endTime  =COALESCE(?, endTime)
+        WHERE ID=?";
 
         if($stmnt = $tutorserver->prepare($query)) {
             $stmnt->bind_param('iiissi', $locID, $deptID, $courseID, $startTime, $endTime, $timeslotID);
