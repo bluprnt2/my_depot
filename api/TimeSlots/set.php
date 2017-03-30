@@ -8,15 +8,18 @@
         $server->getResponse()->send();
         die;
     } else {
-        echo json_encode(
-            setTimeSlot(
-                $_POST['timeslot_id'],
-                $_POST['starttime'],
-                $_POST['endtime'],
-                $_POST['deptID'],
-                $_POST['locID'],
-                $_POST['courseID'],
-                $tutorsql)
+        $userid = checkLogin($_POST['access_token'], $oauthsql);
+        if($userid != NULL && checkAdmin($userid, $tutorsql)) {
+            echo json_encode(
+                setTimeSlot(
+                    $_POST['timeslot_id'],
+                    $_POST['starttime'],
+                    $_POST['endtime'],
+                    $_POST['deptID'],
+                    $_POST['locID'],
+                    $_POST['courseID'],
+                    $tutorsql)
             );
+        }
     }
 ?>
