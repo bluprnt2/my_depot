@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<?php
+	require 'connectiondb.php';// connection to database 
+	$query= "SELECT deptName FROM Departments";
+	foreach ($dbo->query($query) as $row) {
+	echo "<option value=$row[deptName]>$row[deptName]</option>";
+	}
+?>
+						
+<html>
+	<head>
+        <title>Knowledge Base | Rowan University</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="style.css"/>
+    </head>
+	<?php include "dbConnection.php"; ?>
+	<?php
+		function getCourses(subject){
+			$query= "SELECT courseName FROM Courses";
+			foreach ($dbo->query($query) as $row) {
+			echo "<option value=$row[courseName]>$row[courseName]</option>";
+		}
+		
+		function getFiles(course){
+			$query= "SELECT fileName FROM KnowledgeFiles";
+			foreach ($dbo->query($query) as $row) {
+			echo "<option value=$row[fileName]>$row[fileName]</option>";
+		}
+		
+		function getFile(file){
+			$fileContent = mysql_query("SELECT fileName FROM KnowledgeFiles WHERE fileName ='file'");
+			if(!$fileContent){
+				echo 'Could not run query: ' . mysql_error();
+				exit;
+			}
+			$row = mysql_fetch_row($fileContent);
+			
+			echo $row[0];
+		}
+	?>
+	</php>
+	<body>
+		<div id="container">
+			<!--Yellow bar -->
+			<div id="header">
+				<!--yellow bar-->
+				<div class="yellowBox"></div>
+				<!--navigation bar-->
+				<div id="nav">
+					<a class="home" href="#">Home</a>
+					<a class="about" href="">About</a>
+					<a class="schedule" href="">Schedule</a>
+					<a class="feedback" href="">Feedback</a>
+					<a class="rowanHome" href="">RowanHome</a>
+					<input class="w3-input w3-border" type="text" placeholder="Search Rowan" style="width:15%" >	  
+					<a class="login" href="">Login</a>
+				</div>
+				
+				<!--title-->
+				<div id="title">
+					<h>Knowledge Base</h>
+				</div>
+			</div>
+			
+			<div id="divider">
+				<p></p>
+			</div>
+			
+			<div id="content">
+				<!--subject and course selection container-->
+				<div id="file-selector">
+					<select id=subject" onChange="getCourses(this.value);">
+						<option value="">Select a Subject</option>
+						<?php
+							$sql="SELECT deptName FROM Departments";
+							//accessing 'query()' is done using mysqli object '$dbhandle' 
+							//and passing variable '$sql'
+							$result=$dbhandle->query($sql);
+							while($rs=$result->fetch_assoc()){
+								?>
+								<option vaule="<?php $rs["deptName"];?>">>?php echo $rs["deptName"]; ?></option>
+					</select>
+					
+					<select id="course" onChange="getFiles(this.value);">
+						<option value="">Select a Course</option>
+					</select>
+					
+					<select id="filename">
+						<option selected="selected">Select a File</option>
+					</select>
+					
+					<button class="button" onClick="return showFile();">Submit</button>
+				</div>
+				
+				<div id="main">
+					<div class="subjectName">Sample Subject</div>
+					<div class="filesDisplay">File 1</div>
+				</div>
+			</div>
+			<div id="footer">
+			</div>
+		</div>
+	</body>
+</html>
