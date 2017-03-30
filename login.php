@@ -1,4 +1,18 @@
-<!DOCTYPE html>
+<?php
+    define('__ROOT__', dirname(dirname(__FILE__)));
+    require_once(__ROOT__."../APIClient.php");
+    if($_SERVER["REQUEST_METHOD"] == "POST") {
+    // username and password sent from form
+    APIClient::login($_POST['username'],$_POST['password']);
+    // If result matched $myusername and $mypassword, table row must be 1 row
+    if(APIClient::isLoggedIn()) {
+        header("location: index.php");
+    }else {
+        $error = "Your Login Name or Password is invalid";
+        die('$error');
+    }
+}
+?>
 
 <html>
     <head>
