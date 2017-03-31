@@ -40,6 +40,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 ?>
 
+<div class="w3-bar w3-border w3-light-grey">
+    <?php
+    include("navbar.php");
+    ?>
+</div>
 
 <div class="w3-container w3-orange">
     <H3>Drop-in Tutoring Services</H3>
