@@ -40,7 +40,8 @@
             <input type="password" name="password" placeholder="Enter Password">
         </div>
         <input type="submit" name="submit" value="LOGIN" class="btn-login">
-        <input type="reset" name="back" value="BACK" class="btn-login" formaction="index.php">
+        <button type="submit" formaction="index.php">BACK</button>
+        <!-- <input type="reset" name="back" value="BACK" class="btn-login" formaction="index.php"> -->
     </form><br>
     <a href ="#">Forgot Password?</a>
     <p>Login Form powered by <a class="footer-text" href="http://www.rowan.edu/home/">Rowan University </a></p>

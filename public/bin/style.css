@@ -78,7 +78,7 @@
     font-size: 35px;
 }
 
-.login-container .btn-login {
+.login-container .btn-login, button {
     padding: 15px 25px;
     color: #fff;
     background-color: brown;

@@ -38,6 +38,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 }
 
+$title = "Drop-in Tutoring Feedback Form";
+include("header.php");
+
 ?>
 
 <div class="w3-bar w3-border w3-light-grey">

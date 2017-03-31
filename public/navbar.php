@@ -17,8 +17,7 @@
         }
     } else{
         echo '
-            <a class="w3-bar-item w3-button" href="login.php">Login</a>
-            <a class="w3-bar-item w3-button" href="survey.php">Fill a Survey</a>
+            <a class="w3-bar-item w3-button" href="login.php">Login</a>            
         ';
     }
 ?>
