@@ -1,0 +1,31 @@
+#feedback-form-container input {
+    float: right;
+    clear: right;
+    margin-right: 5%;
+    width: 70%;
+}
+
+#feedback-form-container textarea {
+    display: block;
+    //height: 10%;
+    width: 100%;
+}
+
+#feedback-form-container button {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 20px;
+    margin: 2px;
+}
+
+#feedback-form-container div {
+    font-size: 18px;
+    text-align: left;
+
+}
+
+#feedback-form-container {
+    font-family: "Consolas", Times, serif;
+    width: 50%;
+}
+
