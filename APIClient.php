@@ -161,5 +161,12 @@
             $params['deptID'] = $announcement->getDepartmentID();
             $json_array = self::APICall("/Announcements/add.php", $params);
         }
+
+        public static function addLog($log) {
+            $params = array();
+            $params['courseID'] = $log->getCourseID();
+            $params['comments'] = $log->getComments();
+            $json_array = self::APICall("/Announcements/add.php", $params);
+        }
     }
 ?>

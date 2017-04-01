@@ -12,8 +12,10 @@
         if($userid != NULL && checkAdmin($userid, $tutorsql)) {
             echo json_encode(
                 getLogs(
-                    $_POST['starttime'],
-                    $_POST['endtime'],
+                    $_POST['logID'],
+                    $_POST['courseID'],
+                    $_POST['userID'],
+                    $_POST['startTime'], $_POST['endTime'],
                     $tutorsql
                 )
             );

@@ -22,12 +22,12 @@
     }
 
     //Not Tested
-    function getTutorIDs($timeslotID) {
-        $query = "SELECT userID FROM TutorTimeSlots WHERE tSlotID=?";
+    function getTutorTimeslots($timeslotID, $tutorID, $tutorserver) {
+        $query = "SELECT * FROM TutorTimeSlots WHERE tSlotID=COALESCE(?, tSlotID) AND userID=COALESCE(?, userID)";
 
         $tutorids = array();
         if($stmnt = $tutorserver->prepare($query)) {
-            $stmnt->bind_param('i', $timeslotID);
+            $stmnt->bind_param('ii', $timeslotID, $tutorID);
             $stmnt->execute() or trigger_error($stmt->error, E_USER_ERROR);
             $result = $stmnt->get_result();
             while($a = $result->fetch_assoc()) {
@@ -35,23 +35,6 @@
             }
             $stmnt->close();
             return $tutorids;
-        }
-    }
-
-    //Not Tested
-    function getTimeSlotIDs($tutorID) {
-        $query = "SELECT tSlotID FROM TutorTimeSlots WHERE userID=?";
-
-        $timeslotids = array();
-        if($stmnt = $tutorserver->prepare($query)) {
-            $stmnt->bind_param('i', $tutorID);
-            $stmnt->execute() or trigger_error($stmt->error, E_USER_ERROR);
-            $result = $stmnt->get_result();
-            while($a = $result->fetch_assoc()) {
-                $timeslotids[] = $a;
-            }
-            $stmnt->close();
-            return $timeslotids;
         }
     }
 ?>

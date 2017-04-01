@@ -9,7 +9,7 @@
         die;
     } else {
         $userid = checkLogin($_POST['access_token'], $oauthsql);
-        if($userid != NULL && (checkAdmin($userid, $tutorsql) || $_POST['user_id'] == $userid)) {
+        if($userid != NULL) {
             echo json_encode(
                 addLog(
                     $userid,
