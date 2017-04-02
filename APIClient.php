@@ -1,7 +1,11 @@
 <?php
-    //require_once("APIClient/User.php");
     require_once("APIClient/Announcement.php");
     require_once("APIClient/User.php");
+
+    //Not Tested
+    require_once("APIClient/Course.php");
+    require_once("APIClient/Log.php");
+    require_once("APIClient/PunchCard.php");
 
     class APIClient {
         //Singleton-stuff:
@@ -162,11 +166,74 @@
             $json_array = self::APICall("/Announcements/add.php", $params);
         }
 
+        //Not Tested
         public static function addLog($log) {
             $params = array();
             $params['courseID'] = $log->getCourseID();
             $params['comments'] = $log->getComments();
             $json_array = self::APICall("/Announcements/add.php", $params);
+        }
+
+        //Not Tested
+        public static function getLogs($logID, $user, $course, $startTime, $endTime) {
+            $params = array();
+            $params['logID'] = $logID;
+            $params['startTime'] = $startTime;
+            $params['endTime'] = $endTime;
+            if($user != NULL) $params['userID'] = $user->getID();
+            if($course != NULL) $params['courseID'] = $course->getID();
+            $json_array = self::APICall("Logs/getCheckedIn", $params);
+            $logs = array();
+            foreach($json_array as $item) {
+                $logs[] = new Log(
+                    $item->{'ID'},
+                    self::getUser($item->{'userID'}),
+                    $item->{'courseID'},
+                    $item->{'comments'},
+                    $item->{'tStamp'}
+                );
+            }
+            return $logs;
+        }
+
+        //Not Tested
+        public static function toggleCheckedIn($user) {
+            if($user != NULL) {
+                $params = array();
+                $params['userID'] = $user->getID();
+                $json_array = self::APICall("PunchCards/toggleCheckedIn", $params);
+            } else return false;
+        }
+
+        //Not Tested
+        public static function getCheckedIn($user) {
+            if($user != NULL) {
+                $params = array();
+                $params['userID'] = $user->getID();
+                $json_array = self::APICall("PunchCards/getCheckedIn", $params);
+                //Gonna need to check on this... It seems wrong to me.
+                return $json_array->{'checkedIn'};
+            } else return false;
+        }
+
+        //Not Tested
+        public static function getPunchCards($user, $checkedIn, $startTime, $endTime) {
+            $params = array();
+            if($user != NULL) $params['userID'] = $user->getID();
+            $params['checkedIn'] = $checkedIn;
+            $params['startTime'] = $startTime;
+            $params['endTime'] = $endTime;
+            $json_array = self::APICall("PunchCards/get", $params);
+            $punchcards = array();
+            foreach($json_array as $item) {
+                $punchcards[] = new PunchCard(
+                    $item->{'ID'},
+                    self::getUser($item->{'userID'}),
+                    $item->{'checkedIn'},
+                    $item->{'tStamp'}
+                );
+            }
+            return $punchcards;
         }
     }
 ?>
