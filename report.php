@@ -35,7 +35,7 @@ $i = 0;
 while($row = $result->fetch_assoc())
 {
     if ($i == 0) {
-      $i++;
+      $i++; 
       echo "<tr>";
       foreach ($row as $key => $value) {
         echo "<th>" . $key . "</th>";
