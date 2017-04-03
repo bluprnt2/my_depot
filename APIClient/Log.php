@@ -2,15 +2,15 @@
 
     class Log {
         private $id;
-        private $user;
-        private $course_id;
+        private $user_id;
+        private $course;
         private $comments;
         private $tStamp;
 
-        public function __construct($id, $user, $course_id, $comments, $tStamp){
+        public function __construct($id, $user_id, $course, $comments, $tStamp){
             $this->id = $id;
-            $this->user = $user;
-            $this->course_id = $course_id;
+            $this->user_id = $user_id;
+            $this->course = $course;
             $this->comments = $comments;
             $this->tStamp = $tStamp;
         }
@@ -19,8 +19,8 @@
             return $this->id;
         }
 
-        public function getUser() {
-            return $this->user;
+        public function getUserID() {
+            return $this->user_id;
         }
 
         public function getCourseID() {

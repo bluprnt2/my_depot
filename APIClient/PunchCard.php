@@ -2,13 +2,13 @@
 
     class PunchCard {
         private $id;
-        private $user;
+        private $user_id;
         private $checkedIn;
         private $tStamp;
 
-        public function __construct($id, $user, $checkedIn, $tStamp){
+        public function __construct($id, $user_id, $checkedIn, $tStamp){
             $this->id = $id;
-            $this->user = $user;
+            $this->user_id = $user_id;
             $this->checkedIn = $checkedIn;
             $this->tStamp = $tStamp;
         }
@@ -17,7 +17,7 @@
             return $this->id;
         }
 
-        public function getUser() {
+        public function getUserID() {
             return $this->user_id;
         }
 

@@ -1,20 +1,21 @@
 <?php
-    function getPunchCards($user_id, $checkedIn, $startTime, $endTime, $tutorserver){
+    function getPunchCards($punchcard_id, $user_id, $checkedIn, $startTime, $endTime, $tutorserver){
         $query = "SELECT * FROM PunchCards WHERE
+            ID=COALESCE(?, ID) AND
             userID=COALESCE(?, userID) AND
             checkedIn=COALESCE(?, checkedIn) AND
             tStamp BETWEEN COALESCE(?, tStamp) AND COALESCE(?, tStamp)";
 
-        $tutorids = array();
+        $punchcards = array();
         if($stmnt = $tutorserver->prepare($query)) {
-            $stmnt->bind_param('ii', $timeslotID, $tutorID);
+            $stmnt->bind_param('iiiss', $punchcard_id, $user_id, $checkedIn, $startTime, $endTime);
             $stmnt->execute() or trigger_error($stmt->error, E_USER_ERROR);
             $result = $stmnt->get_result();
             while($a = $result->fetch_assoc()) {
-                $tutorids[] = $a;
+                $punchcards[] = $a;
             }
             $stmnt->close();
-            return $tutorids;
+            return $punchcards;
         }
     }
 

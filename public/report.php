@@ -31,7 +31,7 @@ foreach($announcements as $a) {
     echo "<tr>";
       echo "<td>" . $a->getTitle() . "</td>";
       echo "<td>" . $a->getContent() . "</td>";
-      echo "<td>" . $a->getUser()->getUserName() . "</td>";
+      echo "<td>" . APIClient::getUser($a->getUserID())->getUserName() . "</td>";
       echo "<td>" . $a->getTimeStamp() . "</td>";
     echo "</tr>";
 }

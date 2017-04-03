@@ -12,7 +12,8 @@
         if($userid != NULL && checkAdmin($userid, $tutorsql)) {
             echo json_encode(
                 getPunchCards(
-                    $_POST['userid'],
+                    $_POST['punchcardID'],
+                    $_POST['userID'],
                     $_POST['checkedIn'],
                     $_POST['startTime'], $_POST['endTime'],
                     $tutorsql
