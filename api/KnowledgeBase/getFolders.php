@@ -3,11 +3,10 @@
     require_once('../server.php');
     require_once('../Users.php');
     require_once('../Auth.php');
-
     if (!$server->verifyResourceRequest($global_request)) {
         $server->getResponse()->send();
         die;
     } else {
-        echo json_encode(getUsers($_POST['userid'], $tutorsql));
+        echo json_encode(getFiles((int) $_POST['courseID'], $tutorsql));
     }
 ?>

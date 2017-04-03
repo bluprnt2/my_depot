@@ -3,19 +3,20 @@
         private $id;
         private $courseName;
         private $deptID;
-        public function _construct( $temp_id, $temp_courseName, $temp_userID) {
-            $id = $temp_id;
-            $courseID = $temp_courseName;
-            $userID = $temp_userID;
+
+        public function __construct( $id, $courseName, $deptID) {
+            $this->id = $id;
+            $this->courseName = $courseName;
+            $this->deptID = $deptID;
         }
         public function getID() {
-            return $id;
+            return $this->id;
         }
-        public function getCourseName() {
-            return $courseID;
+        public function getName() {
+            return $this->courseName;
         }
         public function getDeptID() {
-            return $userID;
+            return $this->deptID;
         }
     }
 ?>

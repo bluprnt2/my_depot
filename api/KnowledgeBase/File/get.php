@@ -3,11 +3,12 @@
     require_once('../server.php');
     require_once('../Users.php');
     require_once('../Auth.php');
-
     if (!$server->verifyResourceRequest($global_request)) {
         $server->getResponse()->send();
         die;
     } else {
-        echo json_encode(getUsers($_POST['userid'], $tutorsql));
+	//should parameter be var char or int?
+	//I think it should be var char because we want the name of the file.
+        echo json_encode(getFile((int) $_POST['fileID'], $tutorsql));
     }
 ?>
