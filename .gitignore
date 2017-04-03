@@ -1,3 +1,4 @@
 # ignore temp files created by Word
 *.tmp
 ~$*.docx
+.idea/workspace.xml

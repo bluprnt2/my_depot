@@ -161,5 +161,9 @@
             $params['deptID'] = $announcement->getDepartmentID();
             $json_array = self::APICall("/Announcements/add.php", $params);
         }
+
+        public static function getCourses(){
+
+        }
     }
 ?>
