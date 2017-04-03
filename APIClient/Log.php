@@ -3,14 +3,14 @@
     class Log {
         private $id;
         private $user_id;
-        private $course_id;
+        private $course;
         private $comments;
         private $tStamp;
 
-        public function __construct($id, $user_id, $course_id, $comments, $tStamp){
+        public function __construct($id, $user_id, $course, $comments, $tStamp){
             $this->id = $id;
             $this->user_id = $user_id;
-            $this->course_id = $course_id;
+            $this->course = $course;
             $this->comments = $comments;
             $this->tStamp = $tStamp;
         }

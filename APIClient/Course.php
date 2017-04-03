@@ -12,7 +12,7 @@
         public function getID() {
             return $this->id;
         }
-        public function getCourseName() {
+        public function getName() {
             return $this->courseName;
         }
         public function getDeptID() {

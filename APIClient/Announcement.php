@@ -1,22 +1,22 @@
 <?php
 
     class Announcement {
-        private $user;
+        private $user_id;
         private $title;
         private $content;
         private $deptid;
         private $tstamp;
 
-        public function __construct( $user, $title, $content, $deptid, $tstamp) {
-            $this->user = $user;
+        public function __construct( $user_id, $title, $content, $deptid, $tstamp) {
+            $this->user_id = $user_id;
             $this->title = $title;
             $this->content = $content;
             $this->deptid = $deptid;
             $this->tstamp = $tstamp;
         }
 
-        public function getUser() {
-            return $this->user;
+        public function getUserID() {
+            return $this->user_id;
         }
 
         public function getTitle() {

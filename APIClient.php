@@ -1,7 +1,11 @@
 <?php
-    //require_once("APIClient/User.php");
     require_once("APIClient/Announcement.php");
     require_once("APIClient/User.php");
+
+    //Not Tested
+    require_once("APIClient/Course.php");
+    require_once("APIClient/Log.php");
+    require_once("APIClient/PunchCard.php");
 
     class APIClient {
         //Singleton-stuff:
@@ -144,7 +148,7 @@
             $announcements = array();
             foreach($json_array as $item) {
                 $announcements[] = new Announcement(
-                    self::getUser($item->{'userID'}),
+                    $item->{'userID'},
                     $item->{'title'},
                     $item->{'content'},
                     $item->{'deptID'},
@@ -160,6 +164,103 @@
             $params['content'] = $announcement->getContent();
             $params['deptID'] = $announcement->getDepartmentID();
             $json_array = self::APICall("/Announcements/add.php", $params);
+        }
+
+        //Not Tested
+        public static function addLog($log) {
+            $params = array();
+            $params['courseID'] = $log->getCourseID();
+            $params['comments'] = $log->getComments();
+            $json_array = self::APICall("/Announcements/add.php", $params);
+        }
+
+        //Not Tested
+        public static function getLogs($logID, $user, $course, $startTime, $endTime) {
+            $params = array();
+            $params['logID'] = $logID;
+            $params['startTime'] = $startTime;
+            $params['endTime'] = $endTime;
+            if($user != NULL) $params['userID'] = $user->getID();
+            if($course != NULL) $params['courseID'] = $course->getID();
+            $json_array = self::APICall("/Logs/getCheckedIn.php", $params);
+            $logs = array();
+            foreach($json_array as $item) {
+                $logs[] = new Log(
+                    $item->{'ID'},
+                    $item->{'userID'},
+                    $item->{'courseID'},
+                    $item->{'comments'},
+                    $item->{'tStamp'}
+                );
+            }
+            return $logs;
+        }
+
+        //Not Tested
+        public static function toggleCheckedIn($userid) {
+            if($userid != NULL) {
+                $params = array();
+                $params['userID'] = $userid;
+                $json_array = self::APICall("/PunchCards/toggleCheckedIn.php", $params);
+            } else return false;
+        }
+
+        //Tested
+        public static function getCheckedIn($userid) {
+            if($userid != NULL) {
+                $params = array();
+                $params['userID'] = $userid;
+                $json_array = self::APICall("/PunchCards/getCheckedIn.php", $params);
+                return (bool) $json_array;
+            } else return false;
+        }
+
+        //Not Tested
+        public static function getPunchCards($punchcardID, $userid, $checkedIn, $startTime, $endTime) {
+            $params = array();
+            $params['userID'] = $userid;
+            $params['punchcardID'] = $punchcardID;
+            $params['checkedIn'] = $checkedIn;
+            $params['startTime'] = $startTime;
+            $params['endTime'] = $endTime;
+            $json_array = self::APICall("/PunchCards/get.php", $params);
+            $punchcards = array();
+            foreach($json_array as $item) {
+                $punchcards[] = new PunchCard(
+                    $item->{'ID'},
+                    $item->{'userID'},
+                    $item->{'checkedIn'},
+                    $item->{'tStamp'}
+                );
+            }
+            return $punchcards;
+        }
+
+        //Not Tested
+        public static function addCourse($course) {
+            if($user != NULL) {
+                $params = array();
+                $params['courseName'] = $course->getName();
+                $params['deptID'] = $course->getDeptID();
+                $json_array = self::APICall("/Courses/add.php", $params);
+            } else return false;
+        }
+
+        //Tested
+        public static function getCourses($courseID, $deptID) {
+            $params = array();
+            $params['courseID'] = $courseID;
+            $params['deptID'] = $deptID;
+            $json_array = self::APICall("/Courses/get.php", $params);
+            $courses = array();
+            foreach($json_array as $item) {
+                $courses[] = new Course(
+                    $item->{'ID'},
+                    $item->{'courseName'},
+                    $item->{'deptID'}
+                );
+            }
+            return $courses;
         }
     }
 ?>

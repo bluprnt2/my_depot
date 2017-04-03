@@ -7,14 +7,8 @@
         $server->getResponse()->send();
         die;
     } else {
-        if($POST['tutor_id'] != NULL) {
-            echo json_encode(
-                getTimeSlotIDs($_POST['tutor_id'], $tutorsql)
-            );
-        } else if($POST['timeslot_id'] != NULL) {
-            echo json_encode(
-                getTutorIDs($_POST['timeslot_id'], $tutorsql)
-            );
-        }
+        echo json_encode(
+            getTutorTimeSlots($_POST['timeslot_id'], $_POST['tutor_id'], $tutorsql)
+        );
     }
 ?>
