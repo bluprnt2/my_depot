@@ -19,15 +19,8 @@
     <div class="w3-bar w3-border w3-light-grey">
     <div>
     <?php
-    require_once("../APIClient.php");
-    echo '
-        <a class="w3-bar-item w3-button" href="index.php">Home</a>
-        <a class="w3-bar-item w3-button" href="calendar.php">Calendar</a>
-        <a class="w3-bar-item w3-button" href="login.php">Login</a>
-        <a class="w3-bar-item w3-button" href="survey.php">Feedback</a>
-        <a class="w3-bar-item w3-button " href="http://www.rowan.edu/home/">RowanHome</a>
-        ';
-    
+        
+    include("navbar.php"); 
     ?>
     <input class="w3-input w3-border " type="text" placeholder="Search Rowan" style="width:15%" >
     </div>
@@ -59,6 +52,13 @@
         </p>
         <p> Select a course
             <select name="Course"> 
+         /*
+                <?php
+              $courses = APIClient::getCourses(null,null);
+              foreach($courses as $a){
+                echo $a->getName() . "</br>";
+              }
+         ?>*/
          <option value="Physics">Physics</option>
          <option value="Chemistry">Chemistry</option>
          <option value="Mathematics">Mathematics</option>
@@ -67,6 +67,7 @@
         </p>
         <p> Tutor
             <select name="Tutor"> 
+          /* 
          <option value="TutorA">Abcd</option>
          <option value="TutorB">B</option>
          <option value="TutorC">C</option>
