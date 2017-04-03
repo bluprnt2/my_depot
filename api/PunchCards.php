@@ -41,7 +41,7 @@
     }
 
     function toggleCheckedIn($user_id, $tutorserver) {
-        $checkingIn = !getCheckedIn();
+        $checkingIn = !getCheckedIn($user_id, $tutorserver);
 
         $query="INSERT INTO PunchCards(userID, checkedIn) VALUES (?, ?)";
 
