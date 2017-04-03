@@ -205,14 +205,13 @@
             } else return false;
         }
 
-        //Not Tested
+        //Tested
         public static function getCheckedIn($userid) {
             if($userid != NULL) {
                 $params = array();
                 $params['userID'] = $userid;
                 $json_array = self::APICall("/PunchCards/getCheckedIn.php", $params);
-                //Gonna need to check on this... It seems wrong to me.
-                return $json_array->{'checkedIn'};
+                return (bool) $json_array;
             } else return false;
         }
 
@@ -247,7 +246,7 @@
             } else return false;
         }
 
-        //Not Tested
+        //Tested
         public static function getCourses($courseID, $deptID) {
             $params = array();
             $params['courseID'] = $courseID;

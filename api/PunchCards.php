@@ -21,9 +21,10 @@
 
     function getCheckedIn($user_id, $tutorserver) {
         $query = "SELECT checkedIn FROM PunchCards WHERE
-            userID=? ORDER BY tStamp DESC LIMIT 1
-            WHERE tStamp BETWEEN DATE_SUB(NOW(), INTERVAL 12 HOUR) AND NOW()";
-
+            userID=? AND
+            tStamp BETWEEN DATE_SUB(NOW(), INTERVAL 12 HOUR) AND NOW()
+            ORDER BY tStamp DESC LIMIT 1";
+        //$result = array();
         if($stmnt = $tutorserver->prepare($query)) {
             $stmnt->bind_param('i', $user_id);
             $stmnt->bind_result($checkedIn);
@@ -35,13 +36,14 @@
             } else {
                 return false;
             }
+            //return $result;
         }
     }
 
     function toggleCheckedIn($user_id, $tutorserver) {
         $checkingIn = !getCheckedIn();
 
-        $query="INSERT INTO PunchCards(userID, checkedIn) VALUES (?, ?)"
+        $query="INSERT INTO PunchCards(userID, checkedIn) VALUES (?, ?)";
 
 
         if($stmnt = $tutorserver->prepare($query)) {
