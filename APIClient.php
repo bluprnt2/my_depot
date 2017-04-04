@@ -125,7 +125,7 @@
                     $u->{'notify'}
                 );
             }
-            if(count($users) == 1) return $users[0];
+            if($id != null) return $users[0];
             return $users;
         }
 
