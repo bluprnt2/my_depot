@@ -29,7 +29,7 @@
  *          Captcha
  *          Submit / Cancel Button
  *
- *
+ *  
  */
 
 
@@ -55,9 +55,30 @@ include("header.php");
 <div id="feedback-form-container" class="w3-container w3-display-middle w3-amber w3-leftbar w3-border w3-border-brown">
     <H1>Feedback Form</H1>
     <form id="feedback-form" action="" method="">
-        <div class="w3-margin-bottom">Title: <input type="text" name="title"></div>
-        <div class="w3-margin-bottom">Course: <input type="text" name="course"></div>
-        <div class="w3-margin-bottom">Tutor: <input type="text" name="tutor"></div>
+        <div class="w3-margin-bottom">Subject: <input type="text" name="subject"></div>
+        <div class="w3-margin-bottom">Course: 
+            <select name="courses">
+                <?php
+                $allcourses = APIClient::getCourses(null, null);
+                foreach ($allcourses as $c){
+                    $cname = $c->getName();                
+                    echo "<option value=\"" . $c->getID() . "\">" . $cname . "</option>";
+                }            
+                ?>
+            </select>
+        </div>
+        <div class="w3-margin-bottom">Tutor: 
+            <select name="tutors">
+                <?php
+                $allusers = APIClient::getUser(null);
+                foreach ($allusers as $u){
+                    $username = $u->getFirstName();
+                    echo "<option value=\"" . strtolower($username) . "\">" . $username . "</option>";
+                }            
+                ?>
+            </select>
+        </div>
+        
         <textarea name="comment" rows="20" cols="50">
             Comments
         </textarea>

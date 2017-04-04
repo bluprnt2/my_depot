@@ -102,32 +102,6 @@
             $params['username'] = $username;
             $params['password'] = $password;
             self::APICall("/Auth/login.php", $params);
-<<<<<<< HEAD
-        }
-
-        public static function logout() {
-            //really just deletes the token cookie and gets another one...
-            setCookie('token', "");
-            setCookie('token_expires', "");
-            self::getToken();
-        }
-
-        public static function getUser($id) {
-            $params = array();
-            $params['userid'] = $id;
-            $user_array = self::APICall("/Users/get.php", $params);
-            $user = new User(
-                $user_array->{'userName'},
-                $user_array->{'firstName'},
-                $user_array->{'lastName'},
-                $user_array->{'admin'},
-                $user_array->{'notify'}
-            );
-            return $user;
-        }
-
-        public static function tokenInfo() {
-=======
         }
 
         public static function logout() {
@@ -156,7 +130,6 @@
         }
 
         public static function tokenInfo() {
->>>>>>> refs/remotes/origin/master
             return self::APICall("/Auth/tokenInfo.php", array());
         }
 
@@ -197,10 +170,6 @@
             $json_array = self::APICall("/Announcements/add.php", $params);
         }
 
-<<<<<<< HEAD
-        public static function getCourses(){
-
-=======
         //Not Tested
         public static function addLog($log) {
             $params = array();
@@ -296,7 +265,6 @@
                 );
             }
             return $courses;
->>>>>>> refs/remotes/origin/master
         }
     }
 ?>

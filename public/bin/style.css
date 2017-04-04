@@ -1,4 +1,4 @@
-#feedback-form-container input {
+#feedback-form-container input, select {
     float: right;
     clear: right;
     margin-right: 5%;
