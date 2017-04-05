@@ -116,14 +116,18 @@
             $params = array();
             $params['userid'] = $id;
             $user_array = self::APICall("/Users/get.php", $params);
-            $user = new User(
-                $user_array->{'userName'},
-                $user_array->{'firstName'},
-                $user_array->{'lastName'},
-                $user_array->{'admin'},
-                $user_array->{'notify'}
-            );
-            return $user;
+            $users = array();
+            foreach($user_array as $u) {
+                $users[] = new User(
+                    $u->{'userName'},
+                    $u->{'firstName'},
+                    $u->{'lastName'},
+                    $u->{'admin'},
+                    $u->{'notify'}
+                );
+            }
+            if($id != null) return $users[0];
+            return $users;
         }
 
         public static function tokenInfo() {

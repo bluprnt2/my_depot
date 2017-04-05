@@ -19,17 +19,19 @@
     }
 
     //Tested
-    function getUser($userid, $tutorserver) {
-        $query = "SELECT userName, firstName, lastName, admin, notify FROM Users WHERE ID=?";
+    function getUsers($userid, $tutorserver) {
+        $query = "SELECT userName, firstName, lastName, admin, notify FROM Users WHERE ID=COALESCE(?, ID)";
 
-        $user = array();
+        $users = array();
         if($stmnt = $tutorserver->prepare($query)) {
             $stmnt->bind_param('i', $userid);
             $stmnt->execute() or trigger_error($stmt->error, E_USER_ERROR);
             $result = $stmnt->get_result();
-            $user = $result->fetch_assoc();
+            while($u = $result->fetch_assoc()) {
+                $users[] = $u;
+            }
             $stmnt->close();
-            return $user;
+            return $users;
         }
     }
 

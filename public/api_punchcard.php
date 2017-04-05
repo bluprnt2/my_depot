@@ -4,4 +4,6 @@
     //var_dump(APIClient::getCheckedIn(1));
     if(APIClient::getCheckedIn(1)) echo "Admin checked-in";
     else echo "Admin away";
+
+    APIClient::toggleCheckedIn(1);
 ?>

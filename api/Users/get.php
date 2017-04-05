@@ -8,6 +8,6 @@
         $server->getResponse()->send();
         die;
     } else {
-        echo json_encode(getUser((int) $_POST['userid'], $tutorsql));
+        echo json_encode(getUsers($_POST['userid'], $tutorsql));
     }
 ?>

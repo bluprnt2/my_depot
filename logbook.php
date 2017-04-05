@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-
 <html>
     <head>
         <title>Session Logging</title>
@@ -19,12 +17,10 @@
     </div>
      <!-- search box -->   
     <div class="w3-bar w3-border w3-light-grey">
-   
-    <a class="w3-bar-item w3-button " href="#">Home</a>
-    <a class="w3-bar-item w3-button " href="#">Calendar</a>
-    <a class="w3-bar-item w3-button" href="#">Feedback</a>
-    <a class="w3-bar-item w3-button " href="http://www.rowan.edu/home/">RowanHome</a>
-    <a class="w3-bar-item w3-button " href="#">Login</a>
+    <div>
+    <?php
+     include("navbar.php"); 
+    ?>
     <input class="w3-input w3-border " type="text" placeholder="Search Rowan" style="width:15%" >
     </div>
     <!-- Brown bar with heading-->    
@@ -45,40 +41,58 @@
             <input class="w3-radio" type="radio" name = "tutor">
             <label>Tutor2</label>
         </p>
-        <p>
-            Date:
-            <input type="date" name="date">
-        </p>
-        <p>
-            Time:
-            <input type="time" name="time">
-        </p>
+       
         <p> Select a course
             <select name="Course"> 
-         <option value="Physics">Physics</option>
-         <option value="Chemistry">Chemistry</option>
-         <option value="Mathematics">Mathematics</option>
-         <option value="IOOP">IOOP</option>
+         <?php
+              $courses = APIClient::getCourses(null,null,null);
+              foreach($courses as $a){
+                echo "<option>". $a->getName() ."</option>";
+              }
+         
+	?>
         </select>
         </p>
         <p> Tutor
             <select name="Tutor"> 
-         <option value="TutorA">Abcd</option>
-         <option value="TutorB">B</option>
-         <option value="TutorC">C</option>
-         <option value="TutorD">D</option>
+         <?php
+              $tutors = APIClient::getUser(null);
+              foreach($tutors as $t){
+                echo "<option>". $t->getUsername() ."</option>";
+              }
+         ?>
+     
         </select>
         </p>
+
       
-        <input type ="submit" value = " Log Session " class = "w3-btn w3-brown">
+        <input type ="submit" value = " Log Session " class = "w3-btn w3-brown", name = "submit">
+	<?php
+	// not tested
+	 require_once("../APIClient.php");
+	if(isset($_POST['submit']) )
+	{
+	 $log = new Log(
+		null,
+		APIClient::getUser($Tutor->gerUserName())->getUserID(),
+		APIClient::$Course->getName(),
+		null,
+		null
+	);
+		 APIClient::addLog($log);
+	}
+            	
+
+	?>
+
         <input type="reset" value = " Clear Form " class = "w3-btn w3-brown">
-        </form>    
-            
-     
+        </form>      
      </div>
-  
-   
-        
-    </body>
+	
+	<?php
+    	include("footer.php"); 
+	?>
+
+   </body>
     
 </html>
