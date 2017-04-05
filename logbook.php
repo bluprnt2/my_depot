@@ -36,9 +36,9 @@
          <form>
              <h2>Tutor Check-In</h2>
         <p>
-            <input class="w3-radio" type="radio" name = "tutor">
+            <input class="w3-checkbox" type="checkbox" name = "tutor1">
             <label>Tutor1</label>
-            <input class="w3-radio" type="radio" name = "tutor">
+            <input class="w3-checkbox" type="checkbox" name = "tutor2">
             <label>Tutor2</label>
         </p>
        
