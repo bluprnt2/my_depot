@@ -10,10 +10,10 @@
     // If result matched $myusername and $mypassword, table row must be 1 row
 
     if(APIClient::isLoggedIn()) {
-        header("location: index.php");
+        header("Location: index.php");
     }else {
         $error = "Your Login Name or Password is invalid";
-        die('$error');
+        die("$error");
     }
 }
 ?>
@@ -25,14 +25,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--With this we connect CSS and HTML-->
-    <link rel = "stylesheet" type = "text/css" href="style.css"/>
+    <link rel = "stylesheet" type = "text/css" href="bin/style.css"/>
     <!--With this we connect font-awesome.css and index.html-->
-    <link rel = "stylesheet" type = "text/css" href ="font-awesome.css">
+    <link rel = "stylesheet" type = "text/css" href ="bin/font-awesome.css">
 </head>
-<body>
-<div class = "container">
-    <img src ="images/RowanSeal.png"/>
-    <form action="login.php" method="post">
+<body id="login-form-body">
+<div class = "login-container">
+    <img src ="bin/images/RowanSeal.png"/>
+    <form id="login-form" action="login.php" method="post">
         <div class="form-input">
             <input type="text" name="username" placeholder="Enter Username">
         </div>
@@ -40,6 +40,8 @@
             <input type="password" name="password" placeholder="Enter Password">
         </div>
         <input type="submit" name="submit" value="LOGIN" class="btn-login">
+        <button type="submit" formaction="index.php">BACK</button>
+        <!-- <input type="reset" name="back" value="BACK" class="btn-login" formaction="index.php"> -->
     </form><br>
     <a href ="#">Forgot Password?</a>
     <p>Login Form powered by <a class="footer-text" href="http://www.rowan.edu/home/">Rowan University </a></p>

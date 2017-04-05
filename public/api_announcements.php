@@ -5,7 +5,7 @@
         $announcement = new Announcement(
             null,
             "Announcement - " . uniqid(),
-            "Lorem ipsum stuff",
+            "Lorem im stuff",
             null,
             null
         );
