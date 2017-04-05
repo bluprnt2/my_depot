@@ -1,5 +1,12 @@
 <?php
     require_once("../APIClient.php");
+    
+    echo '
+           <div class="w3-container w3-yellow">
+                <br>
+           </div>
+            
+           ';
     echo '
         <a class="w3-bar-item w3-button" href="index.php">Home</a>
         <a class="w3-bar-item w3-button" href="#">About</a>

@@ -42,9 +42,7 @@ if (isset($_POST['exp'])) {
 
 
 <!--Yellow bar -->
-<div class="w3-container w3-yellow">
-    <p></p>
-</div>
+
 
 <!--add nav bar -->
 
