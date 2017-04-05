@@ -11,7 +11,23 @@ if (isset($_POST['exp']) )
     {
 
     header('Content-Type: text/csv; charset=utf-8');
-    header('Content-Disposition: attachment; filename=report.html');
+     $answer = $_POST['colors'];
+    if ($answer=="html")
+    {
+        header('Content-Disposition: attachment; filename=report.html');  
+        
+    }
+    
+    else if ($answer=="txt")
+        
+    {
+            header('Content-Disposition: attachment; filename=report.txt');  
+    }
+    
+    else
+    {
+          header('Content-Disposition: attachment; filename=report.csv');
+    }
 
     $output = fopen('php://output', 'w');
 
@@ -41,7 +57,15 @@ echo "</table>";
 
  }//end IF
 
+
+$title("report");
+ include ("header.php");
+ include("navbar.php");
+ 
+
 ?>
+
+
 
 
 
@@ -54,12 +78,7 @@ and open the template in the editor.
 <html>
 
 
-    <head>
-        <title>Report</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
-    </head>
+   
     <body>
 
         <!--Yellow bar -->
