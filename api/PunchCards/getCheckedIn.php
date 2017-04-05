@@ -1,12 +1,18 @@
 <?php
     require_once('../oauth2-server-php/src/OAuth2/Autoloader.php');
     require_once('../server.php');
-    require_once('../Users.php');
-    require_once('../Auth.php');
+    require_once('../PunchCards.php');
+
     if (!$server->verifyResourceRequest($global_request)) {
         $server->getResponse()->send();
         die;
     } else {
-        echo json_encode(getFiles((int) $_POST['courseID'], $tutorsql));
+        //Checks if user is checked-in in the last 12 hours
+        echo json_encode(
+            getCheckedIn(
+                $_POST['userID'],
+                $tutorsql
+            )
+        );
     }
 ?>
