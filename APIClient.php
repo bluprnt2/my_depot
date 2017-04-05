@@ -7,6 +7,9 @@
 
     //Not Tested
     require_once("APIClient/Log.php");
+    define('__ROOT2__',dirname(__FILE__));
+    require_once(__ROOT2__."/APIClient/Announcement.php");
+    require_once(__ROOT2__."/APIClient/User.php");
 
     class APIClient {
         //Singleton-stuff:
@@ -26,7 +29,7 @@
             return self::$instances[$cls];
         }
 
-        //Actuall interesting code below:
+        //Actual interesting code below:
 
         private static $token;
         private static $token_expires;
@@ -34,6 +37,8 @@
         private static function setToken($t_string, $t_expires) {
             self::getInstance()::$token = $t_string;
             self::getInstance()::$token_expires = $t_expires;
+	    self::$token = $t_string;
+            self::$token_expires = $t_expires;
         }
 
         private static function tokenIsValid($ctime) {
@@ -49,9 +54,12 @@
         }
 
         public static function getAPIHost() {
-            $server = "http://" . $_SERVER['SERVER_NAME'] . ":";
-            $api_url = $server . "8080";
+	    /*
+            $server = "http://" . $_SERVER['SERVER_NAME'];
+            $api_url = $server . "/api";
             return $api_url;
+	    */
+	    return 'http://ec2-54-172-36-252.compute-1.amazonaws.com/senior/tutor_web_app/api';
         }
 
         public static function getToken() {
@@ -66,11 +74,13 @@
                 $params['client_id'] = 'testclient';
                 $params['client_secret'] = 'testpass';
 
-                $params['grant_type'] = 'client_credentials';
+                $params['grant_type'] = "client_credentials";
+
                 curl_setopt($curl, CURLOPT_URL, $api_url);
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
-                $token_response = json_decode(curl_exec($curl));
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
+		curl_setopt($curl, CURLOPT_POST,true);
+		$token_response = json_decode(curl_exec($curl));
                 curl_close($curl);
                 $temp_token = $token_response->{'access_token'};
                 $temp_token_expires = $current_time + $token_response->{'expires_in'};
@@ -79,6 +89,7 @@
                 setCookie('token_expires', $temp_token_expires);
             }
             return self::getInstance()::$token;
+            return self::$token;
         }
 
         public static function APICall($url, $params) {
@@ -87,7 +98,6 @@
             $url = self::getAPIHost() . $url;
 
             $params['access_token'] = self::getToken();
-            //echo $params['access_token'];
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));

@@ -1,5 +1,6 @@
 <?php
-    require_once("../APIClient.php");
+    define('__ROOT__', dirname(dirname(__FILE__)));
+    require_once(__ROOT__."/APIClient.php");
 ?>
 <html>
 <head>
@@ -9,7 +10,6 @@
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
 </head>
 <body>
-
 <div class="w3-bar w3-border w3-light-grey">
     <?php
         include("navbar.php");
@@ -25,3 +25,4 @@
 </div>
 
 </body>
+</html>

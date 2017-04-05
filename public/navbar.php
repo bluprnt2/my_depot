@@ -1,5 +1,6 @@
 <?php
-    require_once("../APIClient.php");
+    define('__ROOT__', dirname(dirname(__FILE__)));
+    require_once(__ROOT__."/APIClient.php");
     echo '
         <a class="w3-bar-item w3-button" href="index.php">Home</a>
         <a class="w3-bar-item w3-button" href="calendar.php">Calendar</a>
