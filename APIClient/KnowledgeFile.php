@@ -40,7 +40,7 @@
         }
 
         public function getApproved() {
-            return $approved;
+            return $this->approved;
         }
     }
 
