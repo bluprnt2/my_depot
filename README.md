@@ -7,6 +7,11 @@
 	get tutors
 	requires api endpoints
 	
+	UPDATE:
+	  get courses + tutors work; needs more testing
+	  need to define POST function for sending completed form to db
+	  
+	
 ### Captcha
 	requires open source captcha tool	
 	
