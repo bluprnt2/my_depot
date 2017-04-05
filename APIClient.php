@@ -1,11 +1,12 @@
 <?php
     require_once("APIClient/Announcement.php");
     require_once("APIClient/User.php");
+    require_once("APIClient/PunchCard.php");
+    require_once("APIClient/Department.php");
+    require_once("APIClient/Course.php");
 
     //Not Tested
-    require_once("APIClient/Course.php");
     require_once("APIClient/Log.php");
-    require_once("APIClient/PunchCard.php");
 
     class APIClient {
         //Singleton-stuff:
@@ -261,6 +262,31 @@
                 );
             }
             return $courses;
+        }
+
+        //Tested
+        public static function getDepartments($deptID) {
+            $params = array();
+            $params['deptID'] = $deptID;
+            $json_array = self::APICall("/Departments/get.php", $params);
+            $departments = array();
+            foreach($json_array as $item) {
+                $departments[] = new Department(
+                    $item->{'ID'},
+                    $item->{'deptName'}
+                );
+            }
+            if($deptID != NULL) return $departments[0];
+            return $departments;
+        }
+
+        //Tested
+        public static function addDepartment($department) {
+            if($department != NULL) {
+                $params = array();
+                $params['deptName'] = $department->getName();
+                $json_array = self::APICall("/Departments/add.php", $params);
+            } else return false;
         }
     }
 ?>
