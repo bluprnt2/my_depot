@@ -119,6 +119,7 @@
             $users = array();
             foreach($user_array as $u) {
                 $users[] = new User(
+                    $u->{'ID'},
                     $u->{'userName'},
                     $u->{'firstName'},
                     $u->{'lastName'},
