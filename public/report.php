@@ -8,7 +8,23 @@ include("header.php");
 
 if (isset($_POST['exp'])) {
     header('Content-Type: text/csv; charset=utf-8');
-    header('Content-Disposition: attachment; filename=report.html');
+     $answer = $_POST['colors'];
+    if ($answer=="html")
+    {
+        header('Content-Disposition: attachment; filename=report.html');  
+        
+    }
+    
+    else if ($answer=="txt")
+        
+    {
+            header('Content-Disposition: attachment; filename=report.txt');  
+    }
+    
+    else
+    {
+          header('Content-Disposition: attachment; filename=report.csv');
+    }
 
     $output = fopen('php://output', 'w');
 
@@ -24,6 +40,7 @@ if (isset($_POST['exp'])) {
     echo "<th>User</th>";
     echo "<th>Time Posted</th>";
     echo "</tr>";
+<<<<<<< HEAD
     foreach ($announcements as $a) {
         echo "<tr>";
         echo "<td>" . $a->getTitle() . "</td>";
@@ -36,10 +53,46 @@ if (isset($_POST['exp'])) {
 
     exit();
 }//end IF
+=======
+}
+echo "</table>";
+
+  exit();
+
+ }//end IF
+
+
+$title("report");
+ include ("header.php");
+ include("navbar.php");
+ 
+
+>>>>>>> refs/remotes/origin/master
 ?>
 
 
 
+<<<<<<< HEAD
+=======
+
+
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+
+
+   
+    <body>
+
+        <!--Yellow bar -->
+      <div class="w3-container w3-yellow">
+       <p></p>
+</div>
+>>>>>>> refs/remotes/origin/master
 
 <!--Yellow bar -->
 
