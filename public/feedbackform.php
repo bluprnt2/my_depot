@@ -34,12 +34,17 @@
 
 
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-}
 
 $title = "Drop-in Tutoring Feedback Form";
 include("header.php");
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    echo "Subject: " . $_POST['subject'] . "\n";
+    echo "Course: " . $_POST['course'] . "\n";
+    echo "Tutor: " . $_POST['tutor'] . "\n";
+    echo "<p>" . $_POST['comment'] . "</p>";
+}
 
 ?>
 
@@ -54,21 +59,21 @@ include("header.php");
 </div>
 <div id="feedback-form-container" class="w3-container w3-display-middle w3-amber w3-leftbar w3-border w3-border-brown">
     <H1>Feedback Form</H1>
-    <form id="feedback-form" action="" method="">
+    <form id="feedback-form" action="testpage.php" method="POST">
         <div class="w3-margin-bottom">Subject: <input type="text" name="subject"></div>
         <div class="w3-margin-bottom">Course: 
-            <select name="courses">
+            <select name="course">
                 <?php
                 $allcourses = APIClient::getCourses(null, null);
                 foreach ($allcourses as $c){
                     $cname = $c->getName();                
-                    echo "<option value=\"" . $c->getID() . "\">" . $cname . "</option>";
+                    echo "<option value=\"" . $cname . "\">" . $cname . "</option>";
                 }            
                 ?>
             </select>
         </div>
         <div class="w3-margin-bottom">Tutor: 
-            <select name="tutors">
+            <select name="tutor">
                 <?php
                 $allusers = APIClient::getUser(null);
                 foreach ($allusers as $u){
