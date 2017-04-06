@@ -12,7 +12,7 @@
         if($userid != NULL) {
             echo json_encode(
                 addLog(
-                    $userid,
+                    $_POST['userID'],
                     $_POST['courseID'],
                     $_POST['comments'],
                     $tutorsql

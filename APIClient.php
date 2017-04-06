@@ -175,9 +175,10 @@
         //Not Tested
         public static function addLog($log) {
             $params = array();
+            $params['userID']   = $log->getUserID();
             $params['courseID'] = $log->getCourseID();
             $params['comments'] = $log->getComments();
-            $json_array = self::APICall("/Announcements/add.php", $params);
+            $json_array = self::APICall("/Logs/add.php", $params);
         }
 
         //Not Tested
