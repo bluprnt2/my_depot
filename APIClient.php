@@ -172,7 +172,7 @@
             $json_array = self::APICall("/Announcements/add.php", $params);
         }
 
-        //Not Tested
+        //Tested
         public static function addLog($log) {
             $params = array();
             $params['userID']   = $log->getUserID();
