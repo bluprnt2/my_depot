@@ -22,7 +22,7 @@
             ';
         }
         echo '
-            <a class="w3-bar-item w3-button" href="#">Shared Knowledgebase</a>
+            <a class="w3-bar-item w3-button" href="knowledge_base.php">Shared Knowledgebase</a>
             <a class="w3-bar-item w3-button" href="logout.php">Logout</a>
         ';
 
