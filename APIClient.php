@@ -36,6 +36,7 @@
             self::getInstance()::$token_expires = $t_expires;
         }
 
+        //Tested
         private static function tokenIsValid($ctime) {
             //echo (int) $_COOKIE['token_expires']) . " " . $ctime;
             //$current_time = time() * 1000;
@@ -48,12 +49,14 @@
             return false;
         }
 
+        //Tested
         public static function getAPIHost() {
             $server = "http://" . $_SERVER['SERVER_NAME'] . ":";
             $api_url = $server . "8080";
             return $api_url;
         }
 
+        //Tested
         public static function getToken() {
             date_default_timezone_set("UTC");
             $current_time = time();
@@ -81,6 +84,7 @@
             return self::getInstance()::$token;
         }
 
+        //Tested
         public static function APICall($url, $params) {
             //currently just a copy of the call above, will change after testing probably
             $curl = curl_init();
@@ -98,6 +102,7 @@
             return json_decode($response);
         }
 
+        //Tested
         public static function login($username, $password) {
             $params = array();
             $params['username'] = $username;
@@ -105,6 +110,7 @@
             self::APICall("/Auth/login.php", $params);
         }
 
+        //Tested
         public static function logout() {
             //really just deletes the token cookie and gets another one...
             setCookie('token', "");
@@ -112,6 +118,7 @@
             self::getToken();
         }
 
+        //Tested
         public static function getUser($id) {
             $params = array();
             $params['userid'] = $id;
@@ -131,22 +138,27 @@
             return $users;
         }
 
+        //Tested
         public static function tokenInfo() {
             return self::APICall("/Auth/tokenInfo.php", array());
         }
 
+        //Tested
         public static function getCurrentUser() {
             return self::getUser(self::tokenInfo()->{'userID'});
         }
 
+        //Tested
         public static function isLoggedIn(){
             return self::tokenInfo()->{'logged_in'};
         }
 
+        //Tested
         public static function isAdmin(){
             return self::tokenInfo()->{'admin'};
         }
 
+        //Tested
         public static function getAnnouncements($num) {
             $params = array();
             $params['amount'] = $num;
@@ -164,6 +176,7 @@
             return $announcements;
         }
 
+        //Tested
         public static function addAnnouncement($announcement) {
             $params = array();
             $params['title'] = $announcement->getTitle();
@@ -181,7 +194,7 @@
             $json_array = self::APICall("/Logs/add.php", $params);
         }
 
-        //Not Tested
+        //Tested
         public static function getLogs($logID, $user, $course, $startTime, $endTime) {
             $params = array();
             $params['logID'] = $logID;
@@ -243,9 +256,9 @@
             return $punchcards;
         }
 
-        //Not Tested
+        //Tested
         public static function addCourse($course) {
-            if($user != NULL) {
+            if($course != NULL) {
                 $params = array();
                 $params['courseName'] = $course->getName();
                 $params['deptID'] = $course->getDeptID();
