@@ -189,7 +189,7 @@
             $params['endTime'] = $endTime;
             if($user != NULL) $params['userID'] = $user->getID();
             if($course != NULL) $params['courseID'] = $course->getID();
-            $json_array = self::APICall("/Logs/getCheckedIn.php", $params);
+            $json_array = self::APICall("/Logs/get.php", $params);
             $logs = array();
             foreach($json_array as $item) {
                 $logs[] = new Log(
