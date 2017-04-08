@@ -21,13 +21,13 @@
 In order to have the submodule loaded by git run:
 `git submodule update --init --recursive`
 
-Edit the server.php file:  It should contain a password variable near the top.  Modify them to match our MySQL setup. __Do not keep the password in the file when committing changes to the public repository!__
+Edit the server.php file:  It should contain a password variable near the top.  Modify them to match our MySQL setup. __Do not keep the password in the file when committing changes to the public repository! (Yes, I've made the mistake a couple of times too... Eventually it will be changed)__
 
 ### Starting the two servers:
 Run the following from the root directory:
 `php -S localhost:8080 -t api`
 From a different command line run:
-`php -S localost:8000 -t public`
+`php -S localhost:8000 -t public`
 Open a web browser of your choosing and navigate to:
 `http://localhost:8000/api_index.php`
 

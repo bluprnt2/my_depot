@@ -16,6 +16,7 @@
                 $_POST['lastName'],
                 $_POST['password'],
                 $_POST['admin'],
+                $_POST['notify'],
                 $tutorsql
             ));
         }

@@ -1,5 +1,5 @@
 <?php
-    //Not tested
+    //Tested
     function addAnnouncement($userid, $title, $content, $deptID, $tutorserver) {
         $query = "INSERT INTO Announcements (userID, title, content, deptID) VALUES (?, ?, ?, ?)";
 
