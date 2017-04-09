@@ -216,7 +216,7 @@
             return $logs;
         }
 
-        //Not Tested
+        //Tested
         public static function toggleCheckedIn($userid) {
             if($userid != NULL) {
                 $params = array();
@@ -235,7 +235,7 @@
             } else return false;
         }
 
-        //Not Tested
+        //Tested
         public static function getPunchCards($punchcardID, $userid, $checkedIn, $startTime, $endTime) {
             $params = array();
             $params['userID'] = $userid;
