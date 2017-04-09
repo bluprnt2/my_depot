@@ -9,8 +9,7 @@
     require_once("APIClient/Location.php");
     require_once("APIClient/Survey.php");
 
-    //Still need: Survey & Location endpoints
-    //As well as many-to-many relationships
+    //Still need: many-to-many relationships
 
     class APIClient {
         //Singleton-stuff:
@@ -398,55 +397,105 @@
 
         //Not Tested
         public static function addSurvey($survey) {
-
+            if($survey != NULL) {
+                $params = array();
+                $params['courseID'] = $survey->getCourseID();
+                $params['tutorID'] = $survey->getTutorID();
+                $params['rating'] = $survey->getRating();
+                $params['title'] = $survey->getTitle();
+                $params['comment'] = $survey->getComment();
+                $json_array = self::APICall("/Surveys/add.php", $params);
+            } else return false;
         }
 
         //Not Tested
         public static function getSurveys($surveyID, $courseID, $tutorID, $rating, $viewed) {
+            $params = array();
+            $params['surveyID'] = $surveyID;
+            $params['courseID'] = $courseID;
+            $params['tutorID'] = $tutorID;
+            $params['rating'] = $rating;
+            $params['viewed'] = $viewed;
+            $json_array = self::APICall("/Surveys/get.php", $params);
+            $surveys = array();
+            foreach($json_array as $item) {
+                $surveys[] = new Survey(
+                    $item->{'ID'},
+                    $item->{'courseID'},
+                    $item->{'tutorID'},
+                    $item->{'rating'},
+                    $item->{'title'},
+                    $item->{'comment'},
+                    $item->{'viewed'}
+                );
+            }
+            if($surveyID != NULL) return $surveys[0];
+            return $surveys;
 
         }
 
         //Not Tested
         public static function viewSurvey($surveyID) {
-
+            $params = array();
+            $params['surveyID'] = $surveyID;
+            $json_array = self::APICall("/Surveys/view.php", $params);
         }
 
         //Many-to-Many relationships:
 
         //Not Tested
-        public static function getCourseTutors($tutorid, $courseid) {
-
+        public static function getCourseTutors($tutorID, $courseID) {
+            $params = array();
+            $params['tutorID'] = $tutorID;
+            $params['courseID'] = $courseID;
+            $json_array = self::APICall("/CourseTutors/get.php", $params);
+            return $json_array; //Not gonna bother with objects for many-to-many
         }
 
 
         //Not Tested
-        public static function addCourseTutors($tutorid, $courseid) {
+        public static function addCourseTutors($tutorID, $courseID) {
             if($tutorid != null && $courseid != null) {
-
-            }
-
+                $params = array();
+                $params['tutorID'] = $tutorID;
+                $params['courseID'] = $courseID;
+                $json_array = self::APICall("/CourseTutors/add.php", $params);
+            } else return false;
         }
 
         //Not Tested
-        public static function delCourseTutors($tutorid, $courseid) {
-
+        public static function delCourseTutors($tutorID, $courseID) {
+            $params = array();
+            $params['tutorID'] = $tutorID;
+            $params['courseID'] = $courseID;
+            $json_array = self::APICall("/CourseTutors/delete.php", $params);
         }
 
         //Not Tested
         public static function getTutorTimeSlots($tutorID, $tSlotID) {
-
+            $params = array();
+            $params['tutor_id'] = $tutorID;
+            $params['timeslot_id'] = $tSlotID;
+            $json_array = self::APICall("/TutorTimeSlots/get.php", $params);
+            return $json_array;
         }
 
         //Not Tested
         public static function addTutorTimeSlot($tutorID, $tSlotID) {
             if($tutorID != NULL && $tSlotID != NULL) {
-
-            }
+                $params = array();
+                $params['tutor_id'] = $tutorID;
+                $params['timeslot_id'] = $tSlotID;
+                $json_array = self::APICall("/TutorTimeSlots/add.php", $params);
+            } else return false;
         }
 
         //Not Tested
         public static function delTutorTimeSlot($tutorID, $tSlotID) {
-
+            $params = array();
+            $params['tutor_id'] = $tutorID;
+            $params['timeslot_id'] = $tSlotID;
+            $json_array = self::APICall("/TutorTimeSlots/delete.php", $params);
         }
     }
 ?>
