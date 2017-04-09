@@ -96,7 +96,7 @@
         rating   TINYINT CHECK(rating <= 10 AND rating > 0), /* optional */
         title    VARCHAR(255) NOT NULL, /* required */
         comment  LONGTEXT, /* optional */
-        viewed   BOOLEAN NOT NULL DEFAULT 1, /* for notification functions */
+        viewed   BOOLEAN NOT NULL DEFAULT 0, /* for notification functions */
         PRIMARY KEY(ID)
     );
 
