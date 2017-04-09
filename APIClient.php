@@ -4,9 +4,11 @@
     require_once("APIClient/PunchCard.php");
     require_once("APIClient/Department.php");
     require_once("APIClient/Course.php");
-
-    //Not Tested
     require_once("APIClient/Log.php");
+    require_once("APIClient/TimeSlot.php");
+
+    //Still need: TimeSlot, Survey & Location endpoints
+    //As well as many-to-many relationships
 
     class APIClient {
         //Singleton-stuff:
@@ -306,6 +308,114 @@
                 $params['deptName'] = $department->getName();
                 $json_array = self::APICall("/Departments/add.php", $params);
             } else return false;
+        }
+
+        //Not Tested
+        public static function addLocation($location){
+
+        }
+
+        //Not Tested
+        public static function getLocations() {
+
+        }
+
+        //Not Tested
+        public static function delLocation($locID) {
+
+        }
+
+        //Not Tested
+        public static function addTimeSlot($tSlot) {
+            if($tSlot != NULL) {
+                $params = array();
+                $params['locID'] = $tSlot->getLocationID();
+                $params['deptID'] = $tSlot->getDepartmentID();
+                $params['courseID'] = $tSlot->getCourseID();
+                $params['startTime'] = $tSlot->getStartTime();
+                $params['endTime'] = $tSlot->getEndTime();
+                $json_array = self::APICall("/TimeSlots/add.php", $params);
+            }
+        }
+
+        //Not Tested
+        public static function getTimeSlots($tSlotID, $locID, $deptID, $courseID, $startTime, $endTime) {
+            $params = array();
+            $params['tSlotID'] = $tSlotID;
+            $params['locID'] = $locID;
+            $params['deptID'] = $deptID;
+            $params['courseID'] = $courseID;
+            $params['startTime'] = $startTime;
+            $params['endTime'] = $endTime;
+            $json_array = self::APICall("/TimeSlots/get.php", $params);
+            $tSlots = array();
+            foreach($json_array as $item) {
+                $tSlots[] = new TimeSlot(
+                    $item->{'ID'},
+                    $item->{'locID'},
+                    $item->{'deptID'},
+                    $item->{'courseID'},
+                    $item->{'startTime'},
+                    $item->{'endTime'}
+                );
+            }
+            if($tSlotID != NULL) return $tSlots[0];
+            return $tSlots;
+        }
+
+        //Not Tested
+        public static function delTimeSlot($tSlotID) {
+            $params = array();
+            $params['tSlotID'] = $tSlotID;
+            $json_array = self::APICall("/TimeSlots/delete.php", $params);
+        }
+
+        //Not Tested
+        public static function addSurvey($survey) {
+
+        }
+
+        //Not Tested
+        public static function getSurveys($surveyID, $courseID, $tutorID, $rating, $viewed) {
+
+        }
+
+        //Many-to-Many relationships:
+
+        //Not Tested
+        public static function getCourseTutors($tutorid, $courseid) {
+
+        }
+
+
+        //Not Tested
+        public static function addCourseTutors($tutorid, $courseid) {
+            if($tutorid != null && $courseid != null) {
+
+            }
+
+        }
+
+        //Not Tested
+        public static function delCourseTutors($tutorid, $courseid) {
+
+        }
+
+        //Not Tested
+        public static function getTutorTimeSlots($tutorID, $tSlotID) {
+
+        }
+
+        //Not Tested
+        public static function addTutorTimeSlot($tutorID, $tSlotID) {
+            if($tutorID != NULL && $tSlotID != NULL) {
+
+            }
+        }
+
+        //Not Tested
+        public static function delTutorTimeSlot($tutorID, $tSlotID) {
+
         }
     }
 ?>

@@ -15,8 +15,8 @@
                     $_POST['locID'],
                     $_POST['deptID'],
                     $_POST['courseID'],
-                    $_POST['starttime'],
-                    $_POST['endtime'],
+                    $_POST['startTime'],
+                    $_POST['endTime'],
                     $tutorsql
                 )
             );
