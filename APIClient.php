@@ -6,8 +6,10 @@
     require_once("APIClient/Course.php");
     require_once("APIClient/Log.php");
     require_once("APIClient/TimeSlot.php");
+    require_once("APIClient/Location.php");
+    require_once("APIClient/Survey.php");
 
-    //Still need: TimeSlot, Survey & Location endpoints
+    //Still need: Survey & Location endpoints
     //As well as many-to-many relationships
 
     class APIClient {
@@ -312,16 +314,40 @@
 
         //Not Tested
         public static function addLocation($location){
-
+            if($location != NULL) {
+                $params = array();
+                $params['buildingName'] = $location->getBuildingName();
+                $params['roomNumber'] = $location->getRoomNumber();
+                $json_array = self::APICall("/Locations/add.php", $params);
+            } else return false;
         }
 
         //Not Tested
-        public static function getLocations() {
-
+        public static function getLocations($locID, $buildingName, $roomNumber) {
+            $params = array();
+            $params['locID'] = $locID;
+            $params['buildingName'] = $buildingName;
+            $params['roomNumber'] = $roomNumber;
+            $json_array = self::APICall("/Locations/get.php", $params);
+            $locations = array();
+            foreach($json_array as $item) {
+                $locations[] = new Location(
+                    $item->{'ID'},
+                    $item->{'buildingName'},
+                    $item->{'roomNumber'}
+                );
+            }
+            if($locID != NULL) return $locations[0];
+            return $locations;
         }
 
         //Not Tested
         public static function delLocation($locID) {
+            if($locID != NULL) {
+                $params = array();
+                $params['locID'] = $locID;
+                $json_array = self::APICall("/Locations/delete.php", $params);
+            } else return false;
 
         }
 
@@ -377,6 +403,11 @@
 
         //Not Tested
         public static function getSurveys($surveyID, $courseID, $tutorID, $rating, $viewed) {
+
+        }
+
+        //Not Tested
+        public static function viewSurvey($surveyID) {
 
         }
 

@@ -7,7 +7,11 @@
         $server->getResponse()->send();
         die;
     } else {
-        echo json_encode(getLocs($locID, $buildingName, $roomNumber, $tutorsql));
+        echo json_encode(getLocs(
+            $_POST['locID'],
+            $_POST['buildingName'],
+            $_POST['roomNumber'],
+            $tutorsql));
     }
 
 ?>
