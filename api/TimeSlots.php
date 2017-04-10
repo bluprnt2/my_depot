@@ -11,8 +11,9 @@
     }
 
     //Not Tested
-    function getTimeSlots($locID, $deptID, $courseID, $startTime, $endTime){
+    function getTimeSlots($tSlotID, $locID, $deptID, $courseID, $startTime, $endTime){
         $query = "SELECT * FROM TimeSlots WHERE
+            ID=COALESCE(?, ID) AND
             locID=COALESCE(?, locID) AND
             deptID=COALESCE(?, deptID) AND
             courseID=COALESCE(?, courseID) AND
@@ -22,7 +23,10 @@
 
         $timeslots = array();
         if($stmnt = $tutorserver->prepare($query)) {
-            $stmnt->bind_param('iiissss', $locID, $deptID, $courseID, $startTime, $endTime, $startTime, $endTime);
+            $stmnt->bind_param('iiiissss',
+                $tSlotID, $locID, $deptID, $courseID,
+                $startTime, $endTime, $startTime, $endTime
+            );
             $stmnt->execute() or trigger_error($stmt->error, E_USER_ERROR);
             $result = $stmnt->get_result();
             while($a = $result->fetch_assoc()) {
@@ -30,23 +34,6 @@
             }
             $stmnt->close();
             return $timeslots;
-        }
-    }
-
-    //Not Tested
-    function setTimeSlot($timeslotID, $locID, $deptID, $courseID, $startTime, $endTime){
-        $query = "UPDATE TimeSlots SET
-            locID    =COALESCE(?, locID),
-            deptID   =COALESCE(?, deptID),
-            courseID =COALESCE(?, courseID),
-            startTime=COALESCE(?, startTime),
-            endTime  =COALESCE(?, endTime)
-        WHERE ID=?";
-
-        if($stmnt = $tutorserver->prepare($query)) {
-            $stmnt->bind_param('iiissi', $locID, $deptID, $courseID, $startTime, $endTime, $timeslotID);
-            $stmnt->execute() or trigger_error($stmt->error, E_USER_ERROR);
-            $stmnt->close();
         }
     }
 

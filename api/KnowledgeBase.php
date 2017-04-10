@@ -1,13 +1,14 @@
 <?php
 
-	public static function getFiles($courseID) 
+	public static function getFiles($courseID, $fileName) 
 	{
 		$query = "SELECT * FROM KnowledgeFiles WHERE 
-			courseID=COALESCE(?, courseID)";
+			courseID=COALESCE(?, courseID) AND
+			fileName=COALESCE(?, fileName)";
         
 		$files = array();
 		if($stmnt = $tutorserver->prepare($query)) {
-            $stmnt->bind_param('i', $courseID);
+            $stmnt->bind_param('is', $courseID, $fileName);
             $stmnt->execute() or trigger_error($stmt->error, E_USER_ERROR);
             $result = $stmnt->get_result();
             while($a = $result->fetch_assoc()) {
@@ -18,26 +19,7 @@
         }
     }
 	
-	//check method with the AND in query.
-	public static function getFile($fileName) 
-	{
-		$query = "SELECT * FROM KnowledgeFiles WHERE
-			fileName=COALESCE(?, fileName)";
-			
-            $file = array();
-            if($stmnt = $tutorserver->prepare($query)) {
-            $stmnt->bind_param('s', $fileName);
-            $stmnt->execute() or trigger_error($stmt->error, E_USER_ERROR);
-            $result = $stmnt->get_result();
-            while($a = $result->fetch_assoc()) {
-                $file[] = $a;
-            }
-            $stmnt->close();
-            return $file;
-        }
-    }
-	
-	ublic static function addFile($courseID, $userID, $fileName, $content, $tutorserver)
+	public static function addFile($courseID, $userID, $fileName, $content, $tutorserver)
 	{
 		$query = "INSERT INTO KnowledgeFiles (courseID, userID, fileName, content) VALUES (?, ?)";
 		//for each ? bind parameter as seen below
