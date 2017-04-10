@@ -1,3 +1,182 @@
+#feedback-form-container input, select {
+    float: right;
+    clear: right;
+    margin-right: 5%;
+    width: 70%;
+}
+
+#feedback-form-container textarea {
+    display: block;
+    //height: 10%;
+    width: 100%;
+}
+
+#feedback-form-container button {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 20px;
+    margin: 2px;
+}
+
+#feedback-form-container div {
+    font-size: 18px;
+    text-align: left;
+
+}
+
+#feedback-form-container {
+    font-family: "Consolas", Times, serif;
+    width: 50%;
+}
+
+#login-form-body  {
+    margin: 0;
+    background: url(images/background.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -noz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+}
+
+.login-container {
+    width: 500px;
+    height: 400px;
+    text-align: center;
+    background-color:antiquewhite;
+    border: 6px solid brown;
+    border-radius: 10px;
+    border-color: brown;
+    margin: 0 auto;
+    margin-top: 150px;
+
+}
+.login-container img {
+    width: 200px;
+    height: 200px;
+    margin-top: -60px;
+    margin-bottom: 30px;
+}
+
+.login-container input[type = "text"], input[type = "password"] {
+    height: 45px;
+    widht: 300px;
+    font-size: 18px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    padding-left: 20px;
+}
+
+.login-container form-input:before{
+    background: url(images/RowanSeal.png);
+    content: "\f007";
+    position: absolute;
+    font-family: "FontAwesome";
+    font-size: 30px;
+    color:aliceblue;
+    padding-top: 5px;
+    font-size: 35px;
+}
+
+.login-container .btn-login, button {
+    padding: 15px 25px;
+    color: #fff;
+    background-color: brown;
+    border: none;
+    border-radius: 4px;
+
+
+
+}
+.login-container a {
+    text-decoration:none;
+    color: brown;
+    font-family: sans-serif;
+    margin-bottom: 20px;
+
+}
+
+.login-container a:hover {
+    color: coral;
+    font-weight: bold;
+
+}
+
+#login-form-body footer {
+    margin: 0;
+}
+
+#login-form-body footer p {
+    float: right;
+    margin-right: 20px;
+    margin-top: 55px;
+    color: blue;
+    font-family: sans-serif;
+}
+
+#login-form-body .footer-text{
+    color: blue;
+}
+
+#login-form-body .footer-text:hover {
+    color: blue
+}
+
+body{
+	background-color: #ffffff;
+}
+
+/*Knowledge Base CSS*/
+#kb-title
+{
+	background-color: #800000;
+	color:white;
+	padding: 10px 0px 10px 12.5px;
+	font-size:175%;
+	font-family: Arial;
+	font-weight: bold;
+}
+
+#kb-file-selector{
+	background-color: #bfbfbf;
+	padding: 12px;
+}
+
+#kb-department, #kb-course, #kb-filename{
+	font-family: Arial, sans-serif;
+    font-size: 18px;
+	font-weight: bold;
+	padding:10px;
+}
+
+.kb-button {
+    background-color: #800000;
+    border: 3px solid white;
+    color: white;
+    padding: 7px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+	font-weight: bold;
+	-webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+.kb-button:hover{
+	background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+#kb-main{
+	background-color: #ffd966;
+	color: black;
+	font-family: Arial, sans-serif;
+    font-size: 25px;
+	font-weight: bold;
+	padding:15px;
+}
+
 body{
 	background-color: #ffffff;
 }
@@ -44,32 +223,6 @@ body{
 #file-selector{
 	background-color: #bfbfbf;
 	padding: 12px;
-}
-
-select{
-	font-family: Arial, sans-serif;
-    font-size: 18px;
-	font-weight: bold;
-	padding:10px;
-}
-
-.submitButton {
-    background-color: #800000;
-    border: 3px solid white;
-    color: white;
-    padding: 7px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 20px;
-	font-weight: bold;
-	-webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-}
-
-.submitButton:hover{
-	background-color: #4CAF50; /* Green */
-    color: white;
 }
 
 #main{
