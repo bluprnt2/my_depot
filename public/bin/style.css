@@ -124,10 +124,96 @@
 
 body{
 	background-color: #ffffff;
+	margin: 0 auto;
+	width: 85%;
 }
 
 /*Knowledge Base CSS*/
+#kb-yellowbar{
+	background-color: #ffd966;
+	content:"";
+	height: 8px;
+	width:100%;
+}
+
 #kb-title
+{
+	background-color: #800000;
+	padding: 5px;
+	color:white;
+	padding: 10px 0px 10px 20px;
+	font-size:175%;
+	font-family: Arial;
+	font-weight: bold;
+}
+
+#kb-file-selector{
+	background-color: #bfbfbf;
+	padding: 12px;
+	
+}
+
+#kb-department, #kb-course, #kb-filename{
+	font-family: Arial, sans-serif;
+    font-size: 18px;
+	font-weight: bold;
+	padding:5px;
+	width:320px;
+	text-align: left;
+	float: left;
+	margin: 0 auto;
+}
+
+#kb-submitButton {
+    background-color: #800000;
+    border: 3px solid white;
+    color: white;
+    padding: .5px 25px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+	font-weight: bold;
+	-webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+#kb-submitButton:hover{
+	background-color: #49E20E; /* Green */
+    color: white;
+}
+
+#kb-main{
+	background-color: #ffd966;
+	color: black;
+	font-family: Arial, sans-serif;
+    font-size: 20px;
+	font-weight: bold;
+	padding:15px;
+}
+
+
+#header .yellowBox
+{
+	background-color: #ffd966;
+	padding-bottom: 20px;
+}
+
+#header #nav
+{
+	background-color: #ffffff;
+	padding: 5px 5px 5px 5px;
+}
+
+#nav a{
+	text-decoration: none;
+	font-weight: bold;
+	font-size:125%;
+	font-family: Arial;
+	padding: 0px 10px 5px 7.5px;
+	color: black;
+}
+
+#title
 {
 	background-color: #800000;
 	color:white;
@@ -137,42 +223,19 @@ body{
 	font-weight: bold;
 }
 
-#kb-file-selector{
-	background-color: #bfbfbf;
-	padding: 12px;
+#nav input{
+	padding-left: 5px;
 }
 
-select{
-	font-family: Arial, sans-serif;
-    font-size: 18px;
-	font-weight: bold;
-	padding:10px;
+#divider{
+	background-color: white;
 }
 
-.submitButton {
-    background-color: #800000;
-    border: 3px solid white;
-    color: white;
-    padding: 7px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 20px;
-	font-weight: bold;
-	-webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-}
-
-.submitButton:hover{
-	background-color: #4CAF50; /* Green */
-    color: white;
-}
-
-#kb-main{
+#main{
 	background-color: #ffd966;
 	color: black;
 	font-family: Arial, sans-serif;
-    font-size: 25px;
+   	font-size: 25px;
 	font-weight: bold;
 	padding:15px;
 }
