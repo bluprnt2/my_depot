@@ -34,7 +34,7 @@
 	function init() {
 		window.resizeTo(950,700)
 		modSchedHeight();
-		scheduler.config.xml_date="%m-%d-%Y %H:%i";
+		scheduler.config.xml_date="%Y-%m-%d %H:%i";
 		scheduler.config.hour_date="%h:%i %A";
 		scheduler.config.first_hour = 8;
 		scheduler.config.last_hour = 18;
@@ -47,7 +47,7 @@
 		
 //Temporary inline events to be removed later(Demonstrating input format)
 scheduler.parse([
-	{ start_date: "03-27-2017 10:00", end_date: "03-27-2017 13:45", text:"Computer Science" },
+	{ start_date: "2017-03-27 10:00", end_date: "2017-03-27 13:45", text:"Computer Science" },
 				],"json");
 //Testing Functionality of adding from a db
 var dp = new dataProcessor("events.php");
