@@ -142,14 +142,14 @@ body{
 	padding: 12px;
 }
 
-#kb-department, #kb-course, #kb-filename{
+select{
 	font-family: Arial, sans-serif;
     font-size: 18px;
 	font-weight: bold;
 	padding:10px;
 }
 
-.kb-button {
+.submitButton {
     background-color: #800000;
     border: 3px solid white;
     color: white;
@@ -163,7 +163,7 @@ body{
     transition-duration: 0.4s;
 }
 
-.kb-button:hover{
+.submitButton:hover{
 	background-color: #4CAF50; /* Green */
     color: white;
 }
@@ -223,6 +223,32 @@ body{
 #file-selector{
 	background-color: #bfbfbf;
 	padding: 12px;
+}
+
+select{
+	font-family: Arial, sans-serif;
+    font-size: 18px;
+	font-weight: bold;
+	padding:10px;
+}
+
+.submitButton {
+    background-color: #800000;
+    border: 3px solid white;
+    color: white;
+    padding: 7px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+	font-weight: bold;
+	-webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+.submitButton:hover{
+	background-color: #4CAF50; /* Green */
+    color: white;
 }
 
 #main{
