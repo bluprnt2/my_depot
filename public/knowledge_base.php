@@ -1,4 +1,6 @@
 
+	<div id="kb-yellowbar"></div>
+	
 	<?php
 		require_once("../APIClient.php");
 		//include ("connectiondb.php");
@@ -14,8 +16,8 @@
 		{
 			//make note to update navbar on login
 			//admin has option to view knowledge base but can remove files
-			//header('Location: ./tutor_web_app/public/home.php');
-			echo '<p><a href="home.php">Only Tutors and Admins have access to the Knowledge Base</a><p>';
+			header('Location: ./tutor_web_app/index.php');
+			echo '<p><a href="index.php">Only Tutors and Admins have access to the Knowledge Base</a><p>';
 			exit();
 		}
 		
@@ -24,14 +26,14 @@
 		<!--kb = knowledge base-->
 		<div id="kb-container">
 			<div id="kb-title">
-				<div class="yellowBox">Knowledge Base</div>
+				<div class="">Knowledge Base</div>
 			</div>
 			
 			<div id="kb-content">
 				<!--subject and course selection container-->
 				<div id="kb-file-selector">
-					<select id=subject" >
-						<option value="">Select a Subject</option>
+					<select id="kb-department" >
+						<option value="">Select a Department</option>
 						<?php
 						//onChange="getCourses(this.value);"
 							$departments = APIClient::getDepartments(null, null);
@@ -56,11 +58,11 @@
 						<option selected="selected">Select a File</option>
 					</select>
 					
-					<button class="kb-button" onClick="return showFile();">Submit</button>
+					<button id="kb-submitButton" onClick="">Open File</button>
 				</div>
 				
 				<div id="kb-main">
-					<div class="subjectName">Sample Subject</div>
+					<div class="subjectName">Sample Course</div>
 					<div class="filesDisplay">File 1</div>
 				</div>
 			</div>
