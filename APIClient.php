@@ -510,7 +510,7 @@
 				$item->{'ID'},
 				$item->{'courseID'},
 				$item->{'userID'},
-				$item->{'filename'}
+				$item->{'filename'},
 				$item->{'content'},
 				$item->{'approved'}
 			);
