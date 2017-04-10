@@ -9,15 +9,19 @@
         die;
     } else {
         $userid = checkLogin($_POST['access_token'], $oauthsql);
-        if($userid != NULL) {
+        if($userid != NULL && $_POST['userID'] != NULL && $_POST['courseID'] != NULL) {
             echo json_encode(
                 addLog(
-                    $userid,
+                    $_POST['userID'],
                     $_POST['courseID'],
                     $_POST['comments'],
                     $tutorsql
                 )
             );
+        } else {
+            echo json_encode(array(
+                'success' => false
+            ));
         }
     }
 ?>

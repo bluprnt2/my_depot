@@ -8,8 +8,10 @@ include("header.php");
 
 if (isset($_POST['exp'])) {
     header('Content-Type: text/csv; charset=utf-8');
-     $answer = $_POST['colors'];
-    if ($answer=="html")
+
+    $answer = $_POST['color'];
+
+    if ( $answer=="html")
     {
         header('Content-Disposition: attachment; filename=report.html');  
         
@@ -24,6 +26,7 @@ if (isset($_POST['exp'])) {
     else
     {
           header('Content-Disposition: attachment; filename=report.csv');
+    
     }
 
     $output = fopen('php://output', 'w');
@@ -62,9 +65,8 @@ echo "</table>";
  }//end IF
 
 
-$title("report");
- include ("header.php");
- include("navbar.php");
+// include ("header.php");
+// include("navbar.php");
  
 
 >>>>>>> refs/remotes/origin/master
@@ -84,7 +86,12 @@ and open the template in the editor.
 -->
 <html>
 
-
+ <head>
+        <title>Report</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
+    </head>
    
     <body>
 
@@ -144,9 +151,15 @@ and open the template in the editor.
 
         <form>
 
+<<<<<<< HEAD
             <input class="w3-radio"  type="radio" name="colors"  id="txt">Pie<br>
             <input class="w3-radio"  type="radio" name="colors" id="csv">Bar<br>
             <input class="w3-radio"  type="radio" name="colors"id="html">Histogram<br>
+=======
+    <input class="w3-radio"  type="radio" name="graph"  id="pie">Pie<br>
+    <input class="w3-radio"  type="radio" name="graph" id="bar">Bar<br>
+    <input class="w3-radio"  type="radio" name="graph" id="hist">Histogram<br>
+>>>>>>> refs/remotes/origin/master
 
 
         </form>
@@ -166,6 +179,7 @@ and open the template in the editor.
 
         <h3><strong>Export</h3>
 
+<<<<<<< HEAD
         <form>
 
             <input class="w3-radio" type="radio" name="colors"  id="txt">.txt<br>
@@ -175,14 +189,33 @@ and open the template in the editor.
 
         </form>
         <br></br> <!--skip line under html-->
+=======
+    <form action="#" method="post">
+
+    <input class="w3-radio" type="radio" name="color" value="txt">.txt<br>
+    <input class="w3-radio" type="radio" name="color" value="csv">.csv<br>
+    <input class="w3-radio" type="radio" name="color" value="html">.html<br>
+    
+    <br></br> <!--skip line under html-->
+>>>>>>> refs/remotes/origin/master
 
     </div>
     <!--export button to csv-->
 
+<<<<<<< HEAD
     <form action="#" method="post">
 
         <input type="submit" class="w3-round-large w3-block w3-brown" style="width:100%"value="Export" name="exp" />
     </form>
+=======
+    
+
+    <input type="submit" class="w3-round-large w3-block w3-brown" style="width:100%" value="Export" name="exp" />
+     </form>
+
+      <br></br>
+    </div><!--end checkedbox generate-->
+>>>>>>> refs/remotes/origin/master
 
     <br></br>
 </div><!--end checkedbox generate-->

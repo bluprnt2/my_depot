@@ -119,6 +119,7 @@
             $users = array();
             foreach($user_array as $u) {
                 $users[] = new User(
+                    $u->{'ID'},
                     $u->{'userName'},
                     $u->{'firstName'},
                     $u->{'lastName'},
@@ -171,12 +172,13 @@
             $json_array = self::APICall("/Announcements/add.php", $params);
         }
 
-        //Not Tested
+        //Tested
         public static function addLog($log) {
             $params = array();
+            $params['userID']   = $log->getUserID();
             $params['courseID'] = $log->getCourseID();
             $params['comments'] = $log->getComments();
-            $json_array = self::APICall("/Announcements/add.php", $params);
+            $json_array = self::APICall("/Logs/add.php", $params);
         }
 
         //Not Tested
