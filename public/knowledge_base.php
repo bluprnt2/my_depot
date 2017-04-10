@@ -14,7 +14,7 @@
 		{
 			//make note to update navbar on login
 			//admin has option to view knowledge base but can remove files
-			header('Location: ./tutor_web_app/public/home.php');
+			//header('Location: ./tutor_web_app/public/home.php');
 			echo '<p><a href="home.php">Only Tutors and Admins have access to the Knowledge Base</a><p>';
 			exit();
 		}
