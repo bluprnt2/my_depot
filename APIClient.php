@@ -497,9 +497,8 @@
             $params['timeslot_id'] = $tSlotID;
             $json_array = self::APICall("/TutorTimeSlots/delete.php", $params);
         }
-    }
-	
-	public static function getFiles($courseID, $fileName) 
+		
+		public static function getFiles($courseID, $fileName) 
 	{
 		$params = array();
 		$params['courseid'] = $courseID;
@@ -543,4 +542,5 @@
 		$params['file_ID'] = $fileID;
 		$json_array = self::APICall("/KnowledgeBase/File/delete.php", $params);
 	}
+    }
 ?>
