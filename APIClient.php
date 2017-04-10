@@ -4,9 +4,12 @@
     require_once("APIClient/PunchCard.php");
     require_once("APIClient/Department.php");
     require_once("APIClient/Course.php");
-
-    //Not Tested
     require_once("APIClient/Log.php");
+    require_once("APIClient/TimeSlot.php");
+    require_once("APIClient/Location.php");
+    require_once("APIClient/Survey.php");
+
+    //Still need: many-to-many relationships
 
     class APIClient {
         //Singleton-stuff:
@@ -36,6 +39,7 @@
             self::getInstance()::$token_expires = $t_expires;
         }
 
+        //Tested
         private static function tokenIsValid($ctime) {
             //echo (int) $_COOKIE['token_expires']) . " " . $ctime;
             //$current_time = time() * 1000;
@@ -48,12 +52,14 @@
             return false;
         }
 
+        //Tested
         public static function getAPIHost() {
             $server = "http://" . $_SERVER['SERVER_NAME'] . ":";
             $api_url = $server . "8080";
             return $api_url;
         }
 
+        //Tested
         public static function getToken() {
             date_default_timezone_set("UTC");
             $current_time = time();
@@ -81,6 +87,7 @@
             return self::getInstance()::$token;
         }
 
+        //Tested
         public static function APICall($url, $params) {
             //currently just a copy of the call above, will change after testing probably
             $curl = curl_init();
@@ -98,6 +105,7 @@
             return json_decode($response);
         }
 
+        //Tested
         public static function login($username, $password) {
             $params = array();
             $params['username'] = $username;
@@ -105,6 +113,7 @@
             self::APICall("/Auth/login.php", $params);
         }
 
+        //Tested
         public static function logout() {
             //really just deletes the token cookie and gets another one...
             setCookie('token', "");
@@ -112,6 +121,7 @@
             self::getToken();
         }
 
+        //Tested
         public static function getUser($id) {
             $params = array();
             $params['userid'] = $id;
@@ -131,22 +141,27 @@
             return $users;
         }
 
+        //Tested
         public static function tokenInfo() {
             return self::APICall("/Auth/tokenInfo.php", array());
         }
 
+        //Tested
         public static function getCurrentUser() {
             return self::getUser(self::tokenInfo()->{'userID'});
         }
 
+        //Tested
         public static function isLoggedIn(){
             return self::tokenInfo()->{'logged_in'};
         }
 
+        //Tested
         public static function isAdmin(){
             return self::tokenInfo()->{'admin'};
         }
 
+        //Tested
         public static function getAnnouncements($num) {
             $params = array();
             $params['amount'] = $num;
@@ -164,6 +179,7 @@
             return $announcements;
         }
 
+        //Tested
         public static function addAnnouncement($announcement) {
             $params = array();
             $params['title'] = $announcement->getTitle();
@@ -181,7 +197,7 @@
             $json_array = self::APICall("/Logs/add.php", $params);
         }
 
-        //Not Tested
+        //Tested
         public static function getLogs($logID, $user, $course, $startTime, $endTime) {
             $params = array();
             $params['logID'] = $logID;
@@ -189,7 +205,7 @@
             $params['endTime'] = $endTime;
             if($user != NULL) $params['userID'] = $user->getID();
             if($course != NULL) $params['courseID'] = $course->getID();
-            $json_array = self::APICall("/Logs/getCheckedIn.php", $params);
+            $json_array = self::APICall("/Logs/get.php", $params);
             $logs = array();
             foreach($json_array as $item) {
                 $logs[] = new Log(
@@ -203,7 +219,7 @@
             return $logs;
         }
 
-        //Not Tested
+        //Tested
         public static function toggleCheckedIn($userid) {
             if($userid != NULL) {
                 $params = array();
@@ -222,7 +238,7 @@
             } else return false;
         }
 
-        //Not Tested
+        //Tested
         public static function getPunchCards($punchcardID, $userid, $checkedIn, $startTime, $endTime) {
             $params = array();
             $params['userID'] = $userid;
@@ -243,9 +259,9 @@
             return $punchcards;
         }
 
-        //Not Tested
+        //Tested
         public static function addCourse($course) {
-            if($user != NULL) {
+            if($course != NULL) {
                 $params = array();
                 $params['courseName'] = $course->getName();
                 $params['deptID'] = $course->getDeptID();
@@ -293,6 +309,193 @@
                 $params['deptName'] = $department->getName();
                 $json_array = self::APICall("/Departments/add.php", $params);
             } else return false;
+        }
+
+        //Not Tested
+        public static function addLocation($location){
+            if($location != NULL) {
+                $params = array();
+                $params['buildingName'] = $location->getBuildingName();
+                $params['roomNumber'] = $location->getRoomNumber();
+                $json_array = self::APICall("/Locations/add.php", $params);
+            } else return false;
+        }
+
+        //Not Tested
+        public static function getLocations($locID, $buildingName, $roomNumber) {
+            $params = array();
+            $params['locID'] = $locID;
+            $params['buildingName'] = $buildingName;
+            $params['roomNumber'] = $roomNumber;
+            $json_array = self::APICall("/Locations/get.php", $params);
+            $locations = array();
+            foreach($json_array as $item) {
+                $locations[] = new Location(
+                    $item->{'ID'},
+                    $item->{'buildingName'},
+                    $item->{'roomNumber'}
+                );
+            }
+            if($locID != NULL) return $locations[0];
+            return $locations;
+        }
+
+        //Not Tested
+        public static function delLocation($locID) {
+            if($locID != NULL) {
+                $params = array();
+                $params['locID'] = $locID;
+                $json_array = self::APICall("/Locations/delete.php", $params);
+            } else return false;
+
+        }
+
+        //Not Tested
+        public static function addTimeSlot($tSlot) {
+            if($tSlot != NULL) {
+                $params = array();
+                $params['locID'] = $tSlot->getLocationID();
+                $params['deptID'] = $tSlot->getDepartmentID();
+                $params['courseID'] = $tSlot->getCourseID();
+                $params['startTime'] = $tSlot->getStartTime();
+                $params['endTime'] = $tSlot->getEndTime();
+                $json_array = self::APICall("/TimeSlots/add.php", $params);
+            }
+        }
+
+        //Not Tested
+        public static function getTimeSlots($tSlotID, $locID, $deptID, $courseID, $startTime, $endTime) {
+            $params = array();
+            $params['tSlotID'] = $tSlotID;
+            $params['locID'] = $locID;
+            $params['deptID'] = $deptID;
+            $params['courseID'] = $courseID;
+            $params['startTime'] = $startTime;
+            $params['endTime'] = $endTime;
+            $json_array = self::APICall("/TimeSlots/get.php", $params);
+            $tSlots = array();
+            foreach($json_array as $item) {
+                $tSlots[] = new TimeSlot(
+                    $item->{'ID'},
+                    $item->{'locID'},
+                    $item->{'deptID'},
+                    $item->{'courseID'},
+                    $item->{'startTime'},
+                    $item->{'endTime'}
+                );
+            }
+            if($tSlotID != NULL) return $tSlots[0];
+            return $tSlots;
+        }
+
+        //Not Tested
+        public static function delTimeSlot($tSlotID) {
+            $params = array();
+            $params['tSlotID'] = $tSlotID;
+            $json_array = self::APICall("/TimeSlots/delete.php", $params);
+        }
+
+        //Not Tested
+        public static function addSurvey($survey) {
+            if($survey != NULL) {
+                $params = array();
+                $params['courseID'] = $survey->getCourseID();
+                $params['tutorID'] = $survey->getTutorID();
+                $params['rating'] = $survey->getRating();
+                $params['title'] = $survey->getTitle();
+                $params['comment'] = $survey->getComment();
+                $json_array = self::APICall("/Surveys/add.php", $params);
+            } else return false;
+        }
+
+        //Not Tested
+        public static function getSurveys($surveyID, $courseID, $tutorID, $rating, $viewed) {
+            $params = array();
+            $params['surveyID'] = $surveyID;
+            $params['courseID'] = $courseID;
+            $params['tutorID'] = $tutorID;
+            $params['rating'] = $rating;
+            $params['viewed'] = $viewed;
+            $json_array = self::APICall("/Surveys/get.php", $params);
+            $surveys = array();
+            foreach($json_array as $item) {
+                $surveys[] = new Survey(
+                    $item->{'ID'},
+                    $item->{'courseID'},
+                    $item->{'tutorID'},
+                    $item->{'rating'},
+                    $item->{'title'},
+                    $item->{'comment'},
+                    $item->{'viewed'}
+                );
+            }
+            if($surveyID != NULL) return $surveys[0];
+            return $surveys;
+
+        }
+
+        //Not Tested
+        public static function viewSurvey($surveyID) {
+            $params = array();
+            $params['surveyID'] = $surveyID;
+            $json_array = self::APICall("/Surveys/view.php", $params);
+        }
+
+        //Many-to-Many relationships:
+
+        //Not Tested
+        public static function getCourseTutors($tutorID, $courseID) {
+            $params = array();
+            $params['tutorID'] = $tutorID;
+            $params['courseID'] = $courseID;
+            $json_array = self::APICall("/CourseTutors/get.php", $params);
+            return $json_array; //Not gonna bother with objects for many-to-many
+        }
+
+
+        //Not Tested
+        public static function addCourseTutors($tutorID, $courseID) {
+            if($tutorid != null && $courseid != null) {
+                $params = array();
+                $params['tutorID'] = $tutorID;
+                $params['courseID'] = $courseID;
+                $json_array = self::APICall("/CourseTutors/add.php", $params);
+            } else return false;
+        }
+
+        //Not Tested
+        public static function delCourseTutors($tutorID, $courseID) {
+            $params = array();
+            $params['tutorID'] = $tutorID;
+            $params['courseID'] = $courseID;
+            $json_array = self::APICall("/CourseTutors/delete.php", $params);
+        }
+
+        //Not Tested
+        public static function getTutorTimeSlots($tutorID, $tSlotID) {
+            $params = array();
+            $params['tutor_id'] = $tutorID;
+            $params['timeslot_id'] = $tSlotID;
+            $json_array = self::APICall("/TutorTimeSlots/get.php", $params);
+            return $json_array;
+        }
+
+        //Not Tested
+        public static function addTutorTimeSlot($tutorID, $tSlotID) {
+            if($tutorID != NULL && $tSlotID != NULL) {
+                $params = array();
+                $params['tutor_id'] = $tutorID;
+                $params['timeslot_id'] = $tSlotID;
+                $json_array = self::APICall("/TutorTimeSlots/add.php", $params);
+            } else return false;
+        }
+
+        //Not Tested
+        public static function delTutorTimeSlot($tutorID, $tSlotID) {
+            $params = array();
+            $params['tutor_id'] = $tutorID;
+            $params['timeslot_id'] = $tSlotID;
+            $json_array = self::APICall("/TutorTimeSlots/delete.php", $params);
         }
     }
 ?>

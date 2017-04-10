@@ -12,7 +12,7 @@
         if($userid != NULL && checkAdmin($userid, $tutorsql)) {
             echo json_encode(
                 delTimeSlot(
-                    $_POST['timeslot_id'],
+                    $_POST['tSlotID'],
                     $tutorsql
                 )
             );
