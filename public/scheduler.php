@@ -54,7 +54,9 @@ scheduler.parse([
 		*
 		*$events ->render_table("id","start_date,end_date,text");
 		*/
+		$events;
 		?>
+		
 	}
 	</script>
 
