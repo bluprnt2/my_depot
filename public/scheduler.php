@@ -10,7 +10,9 @@
 	<title>Scheduler</title>
 </head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="/codebase/dhtmlxscheduler.js" type="text/javascript" 
 												charset="utf-8"></script>
+	<link rel="stylesheet" href="/codebase/dhtmlxscheduler.css" 
 			type="text/css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
 
@@ -25,6 +27,7 @@
 
 	<script type="text/javascript" charset="utf-8">
 	function init() {
+		//configuring a calendar
 		window.resizeTo(950,700)
 		modSchedHeight();
 		scheduler.config.xml_date="%Y-%m-%d %H:%i";
@@ -33,7 +36,7 @@
 		scheduler.config.last_hour = 18;
 		scheduler.config.multi_day = true;
 		scheduler.config.date_step = "5"
-		
+		//initializing here
 		scheduler.init('scheduler_here', new Date(),"week");
 		scheduler.setLoadMode("week")
 		scheduler.templates.event_class=function(s,e,ev)
@@ -43,9 +46,16 @@
 scheduler.parse([
 	{ start_date: "2017-03-27 10:00", end_date: "2017-03-27 13:45", text:"Computer Science" },
 				],"json");
-//Testing Functionality of adding from a db
+	//Testing Functionality of adding from a db
+	<?php
+		require_once("../APIClient.php");
+		$events = APIClient::getTimeSlots(null, null, null, null, null);
+		/**Error on line 
+		*
+		*$events ->render_table("id","start_date,end_date,text");
+		*/
+		?>
 	}
-
 	</script>
 
 
@@ -79,7 +89,7 @@ scheduler.parse([
 	<!--<br> skip a line. -->
 	<div class="w3-bar w3-border w3-light-grey">
    <?php
-   require_once("../APIClient.php");
+   
    include("navbar.php");
    ?>
 	</div>
