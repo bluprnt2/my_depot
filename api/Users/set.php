@@ -11,7 +11,7 @@
         $userid = checkLogin($_POST['access_token'], $oauthsql);
         if($userid != NULL && (checkAdmin($userid, $tutorsql) || $_POST['user_id'] == $userid)) {
             echo json_encode(setUser(
-                $userid,
+                $_POST['user_id'],
                 $_POST['username'],
                 $_POST['firstName'],
                 $_POST['lastName'],
