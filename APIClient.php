@@ -76,9 +76,45 @@ class APIClient {
             $curl = curl_init();
             $params = array();
 
+<<<<<<< HEAD
             //TODO: change the client username & password
             $params['client_id'] = 'testclient';
             $params['client_secret'] = 'testpass';
+=======
+        //Tested
+        public static function addUser($user, $password) {
+            if($user != NULL) {
+                $params= array();
+                $params['username'] = $user->getUsername();
+                $params['firstName'] = $user->getFirstName();
+                $params['lastName'] = $user->getLastName();
+                $params['password'] = $password;
+                $params['admin'] = $user->getAdmin();
+                $params['notify'] = $user->getNotify();
+                $json_array = self::APICall("/Users/add.php", $params);
+            } else return false;
+        }
+
+        //Not Tested
+        public static function setUser($user, $password) {
+            if($user != NULL) {
+                $params= array();
+                $params['user_id'] = $user->getUserID();
+                $params['username'] = $user->getUsername();
+                $params['firstName'] = $user->getFirstName();
+                $params['lastName'] = $user->getLastName();
+                $params['password'] = $password;
+                $params['admin'] = $user->getAdmin();
+                $params['notify'] = $user->getNotify();
+                $json_array = self::APICall("/Users/set.php", $params);
+            } else return false;
+        }
+
+        //Tested
+        public static function tokenInfo() {
+            return self::APICall("/Auth/tokenInfo.php", array());
+        }
+>>>>>>> refs/remotes/origin/master
 
             $params['grant_type'] = 'client_credentials';
             curl_setopt($curl, CURLOPT_URL, $api_url);
@@ -503,6 +539,7 @@ class APIClient {
     public static function addFile($file) {
         if ($file != NULL) {
             $params = array();
+<<<<<<< HEAD
             $params['courseID'] = $file->getCourseID();
             $params['userID'] = $file->getUserID();
             $params['fileName'] = $file->getFilename();
@@ -515,6 +552,57 @@ class APIClient {
     //Not designed yet.
     public static function setFile($fileID, $courseID, $userID, $fileName, $content, $approved) {
         
+=======
+            $params['tutor_id'] = $tutorID;
+            $params['timeslot_id'] = $tSlotID;
+            $json_array = self::APICall("/TutorTimeSlots/delete.php", $params);
+        }
+
+		public static function getFiles($courseID, $fileName)
+	{
+		$params = array();
+		$params['courseid'] = $courseID;
+		$params['filename'] = $fileName;
+		$json_array = self::APICall("/KnowledgeBase/File/get.php", $params);
+		$files = array();
+		foreach($json_array as $item) {
+			$files[] = new KnowledgeFile(
+				$item->{'ID'},
+				$item->{'courseID'},
+				$item->{'userID'},
+				$item->{'filename'},
+				$item->{'content'},
+				$item->{'approved'}
+			);
+		}
+		return $files;
+	}
+
+	public static function addFile($file)
+	{
+		 if($file != NULL) {
+			$params = array();
+			$params['courseID'] = $file->getCourseID();
+			$params['userID'] = $file->getUserID();
+			$params['fileName'] = $file->getFilename();
+			$params['content'] = $file->getContent();
+			$json_array = self::APICall("/KnowledgeBase/File/add.php", $params);
+		} else return false;
+	}
+
+	//Not designed yet.
+	public static function setFile($fileID, $courseID, $userID, $fileName, $content, $approved)
+	{
+
+	}
+
+	public static function removeFile($fileID)
+	{
+		$params = array();
+		$params['file_ID'] = $fileID;
+		$json_array = self::APICall("/KnowledgeBase/File/delete.php", $params);
+	}
+>>>>>>> refs/remotes/origin/master
     }
 
     public static function removeFile($fileID) {
