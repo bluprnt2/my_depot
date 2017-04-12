@@ -9,9 +9,10 @@
     } else {
         echo json_encode(
             getTimeSlots(
+                $_POST['tSlotID'],
                 $_POST['locID'],
                 $_POST['deptID'],
-                $_POST['courseID'], 
+                $_POST['courseID'],
                 $_POST['starttime'],
                 $_POST['endtime'],
                 $tutorsql)

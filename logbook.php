@@ -34,14 +34,7 @@
      <div class = "w3-display-container w3-display-middle w3-light-grey" 
           style ="height:400px; width:500px;margin-top:150px;margin:0 auto;text-align: center; border-radius: 10px; border-color: solid brown">
          <form>
-             <h2>Tutor Check-In</h2>
-        <p>
-            <input class="w3-checkbox" type="checkbox" name = "tutor1">
-            <label>Tutor1</label>
-            <input class="w3-checkbox" type="checkbox" name = "tutor2">
-            <label>Tutor2</label>
-        </p>
-       
+             
         <p> Select a course
             <select name="Course"> 
          <?php

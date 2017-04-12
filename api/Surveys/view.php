@@ -11,12 +11,8 @@
         $userid = checkLogin($_POST['access_token'], $oauthsql);
         if($userid != NULL && checkAdmin($userid, $tutorsql)) {
             echo json_encode(
-                getSurveys(
+                viewSurveys(
                     $_POST['surveyID'],
-                    $_POST['courseID'],
-                    $_POST['tutorID'],
-                    $_POST['rating'],
-                    $_POST['viewed'],
                     $tutorsql
                 )
             );
