@@ -10,4 +10,9 @@
             'Full Name: ' . $item->getFirstName() . ' ' . $item->getLastName() . '<br />' .
             'Is Admin:  ' . $item->getAdmin() . '<br />' .
             'Notify:    ' . $item->getNotify() . '<br />';
+
+    if(APIClient::isAdmin()) {
+        $u = new User(null, "sample - " . uniqid(), "John", "Doe", false, false);
+        APIClient::addUser($u, "password123");
+    }
 ?>

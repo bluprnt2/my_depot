@@ -2,8 +2,7 @@
     //Not Tested
     function addUser($username, $firstName, $lastName, $password, $admin, $notify, $tutorserver) {
         $saltHash = password_hash($password, PASSWORD_BCRYPT);
-        $query = "INSERT INTO Users (userName, firstName, lastName, saltHash, admin, notify) VALUES (?, ?, ?, ?, ?)";
-
+        $query = "INSERT INTO Users (userName, firstName, lastName, saltHash, admin, notify) VALUES (?, ?, ?, ?, ?, ?)";
         if($stmnt = $tutorserver->prepare($query)) {
             $stmnt->bind_param('ssssii',
                 $username,

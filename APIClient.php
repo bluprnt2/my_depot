@@ -142,6 +142,35 @@
         }
 
         //Tested
+        public static function addUser($user, $password) {
+            if($user != NULL) {
+                $params= array();
+                $params['username'] = $user->getUsername();
+                $params['firstName'] = $user->getFirstName();
+                $params['lastName'] = $user->getLastName();
+                $params['password'] = $password;
+                $params['admin'] = $user->getAdmin();
+                $params['notify'] = $user->getNotify();
+                $json_array = self::APICall("/Users/add.php", $params);
+            } else return false;
+        }
+
+        //Not Tested
+        public static function setUser($user, $password) {
+            if($user != NULL) {
+                $params= array();
+                $params['user_id'] = $user->getUserID();
+                $params['username'] = $user->getUsername();
+                $params['firstName'] = $user->getFirstName();
+                $params['lastName'] = $user->getLastName();
+                $params['password'] = $password;
+                $params['admin'] = $user->getAdmin();
+                $params['notify'] = $user->getNotify();
+                $json_array = self::APICall("/Users/set.php", $params);
+            } else return false;
+        }
+
+        //Tested
         public static function tokenInfo() {
             return self::APICall("/Auth/tokenInfo.php", array());
         }
@@ -497,8 +526,8 @@
             $params['timeslot_id'] = $tSlotID;
             $json_array = self::APICall("/TutorTimeSlots/delete.php", $params);
         }
-		
-		public static function getFiles($courseID, $fileName) 
+
+		public static function getFiles($courseID, $fileName)
 	{
 		$params = array();
 		$params['courseid'] = $courseID;
@@ -533,7 +562,7 @@
 	//Not designed yet.
 	public static function setFile($fileID, $courseID, $userID, $fileName, $content, $approved)
 	{
-		
+
 	}
 
 	public static function removeFile($fileID)
