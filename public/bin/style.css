@@ -1,4 +1,4 @@
-#feedback-form-container input, select {
+#feedback-form-container input[type="text"], select {
     float: right;
     clear: right;
     margin-right: 5%;
@@ -18,7 +18,7 @@
     margin: 2px;
 }
 
-#feedback-form-container div {
+#feedback-form-container label {
     font-size: 18px;
     text-align: left;
 
@@ -27,6 +27,19 @@
 #feedback-form-container {
     font-family: "Consolas", Times, serif;
     width: 50%;
+}
+
+#feedback-form input[type="radio"]{    
+    display: inline;
+    margin-left: 5px;
+}
+
+#radio-buttons {
+    font-size: 12px;
+    display: inline;    
+    //width: 75%;
+    float: right;
+    margin-right: 5%;
 }
 
 #login-form-body  {
@@ -239,3 +252,4 @@ body{
 	font-weight: bold;
 	padding:15px;
 }
+
