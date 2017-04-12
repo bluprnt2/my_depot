@@ -11,11 +11,11 @@
     if(APIClient::isLoggedIn()) {
         if(APIClient::isAdmin()){
             echo '
-                <a class="w3-bar-item w3-button" href="#">Reports</a>            
+                <a class="w3-bar-item w3-button" href="report.php">Reports</a>            
             ';
         }
         echo '
-            <a class="w3-bar-item w3-button" href="#">Shared Knowledgebase</a>
+            <a class="w3-bar-item w3-button" href="knowledge_base.php">Shared Knowledgebase</a>
             <a class="w3-bar-item w3-button" href="logout.php">Logout</a>
         ';
 
