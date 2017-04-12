@@ -147,11 +147,24 @@ body{
 	font-weight: bold;
 }
 
-#kb-file-selector{
+#kb-selection{
+	font-family: Arial, sans-serif;
+    font-size: 20px;
+	font-weight: bold;
+	margin: auto;
+	float:left;
 	background-color: #bfbfbf;
-	padding: 12px;
-	
+	padding: 12px 12px 0px 12px;
 }
+
+#kb-selection-component1, #kb-selection-component2{
+	padding: 6px;
+}
+
+#kb-selection-component3{
+	padding: 6px 6px 0px 6px;
+}
+	
 
 #kb-department, #kb-course, #kb-filename{
 	font-family: Arial, sans-serif;
@@ -164,11 +177,12 @@ body{
 	margin: 0 auto;
 }
 
-#kb-submitButton {
+#kb-loadButton {
     background-color: #800000;
     border: 3px solid white;
     color: white;
-    padding: .5px 25px;
+    padding: .5px 5px;
+	width: 150px;
     text-align: center;
     text-decoration: none;
     font-size: 18px;
@@ -177,12 +191,31 @@ body{
     transition-duration: 0.4s;
 }
 
-#kb-submitButton:hover{
+#kb-loadButton:hover{
 	background-color: #49E20E; /* Green */
     color: white;
 }
 
-#kb-main{
+#kb-instructions{
+	background-color: #bfbfbf;
+	padding: 14px 14px 5px 14px;
+}
+
+#kb-instructionsTitle{
+	font-family: Arial, sans-serif;
+    font-size: 20px;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+#kb-instructionsText, span{
+	font-family: Arial, sans-serif;
+    font-size: 18px;
+	display: block;
+}
+
+#kb-content{
+	display:block;
 	background-color: #ffd966;
 	color: black;
 	font-family: Arial, sans-serif;
@@ -190,7 +223,6 @@ body{
 	font-weight: bold;
 	padding:15px;
 }
-
 
 #header .yellowBox
 {

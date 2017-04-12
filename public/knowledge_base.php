@@ -16,11 +16,10 @@
 		{
 			//make note to update navbar on login
 			//admin has option to view knowledge base but can remove files
-			header('Location: ./tutor_web_app/index.php');
+			header('Location: ./index.php');
 			echo '<p><a href="index.php">Only Tutors and Admins have access to the Knowledge Base</a><p>';
 			exit();
 		}
-		
 	?>
 		
 		<!--kb = knowledge base-->
@@ -29,43 +28,111 @@
 				<div class="">Knowledge Base</div>
 			</div>
 			
-			<div id="kb-content">
-				<!--subject and course selection container-->
-				<div id="kb-file-selector">
-					<select id="kb-department" >
-						<option value="">Select a Department</option>
+			
+			<div id="wrapper">
+				<div id="kb-selection">
+					<form method="POST">
+					<div id="kb-selection-component1">
+						<select id="kb-department" >
+							<option name="department" value="">Select a Department</option>
+							
+							<?php
+							$departments = APIClient::getDepartments(null);
+								foreach($departments as $d) {
+									echo "<option value=".$d->getID().">". $d->getName() . "</option>";
+								}
+							?>
+							
+							
+						</select>
+						
+						<button id="kb-loadButton" name="load-courses" type="submit">Load Courses
 						<?php
-						//onChange="getCourses(this.value);"
-							$departments = APIClient::getDepartments(null, null);
-							foreach($departments as $d) {
-								echo "<option>". $d->getName() . "</option>";
+							/*
+							if(!$_POST('load-courses') !== null)
+							{
+								$department = $_POST['department'];
+								echo $department;
 							}
+							*/
 						?>
-					</select>
+						</button>
+					</div>
+
+					<div id="kb-selection-component2">
+						<select id="kb-course">
+							<option name="course" value="">Select a Course</option>
+							<?php
+								
+								if(isset($department))
+								{
+									$courses = APIClient::getCourses(null, $department);
+									foreach($courses as $a){
+										echo "<option value=".$a->getID().">". $a->getName() ."</option>";
+									}
+								}
+							?>
+						</select>
+						
+						<button id="kb-loadButton" type="submit" onClick="">Load Files</button>
+					</div>
 					
-					<select id="kb-course" >
-						<option value="">Select a Course</option>
-						<?php
-							//onChange="getFiles(this.value);"
-							$courses = APIClient::getCourses(null, null, null);
-							foreach($courses as $a){
-								echo "<option>". $a->getName() ."</option>";
-							}
-						?>
-					</select>
-					
-					<select id="kb-filename">
-						<option selected="selected">Select a File</option>
-					</select>
-					
-					<button id="kb-submitButton" onClick="">Open File</button>
-				</div>
-				
-				<div id="kb-main">
-					<div class="subjectName">Sample Course</div>
-					<div class="filesDisplay">File 1</div>
+					<div id="kb-selection-component3">
+						<select id="kb-filename">
+							<option name="file" selected="selected">Select a File</option>
+							<?php
+								$course = $_POST['course'];
+								if(isset($course))
+								{
+									$courses = APIClient::getFiles($course, null);
+									foreach($files as $a){
+										echo "<option value=".$d->getID().">". $a->getFileName() ."</option>";
+									}
+								}
+							?>
+						</select>
+						
+						<button id="kb-loadButton" type="submit" onClick="">Open File</button>
+					</div>
+					</form>
 				</div>
 			</div>
+				<div id="kb-instructions">
+					<div id="kb-instructionsTitle">Knowledge Base Instructions</div>
+					<div id="kb-instructionsText"><p><span>1. Select a Department and click "Load Courses" to load a course.</span>
+					<span>2. Select a Course and click "Load Files" to load a course's files.</span>
+					<span>3. Select a File and click "Load File" to load a file.</span></p>
+					</div>
+				</div>
+			</div>
+				
+			<div id="kb-content">
+					<div class="courseName">
+						<?php
+							$filename = $_GET['file']; 
+							if(isset($filename))
+							{
+								$courses = APIClient::getFiles($course, $filename);
+								foreach($courses as $a){
+									echo "<option>". $a->getName() ."</option>";
+								}
+							}
+						?>
+					</div>
+					<div class="filesDisplay">
+						<?php
+							$filename = $_GET['file']; 
+							if(isset($filename))
+							{
+								$courses = APIClient::getFiles($course, $filename);
+								foreach($courses as $a){
+									echo "<option>". $a->getContent() ."</option>";
+								}
+							}
+						?>
+					</div>
+			</div>
+			
 			<div id="kb-footer">
 			<?php
 				include("footer.php");
