@@ -10,21 +10,24 @@
 	<title>Scheduler</title>
 </head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="codebase/dhtmlxscheduler.js" type="text/javascript" charset="utf-8"></script>
-	<link rel="stylesheet" href="codebase/dhtmlxscheduler.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	<script src="/codebase/dhtmlxscheduler.js" type="text/javascript" 
+												charset="utf-8"></script>
+	<link rel="stylesheet" href="/codebase/dhtmlxscheduler.css" 
+			type="text/css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
-<style type="text/css" media="screen">
 
-	html, body{
-		margin:0px;
-		padding:0px;
-		height:100%;
-		overflow:hidden;
-	}	
-	
+	<style type="text/css" media="screen">
+    html, body{
+        margin:0px;
+        padding:0px;
+        height:100%;
+        overflow:hidden;
+    }   
 </style>
-<script type="text/javascript" charset="utf-8">
+
+	<script type="text/javascript" charset="utf-8">
 	function init() {
+		//configuring a calendar
 		window.resizeTo(950,700)
 		modSchedHeight();
 		scheduler.config.xml_date="%Y-%m-%d %H:%i";
@@ -33,21 +36,32 @@
 		scheduler.config.last_hour = 18;
 		scheduler.config.multi_day = true;
 		scheduler.config.date_step = "5"
+		//initializing here
 		scheduler.init('scheduler_here', new Date(),"week");
+		scheduler.setLoadMode("week")
 		scheduler.templates.event_class=function(s,e,ev)
 			{ return ev.custom?"custom":""; };
-		scheduler.load("./xml/events.php");
 		
 //Temporary inline events to be removed later(Demonstrating input format)
 scheduler.parse([
 	{ start_date: "2017-03-27 10:00", end_date: "2017-03-27 13:45", text:"Computer Science" },
 				],"json");
-//Testing Functionality of adding from a db
-var dp = new dataProcessor("events.php");
+	//Testing Functionality of adding from a db
+	<?php
+		require_once("../APIClient.php");
+		$events = APIClient::getTimeSlots(null, null, null, null, null);
+		/**Error on line 
+		*
+		*$events ->render_table("id","start_date,end_date,text");
+		*/
+		$events;
+		?>
+		
 	}
-</script>
+	</script>
 
-<body onload="init();" onresize="modSchedHeight()">
+
+	<body onload="init();" onresize="modSchedHeight()">
 	
     <style>
         a img{
@@ -74,19 +88,14 @@ var dp = new dataProcessor("events.php");
 	 <div class="w3-container">
 	</div>
 
-<!--<br> skip a line-->
-<div class="w3-bar w3-border w3-light-grey">
+	<!--<br> skip a line. -->
+	<div class="w3-bar w3-border w3-light-grey">
+   <?php
    
-   <a class="w3-bar-item w3-button " href="#">Home</a>
-   <a class="w3-bar-item w3-button " href="#">About</a>
-   <a class="w3-bar-item w3-button " href="#">Schedule</a>
-   <a class="w3-bar-item w3-button" href="#">Feedback</a>
-   <a class="w3-bar-item w3-button " href="#">RowanHome</a>
-   <a class="w3-bar-item w3-button " href="#">Login</a>
-   <input class="w3-input w3-border " type="text" placeholder="Search Rowan"
-		style="width:15%" >
-  
-</div>
+   include("navbar.php");
+   ?>
+	</div>
+	
 	<div style="height:50px;background-color:#92543f ">
 		
 		<div id="contbox" style="position: relative; font: bold 17px Arial">
@@ -96,6 +105,11 @@ var dp = new dataProcessor("events.php");
             </div>
 		</div>
 	</div>
+		<div id="kb-footer">
+			<?php
+				include("footer.php");
+			?>
+		</div>
 	<!-- some spacing before scheduler entity-->
     <ul>
         <li>
@@ -103,10 +117,12 @@ var dp = new dataProcessor("events.php");
             <span></span>
         </li>
     </ul>
+	<script>
+
+	</script>
 	<div id="scheduler_here" class="dhx_cal_container" 
 		style='width:100%;height:100%;'>
-		<div class="dhx_cal_navline">
-		
+			<div class="dhx_cal_navline">
 			<div class="dhx_cal_prev_button">&nbsp;</div>
 			<div class="dhx_cal_next_button">&nbsp;</div>
 			<div class="dhx_cal_today_button"></div>
@@ -117,10 +133,10 @@ var dp = new dataProcessor("events.php");
 				style="right:268px;"></div>
 			<div class="dhx_cal_tab" name="month_tab" 
 				style="right:204px;"></div>	
+			
 		</div>
 		<div class="dhx_cal_header"></div>
 		<div class="dhx_cal_data"></div>		
 	</div>
-	
 	</body>
 </html>
