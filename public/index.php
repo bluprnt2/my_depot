@@ -5,11 +5,11 @@ include("header.php");
 ?>
 
 
-<div class="w3-bar w3-border w3-light-grey">
-    <?php
-    include("navbar.php");
-    ?>
-</div>
+
+<?php
+include("navbar.php");
+?>
+
 
 <div class="w3-container">
     <?php include("home.php"); ?>

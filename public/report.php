@@ -1,12 +1,15 @@
-<?php
-require_once("../APIClient.php");
-$title = "Report Generator";
-include("header.php");
 
+
+<?php
+
+require_once("../APIClient.php");
 
 //Generate to export file TXT
 
-if (isset($_POST['exp'])) {
+if (isset($_POST['exp']) )
+
+    {
+
     header('Content-Type: text/csv; charset=utf-8');
 
     $answer = $_POST['color'];
@@ -35,28 +38,21 @@ if (isset($_POST['exp'])) {
 
     $announcements = APIClient::getAnnouncements(5);
 
-    echo "<table border='1'>";
+echo "<table border='1'>";
 
-    echo "<tr>";
+echo "<tr>";
     echo "<th>Title</th>";
     echo "<th>Content</th>";
     echo "<th>User</th>";
     echo "<th>Time Posted</th>";
+echo "</tr>";
+foreach($announcements as $a) {
+    echo "<tr>";
+      echo "<td>" . $a->getTitle() . "</td>";
+      echo "<td>" . $a->getContent() . "</td>";
+      echo "<td>" . APIClient::getUser($a->getUserID())->getUserName() . "</td>";
+      echo "<td>" . $a->getTimeStamp() . "</td>";
     echo "</tr>";
-<<<<<<< HEAD
-    foreach ($announcements as $a) {
-        echo "<tr>";
-        echo "<td>" . $a->getTitle() . "</td>";
-        echo "<td>" . $a->getContent() . "</td>";
-        echo "<td>" . APIClient::getUser($a->getUserID())->getUserName() . "</td>";
-        echo "<td>" . $a->getTimeStamp() . "</td>";
-        echo "</tr>";
-    }
-    echo "</table>";
-
-    exit();
-}//end IF
-=======
 }
 echo "</table>";
 
@@ -69,13 +65,10 @@ echo "</table>";
 // include("navbar.php");
  
 
->>>>>>> refs/remotes/origin/master
 ?>
 
 
 
-<<<<<<< HEAD
-=======
 
 
 <!DOCTYPE html>
@@ -99,97 +92,77 @@ and open the template in the editor.
       <div class="w3-container w3-yellow">
        <p></p>
 </div>
->>>>>>> refs/remotes/origin/master
 
-<!--Yellow bar -->
+         <!--add nav bar -->
+
+        <div class="w3-container">
 
 
-<!--add nav bar -->
-
+</div>
+<!--<br> skip a line-->
 <div class="w3-bar w3-border w3-light-grey">
-    <?php
-    include("navbar.php");
-    ?>
+
+  <a class="w3-bar-item w3-button " href="#">Home</a>
+  <a class="w3-bar-item w3-button " href="#">About</a>
+  <a class="w3-bar-item w3-button " href="#">Schedule</a>
+  <a class="w3-bar-item w3-button" href="#">Feedback</a>
+   <a class="w3-bar-item w3-button " href="#">RowanHome</a>
+   <a class="w3-bar-item w3-button " href="#">Login</a>
+   <input class="w3-input w3-border " type="text" placeholder="Search Rowan" style="width:15%" >
+
 </div>
 
-<!-- 
-<div class="w3-bar w3-border w3-light-grey">
-    <a class="w3-bar-item w3-button " href="#">Home</a>
-    <a class="w3-bar-item w3-button " href="#">About</a>
-    <a class="w3-bar-item w3-button " href="#">Schedule</a>
-    <a class="w3-bar-item w3-button" href="#">Feedback</a>
-    <a class="w3-bar-item w3-button " href="#">RowanHome</a>
-    <a class="w3-bar-item w3-button " href="#">Login</a>
-    <input class="w3-input w3-border " type="text" placeholder="Search Rowan" style="width:15%" >
-</div>
--->
-<!--brown bar -->
-<div class="w3-container w3-brown">
-    <h1></h1>
-    <h2>Report</h2>
-</div>
+  <!--brown bar -->
+        <div class="w3-container w3-brown">
+       <h1></h1>
+       <h2>Report</h2>
+        </div>
 
-<div class="w3-panel w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border-white w3-light-grey">
 
-    <h2><strong>Generating a Report</h2>
-    <p>Select the type of report you want to generate and the type of information you want to display,<br></br>
-        then click Generate. Afterwards, you can export a copy of the report as a .csv, .txt, or .html file.
+  <div class="w3-panel w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border-white w3-light-grey">
 
-    <div class="w3-display-topleft">
+      <h2><strong>Generating a Report</h2>
+      <p>Select the type of report you want to generate and the type of information you want to display,<br></br>
+     then click Generate. Afterwards, you can export a copy of the report as a .csv, .txt, or .html file.
 
-    </div>
+           <div class="w3-display-topleft">
 
-</p><!--end papagraph-->
+        </div>
+
+  </p><!--end papagraph-->
 
 
 
-<div class="w3-container w3-lightgrey w3-cell">
+         <div class="w3-container w3-lightgrey w3-cell">
 
-    <div class="w3-panel w3-border w3-border-white">
+        <div class="w3-panel w3-border w3-border-white">
 
-        <h3><strong>Graph</h3>
+          <h3><strong>Graph</h3>
 
-        <form>
+         <form>
 
-<<<<<<< HEAD
-            <input class="w3-radio"  type="radio" name="colors"  id="txt">Pie<br>
-            <input class="w3-radio"  type="radio" name="colors" id="csv">Bar<br>
-            <input class="w3-radio"  type="radio" name="colors"id="html">Histogram<br>
-=======
     <input class="w3-radio"  type="radio" name="graph"  id="pie">Pie<br>
     <input class="w3-radio"  type="radio" name="graph" id="bar">Bar<br>
     <input class="w3-radio"  type="radio" name="graph" id="hist">Histogram<br>
->>>>>>> refs/remotes/origin/master
 
 
         </form>
         <br></br> <!--skip line under histogram box-->
-    </div>
+        </div>
 
-    <button class="w3-round-large w3-block w3-brown" style="width:100%"  >Generate</button>
-
-
-    <br></br>
-</div> <!--end graph box-->
+   <button class="w3-round-large w3-block w3-brown" style="width:100%"  >Generate</button>
 
 
-<div class="w3-container w3-light-grey w3-cell ">
+      <br></br>
+        </div> <!--end graph box-->
+
+
+    <div class="w3-container w3-light-grey w3-cell ">
 
     <div class="w3-panel w3-border w3-border-white">
 
         <h3><strong>Export</h3>
 
-<<<<<<< HEAD
-        <form>
-
-            <input class="w3-radio" type="radio" name="colors"  id="txt">.txt<br>
-
-            <input class="w3-radio"type="radio" name="colors" id="csv">.csv<br>
-            <input class="w3-radio" type="radio" name="colors"id="html">.html<br>
-
-        </form>
-        <br></br> <!--skip line under html-->
-=======
     <form action="#" method="post">
 
     <input class="w3-radio" type="radio" name="color" value="txt">.txt<br>
@@ -197,17 +170,10 @@ and open the template in the editor.
     <input class="w3-radio" type="radio" name="color" value="html">.html<br>
     
     <br></br> <!--skip line under html-->
->>>>>>> refs/remotes/origin/master
 
     </div>
     <!--export button to csv-->
 
-<<<<<<< HEAD
-    <form action="#" method="post">
-
-        <input type="submit" class="w3-round-large w3-block w3-brown" style="width:100%"value="Export" name="exp" />
-    </form>
-=======
     
 
     <input type="submit" class="w3-round-large w3-block w3-brown" style="width:100%" value="Export" name="exp" />
@@ -215,10 +181,6 @@ and open the template in the editor.
 
       <br></br>
     </div><!--end checkedbox generate-->
->>>>>>> refs/remotes/origin/master
 
     <br></br>
-</div><!--end checkedbox generate-->
-
-<br></br>
-</div><!--end grey panel-->
+    </div><!--end grey panel-->
