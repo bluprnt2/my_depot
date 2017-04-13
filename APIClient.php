@@ -535,8 +535,8 @@
 		public static function getFiles($courseID, $fileName)
 	{
 		$params = array();
-		$params['courseid'] = $courseID;
-		$params['filename'] = $fileName;
+		$params['courseID'] = $courseID;
+		$params['fileName'] = $fileName;
 		$json_array = self::APICall("/KnowledgeBase/File/get.php", $params);
 		$files = array();
 		foreach($json_array as $item) {

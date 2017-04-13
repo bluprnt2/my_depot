@@ -14,7 +14,7 @@
 		{
 			echo json_encode(
 				getFiles(
-				(int) $_POST['courseID'], 
+				$_POST['courseID'], 
 				$_POST['fileName'], 
 				$tutorsql
 				)

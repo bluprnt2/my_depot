@@ -122,7 +122,7 @@
     color: blue
 }
 
-body{
+#container{
 	background-color: #ffffff;
 	margin: 0 auto;
 	width: 85%;
@@ -165,7 +165,6 @@ body{
 	padding: 6px 6px 0px 6px;
 }
 
-
 #kb-department, #kb-course, #kb-filename{
 	font-family: Arial, sans-serif;
     font-size: 18px;
@@ -198,7 +197,7 @@ body{
 
 #kb-instructions{
 	background-color: #bfbfbf;
-	padding: 14px 14px 5px 14px;
+	padding: 14px 14px 20px 14px;
 }
 
 #kb-instructionsTitle{
