@@ -11,5 +11,6 @@
         <link rel="stylesheet" href="/codebase/dhtmlxscheduler.css" 
               type="text/css" media="screen" title="no title" charset="utf-8">
         <link rel="stylesheet" href="bin/style.css">
+        <script src="bin/scripts.js" type="text/javascript"></script>
     </head>
     <body>
