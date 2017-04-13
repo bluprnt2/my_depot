@@ -29,7 +29,7 @@ Run the following from the root directory:
 From a different command line run:
 `php -S localhost:8000 -t public`
 Open a web browser of your choosing and navigate to:
-`http://localhost:8000/api_index.php`
+`http://localhost:8000/api_examples/`
 
 Here's an example of a correct response:
 > Logged in: false  
@@ -38,7 +38,7 @@ Here's an example of a correct response:
 The token should remain across page refreshes and tabs.
 
 Also, using the token, the sample login endpoint should work, and it can be tested by navigating to:
-`http://localhost:8000/api_login.php`
+`http://localhost:8000/api_examples/login.php`
 
 Here's an example of a correct response:
 > Logged in successfully
@@ -47,7 +47,7 @@ Now that the token is marked as logged in, navigate back to the first page, the 
 > Logged in: true  
 > Admin privileges: true
 
-Navigating to `http://localhost:8000/api_logout.php` should result in:
+Navigating to `http://localhost:8000/api_examples/logout.php` should result in:
 > Logged out successfully
 
 And the index page should look like how it started.

@@ -1,5 +1,5 @@
 <?php
-    require_once("../APIClient.php");
+    require_once("../../APIClient.php");
 
     if(APIClient::isAdmin()) {
         $dept = new Department(null, "Test Department - " . uniqid());

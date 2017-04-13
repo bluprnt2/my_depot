@@ -1,5 +1,5 @@
 <?php
-    require_once("../APIClient.php");
+    require_once("../../APIClient.php");
 
     if(APIClient::isAdmin()) {
         $announcement = new Announcement(
