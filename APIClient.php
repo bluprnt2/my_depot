@@ -8,7 +8,7 @@
     require_once("APIClient/TimeSlot.php");
     require_once("APIClient/Location.php");
     require_once("APIClient/Survey.php");
-
+	require_once("APIClient/KnowledgeFile.php");
     //Still need: many-to-many relationships
 
     class APIClient {
@@ -532,49 +532,50 @@
             $json_array = self::APICall("/TutorTimeSlots/delete.php", $params);
         }
 
-		public static function getFiles($courseID, $fileName)
-	{
-		$params = array();
-		$params['courseID'] = $courseID;
-		$params['fileName'] = $fileName;
-		$json_array = self::APICall("/KnowledgeBase/File/get.php", $params);
-		$files = array();
-		foreach($json_array as $item) {
-			$files[] = new KnowledgeFile(
-				$item->{'ID'},
-				$item->{'courseID'},
-				$item->{'userID'},
-				$item->{'filename'},
-				$item->{'content'},
-				$item->{'approved'}
-			);
-		}
-		return $files;
-	}
-
-	public static function addFile($file)
-	{
-		 if($file != NULL) {
+		public static function getFiles($id, $courseID, $fileName)
+		{
 			$params = array();
-			$params['courseID'] = $file->getCourseID();
-			$params['userID'] = $file->getUserID();
-			$params['fileName'] = $file->getFilename();
-			$params['content'] = $file->getContent();
-			$json_array = self::APICall("/KnowledgeBase/File/add.php", $params);
-		} else return false;
-	}
+			$params['ID'] = $id;
+			$params['courseID'] = $courseID;
+			$params['fileName'] = $fileName;
+			$json_array = self::APICall("/KnowledgeBase/get.php", $params);
+			$files = array();
+			foreach($json_array as $item) {
+				$files[] = new KnowledgeFile(
+					$item->{'ID'},
+					$item->{'courseID'},
+					$item->{'userID'},
+					$item->{'fileName'},
+					$item->{'content'},
+					$item->{'approved'}
+				);
+			}
+			return $files;
+		}
 
-	//Not designed yet.
-	public static function setFile($fileID, $courseID, $userID, $fileName, $content, $approved)
-	{
+		public static function addFile($file)
+		{
+			 if($file != NULL) {
+				$params = array();
+				$params['courseID'] = $file->getCourseID();
+				$params['userID'] = $file->getUserID();
+				$params['fileName'] = $file->getFilename();
+				$params['content'] = $file->getContent();
+				$json_array = self::APICall("/KnowledgeBase/add.php", $params);
+			} else return false;
+		}
 
-	}
+		//Not designed yet.
+		public static function setFile($fileID, $courseID, $userID, $fileName, $content, $approved)
+		{
 
-	public static function removeFile($fileID)
-	{
-		$params = array();
-		$params['file_ID'] = $fileID;
-		$json_array = self::APICall("/KnowledgeBase/File/delete.php", $params);
-	}
+		}
+
+		public static function removeFile($fileID)
+		{
+			$params = array();
+			$params['file_ID'] = $fileID;
+			$json_array = self::APICall("/KnowledgeBase/delete.php", $params);
+		}
     }
 ?>

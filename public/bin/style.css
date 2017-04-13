@@ -152,9 +152,9 @@
     font-size: 20px;
 	font-weight: bold;
 	margin: auto;
-	float:left;
 	background-color: #bfbfbf;
 	padding: 12px 12px 0px 12px;
+	display:block;
 }
 
 #kb-selection-component1, #kb-selection-component2{
