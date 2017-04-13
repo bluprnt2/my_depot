@@ -94,15 +94,20 @@
             $url = self::getAPIHost() . $url;
 
             $params['access_token'] = self::getToken();
-            //echo $params['access_token'];
+            
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
 
             $response = curl_exec($curl);
             curl_close($curl);
-            //echo $response;
-            return json_decode($response);
+
+            $decoded_resp = json_decode($response, true);
+            $result = array_walk_recursive($decoded_resp, function(&$item){
+                $item = htmlspecialchars($item);
+            });
+            //This is dumb, but the other functions want json objects
+            return json_decode(json_encode($decoded_resp));
         }
 
         //Tested
@@ -530,8 +535,8 @@
 		public static function getFiles($courseID, $fileName)
 	{
 		$params = array();
-		$params['courseid'] = $courseID;
-		$params['filename'] = $fileName;
+		$params['courseID'] = $courseID;
+		$params['fileName'] = $fileName;
 		$json_array = self::APICall("/KnowledgeBase/File/get.php", $params);
 		$files = array();
 		foreach($json_array as $item) {
