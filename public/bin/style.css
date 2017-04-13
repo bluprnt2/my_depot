@@ -270,3 +270,9 @@
 	font-weight: bold;
 	padding:15px;
 }
+
+.settings-dropdown {
+    float:none;
+    width: auto;
+    margin-right:0;
+}
