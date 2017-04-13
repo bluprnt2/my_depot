@@ -8,7 +8,7 @@
     //$dsn      = 'mysql:dbname=oauthtables;host=ec2-52-55-181-20.compute-1.amazonaws.com';
     $dsn      = 'mysql:dbname=' . $dbname . ';host=' . $host;
     $username = 'tutoradmin';
-    $password = '';
+    $password = '314Pip3R';
     Oauth2\Autoloader::register();
 
     $storage = new OAuth2\Storage\Pdo(array('dsn' => $dsn, 'username' => $username, 'password' => $password));
