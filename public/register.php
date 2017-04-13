@@ -31,12 +31,21 @@
     
 	<label>User Name</label>
 	<input class="w3-input w3-border w3-round" type="text" name="username">
+		
+	<label>Password</label>
+	<input class = "w3-input w3-border w3-round" type= "text" name= "password">
     
-	<label>Admin (please answer with yes or no)</label>
-    <input class="w3-input w3-border w3-round" type="text" name="isAdmin">
+	<label>Admin        </label>
+    	<input class="w3-radio" type="radio" name="isAdmin" value = "yes">
+	<label>Yes</label>
+	<input class = "w3-radio" type = "radio" name = "isAdmin" value = "no">
+	<label>No</label><br>
     
-	<label>Allow notification (please answer with yes or no)</label>
-	<input class="w3-input w3-border w3-round" type="text" name="notify">
+	<label>Allow notification </label>
+	<input class="w3-radio" type="radio" name="notify" value = "yes">
+	<label>Yes</label>
+	<input class = "w3-radio" type = "radio" name = "notify" value = "no">
+	<label>No</label>
     <p>
     <input type="submit" name="submit"  class="w3-block w3-brown w3-display-bottom-middle w3-large">
     </p>    
@@ -46,6 +55,7 @@
 	if(isset($_POST['submit']))
 	{
 		$username = $_POST["username"];
+		$password = $_POST["password"];
 		$firstname = $_POST["firstname"];
 		$lastname = $_POST["lastname"];
 		$isAdmin = true;
@@ -60,7 +70,7 @@
 		}
 		
 		$user = new User(null, $username, $firstname, $lastname, $isAdmin, $notify);
-		APIClient::addUser($user, "pswd123");
+		APIClient::addUser($user, $password);
 	}
 	?>	
 	</form><br>
