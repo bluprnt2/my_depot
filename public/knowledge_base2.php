@@ -32,41 +32,19 @@
 			<div id="wrapper">
 				<div id="kb-selection">
 					<form method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>">
-					<div id="kb-selection-component1">
-						<select id="kb-department" >
-							<option name="department" value="" onchange="this.form.submit;" type="submit">Select a Department</option>
-							<?php
-								$departments = APIClient::getDepartments(null);
-								foreach($departments as $d) {
-									echo "<option value=".$d->getID().">". $d->getName() . "</option>";
-								}
-								if(isset($_POST['department']))
-								{
-									$department= $_POST['department'];
-								}
-								
-							?>
-						</select>
-						
-						<input id="kb-loadButton"  type='submit' name="load-courses" value='Load Courses' onClick="window.location.reload()">
-						</button>
-					</div>
 					
 					<div id="kb-selection-component2">
 						<select id="kb-course">
-							<option name="course" value="" onchange="this.form.submit;" type="submit">Select a Course</option>
+							<option name="course" value="" type="submit">Select a Course</option>
 							<?php
-								if(isset($department))
-								{
-									$courses = APIClient::getCourses(null, $department);
-									foreach($courses as $a){
-										echo "<option value=".$a->getID().">". $a->getName() ."</option>";
-									}
+								$courses = APIClient::getCourses(null, null);
+								foreach($courses as $c){
+									echo "<option value=".$c->getID().">". $c->getName() ."</option>";
 								}
-								if(isset($_POST['course']))
+								/*if(isset($_POST['course']))
 								{
 									$course= $_POST['course'];
-								}
+								}*/
 							?>
 						</select>
 						
@@ -75,19 +53,19 @@
 					
 					<div id="kb-selection-component3">
 						<select id="kb-filename">
-							<option name="file" value="" onchange="this.form.submit;" type="submit">Select a File</option>
+							<option name="files" value="" type="submit">Select a File</option>
 							<?php
-								if(isset($course))
-								{
-									$files = APIClient::getFiles($course, null);
-									foreach($files as $a){
-										echo "<option value=".$a->getID().">". $a->getFileName() ."</option>";
+								//if(isset($course))
+								//{
+									$files = APIClient::getFiles(null, null);
+									foreach($files as $f){
+										echo "<option value=".$f->getID().">". $f->getFileName() ."</option>";
 									}
-								}
-								if(isset($_POST['file']))
+								//}
+								/*if(isset($_POST['files']))
 								{
-									$file= $_POST['file'];
-								}
+									$file= $_POST['files'];
+								}*/
 							?>
 						</select>
 						
@@ -98,9 +76,9 @@
 			</div>
 				<div id="kb-instructions">
 					<div id="kb-instructionsTitle">Knowledge Base Instructions</div>
-					<div id="kb-instructionsText"><p><span>1. Select a Department and click "Load Courses" to load a course.</span>
-					<span>2. Select a Course and click "Load Files" to load a course's files.</span>
-					<span>3. Select a File and click "Load File" to load a file.</span></p>
+					<div id="kb-instructionsText">
+					<span>1. Select a Course and click "Load Files" to load a course's files.</span>
+					<span>2. Select a File and click "Load File" to load a file.</span>
 					</div>
 				</div>
 			</div>
