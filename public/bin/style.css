@@ -27,6 +27,7 @@
 #feedback-form-container {
     font-family: "Consolas", Times, serif;
     width: 50%;
+    margin: 10px auto;
 }
 
 #feedback-form input[type="radio"]{    

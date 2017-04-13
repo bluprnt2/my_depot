@@ -80,7 +80,7 @@ if (isset($_POST['submit'])) {
 </div>
 <div id="feedback-form-container" class="w3-container w3-amber w3-leftbar w3-border w3-border-brown">
     <H1>Feedback Form</H1>
-    <form id="feedback-form" action="feedbackform.php" method="POST">
+    <form id="feedback-form" action="testpage.php" method="POST">
         <div class="w3-margin-bottom"><label>Subject: </label><input type="text" name="subject"></div>
         <div class="w3-margin-bottom"><label>Course: </label>
             <select name="course">
