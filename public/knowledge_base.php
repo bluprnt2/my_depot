@@ -16,7 +16,7 @@
 		{
 			//make note to update navbar on login
 			//admin has option to view knowledge base but can remove files
-			header('Location: ./tutor_web_app/index.php');
+			header('Location: ./index.php');
 			echo '<p><a href="index.php">Only Tutors and Admins have access to the Knowledge Base</a><p>';
 			exit();
 		}
@@ -37,25 +37,24 @@
 							<option name="department" value="">Select a Department</option>
 							
 							<?php
-							/*
 							$departments = APIClient::getDepartments(null);
 								foreach($departments as $d) {
 									echo "<option value=".$d->getID().">". $d->getName() . "</option>";
 								}
-							*/
 							?>
 							
 							
 						</select>
 						
-						<button id="kb-loadButton" name="load-courses" type="submit" onClick="">Load Courses
+						<button id="kb-loadButton" name="load-courses" type="submit">Load Courses
 						<?php
-						/*
-							if(isset($_POST('load-courses')))
+							/*
+							if(!$_POST('load-courses') !== null)
 							{
 								$department = $_POST['department'];
+								echo $department;
 							}
-						*/
+							*/
 						?>
 						</button>
 					</div>
@@ -69,7 +68,7 @@
 								{
 									$courses = APIClient::getCourses(null, $department);
 									foreach($courses as $a){
-										echo "<option>". $a->getName() ."</option>";
+										echo "<option value=".$a->getID().">". $a->getName() ."</option>";
 									}
 								}
 							?>
@@ -87,7 +86,7 @@
 								{
 									$courses = APIClient::getFiles($course, null);
 									foreach($files as $a){
-										echo "<option>". $a->getFileName() ."</option>";
+										echo "<option value=".$d->getID().">". $a->getFileName() ."</option>";
 									}
 								}
 							?>

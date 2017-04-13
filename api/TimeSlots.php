@@ -1,6 +1,6 @@
 <?php
     //Not Tested
-    function addTimeSlot($locID, $deptID, $courseID, $startTime, $endTime) {
+    function addTimeSlot($locID, $deptID, $courseID, $startTime, $endTime, $tutorserver) {
         $query = "INSERT INTO TimeSlots (locID, deptID, courseID, startTime, endTime) VALUES (?, ?, ?, ?, ?)";
 
         if($stmnt = $tutorserver->prepare($query)) {
@@ -11,7 +11,7 @@
     }
 
     //Not Tested
-    function getTimeSlots($tSlotID, $locID, $deptID, $courseID, $startTime, $endTime){
+    function getTimeSlots($tSlotID, $locID, $deptID, $courseID, $startTime, $endTime, $tutorserver){
         $query = "SELECT * FROM TimeSlots WHERE
             ID=COALESCE(?, ID) AND
             locID=COALESCE(?, locID) AND
@@ -38,7 +38,7 @@
     }
 
     //Not Tested
-    function delTimeslot($timeslotID) {
+    function delTimeslot($timeslotID, $tutorserver) {
         $query = "DELETE FROM TimeSlots WHERE ID=?";
 
         if($stmnt = $tutorserver->prepare($query)) {
