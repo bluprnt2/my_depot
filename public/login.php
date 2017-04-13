@@ -13,11 +13,7 @@
         header("Location: index.php");
     }else {
         $error = "Your Login Name or Password is invalid";
-<<<<<<< HEAD
-        die("$error");
-=======
         die($error);
->>>>>>> refs/remotes/origin/serverbranch
     }
 }
 ?>
