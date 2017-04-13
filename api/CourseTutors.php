@@ -1,6 +1,6 @@
 <?php
     //Not Tested
-    function getCourseTutors($courseID, $tutorID) {
+    function getCourseTutors($courseID, $tutorID, $tutorserver) {
         $query = "SELECT * FROM CourseTutors WHERE courseID=COALESCE(?, courseID) AND userID=COALESCE(?, userID)";
 
         $tutorids = array();
@@ -17,7 +17,7 @@
     }
 
     //Not Tested
-    function addCourseTutors($courseID, $tutorID) {
+    function addCourseTutors($courseID, $tutorID, $tutorserver) {
         $query = "INSERT INTO CourseTutors (courseID, userID) VALUES (?, ?)";
 
         if($stmnt = $tutorserver->prepare($query)) {
@@ -28,7 +28,7 @@
     }
 
     //Not Tested
-    function delCourseTutors($courseID, $tutorID) {
+    function delCourseTutors($courseID, $tutorID, $tutorserver) {
         $query = "DELETE FROM CourseTutors WHERE courseID=? AND tutorID=?";
 
         if($stmnt = $tutorserver->prepare($query)) {
