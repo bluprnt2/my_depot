@@ -164,7 +164,7 @@ body{
 #kb-selection-component3{
 	padding: 6px 6px 0px 6px;
 }
-	
+
 
 #kb-department, #kb-course, #kb-filename{
 	font-family: Arial, sans-serif;
@@ -270,4 +270,10 @@ body{
    	font-size: 25px;
 	font-weight: bold;
 	padding:15px;
+}
+
+.settings-dropdown {
+    float:none;
+    width: auto;
+    margin-right:0;
 }
