@@ -1,5 +1,5 @@
 <?php
-    require("../APIClient.php");
+    require("../../APIClient.php");
 
     $logged_in = APIClient::isLoggedIn();
     echo "Logged in: " . ($logged_in ? 'true' : 'false') . "<br />";

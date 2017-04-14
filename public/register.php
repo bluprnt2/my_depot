@@ -21,7 +21,7 @@
     </div>
 	<img src ="bin/images/background1.jpg" alt = "Background" style="width:100%">
 	<!--- Form begins here ----->
-	<div class = "w3-container w3-light-grey w3-display-middle" style = "width:30%; height:60%">
+	<div class = "w3-container w3-light-grey w3-display-middle" style = "width:30%; height:50%">
 	<form id="register" action="register.php" method="post">
 	<label>First Name</label> 
     <input class="w3-input w3-border w3-round" type="text" name="firstname">
@@ -31,25 +31,55 @@
     
 	<label>User Name</label>
 	<input class="w3-input w3-border w3-round" type="text" name="username">
+		
+	<label>Password</label>
+	<input class = "w3-input w3-border w3-round" type= "text" name= "password">
     
-	<label>Enter Password</label>
-    <input class="w3-input w3-border w3-round" type="password" name="password1">
+	<label>Admin        </label>
+    	<input class="w3-radio" type="radio" name="isAdmin" value = "yes">
+	<label>Yes</label>
+	<input class = "w3-radio" type = "radio" name = "isAdmin" value = "no">
+	<label>No</label><br>
     
-	<label>Re-Enter Password</label>
-	<input class="w3-input w3-border w3-round" type="password" name="password2">
+	<label>Allow notification </label>
+	<input class="w3-radio" type="radio" name="notify" value = "yes">
+	<label>Yes</label>
+	<input class = "w3-radio" type = "radio" name = "notify" value = "no">
+	<label>No</label>
+    <p>
+    <input type="submit" name="submit"  class="w3-block w3-brown w3-display-bottom-middle w3-large">
+    </p>    
     
-    <input type="submit" name="submit" formaction = "index.php" class="w3-block w3-brown w3-display-bottom-middle w3-large">
-         
-    </form><br>
-	
-	</div>
+	<?php
+	require_once("../APIClient.php");
+	if(isset($_POST['submit']))
+	{
+		$username = $_POST["username"];
+		$password = $_POST["password"];
+		$firstname = $_POST["firstname"];
+		$lastname = $_POST["lastname"];
+		$isAdmin = true;
+		if($_POST["isAdmin"] == "yes")
+		{
+			$isAdmin = false;
+		}
+		$notify = true;
+		if($_POST["notify"] == "yes")
+		{
+			$notify = false; 
+		}
+		
+		$user = new User(null, $username, $firstname, $lastname, $isAdmin, $notify);
+		APIClient::addUser($user, $password);
+	}
+	?>	
+	</form><br>
+	</div>	
+		
 	
 	<?php
 	include("footer.php");
 	?>
 	
-		 
-		
-	
-  
-	
+	</body>
+	</html>

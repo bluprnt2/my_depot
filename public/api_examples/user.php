@@ -1,5 +1,5 @@
 <?php
-    require_once("../APIClient.php");
+    require_once("../../APIClient.php");
 
     var_dump(APIClient::getUser(null));
 

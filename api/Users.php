@@ -1,4 +1,5 @@
 <?php
+    require_once 'passwordLib.php';
     //Not Tested
     function addUser($username, $firstName, $lastName, $password, $admin, $notify, $tutorserver) {
         $saltHash = password_hash($password, PASSWORD_BCRYPT);

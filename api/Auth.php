@@ -1,4 +1,6 @@
 <?php
+    require_once 'passwordLib.php';
+
     function checkPassword($uname, $pword, $tutorserver, $oauthserver) {
         $query = "SELECT saltHash, ID, admin FROM Users WHERE userName=?";
 

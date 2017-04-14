@@ -1,6 +1,6 @@
 <?php
     define('__ROOT__', dirname(dirname(__FILE__)));
-    require_once("../APIClient.php");
+    require_once(__ROOT__."/APIClient.php");
 
     if($_SERVER["REQUEST_METHOD"] == "POST") {
     // username and password sent from form
@@ -13,7 +13,7 @@
         header("Location: index.php");
     }else {
         $error = "Your Login Name or Password is invalid";
-        die("$error");
+        die($error);
     }
 }
 ?>

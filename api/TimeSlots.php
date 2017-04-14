@@ -16,15 +16,15 @@
             ID=COALESCE(?, ID) AND
             locID=COALESCE(?, locID) AND
             deptID=COALESCE(?, deptID) AND
-            courseID=COALESCE(?, courseID) AND
+            ((courseID IS NULL AND ? IS NULL) OR courseID=COALESCE(?, courseID)) AND
 
             ((startTime BETWEEN COALESCE(?, startTime) AND COALESCE(?, startTime))
-            OR (endTime BETWEEN COALESCE(?, endTime) AND COALESCE(?, endTime))";
+            OR (endTime BETWEEN COALESCE(?, endTime) AND COALESCE(?, endTime)))";
 
         $timeslots = array();
         if($stmnt = $tutorserver->prepare($query)) {
-            $stmnt->bind_param('iiiissss',
-                $tSlotID, $locID, $deptID, $courseID,
+            $stmnt->bind_param('iiiiissss',
+                $tSlotID, $locID, $deptID, $courseID, $courseID,
                 $startTime, $endTime, $startTime, $endTime
             );
             $stmnt->execute() or trigger_error($stmt->error, E_USER_ERROR);

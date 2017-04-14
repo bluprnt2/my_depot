@@ -31,105 +31,100 @@
 			
 			<div id="wrapper">
 				<div id="kb-selection">
-					<form method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>">
+				<?php
+					$departments = APIClient::getDepartments(null);
+					$courses = APIClient::getCourses(null, null, null);
+					$files = APIClient::getFiles(null, null, null);
+				?>
+					<form id="selDeptForm" method="POST">					
 					<div id="kb-selection-component1">
-						<select id="kb-department" >
-							<option name="department" value="" onchange="this.form.submit;" type="submit">Select a Department</option>
+						<select id="kb-department" name="department" class="dept-list" onChange="updateCourses()">
+							<option value="">Select a Department</option>
 							<?php
-								$departments = APIClient::getDepartments(null);
 								foreach($departments as $d) {
-									echo "<option value=".$d->getID().">". $d->getName() . "</option>";
-								}
-								if(isset($_POST['department']))
-								{
-									$department= $_POST['department'];
-								}
-								
+									echo "<option value=" . $d->getID() . ">" . $d->getName() . "</option>";
+								}					
 							?>
 						</select>
-						
-						<input id="kb-loadButton"  type='submit' name="load-courses" value='Load Courses' onClick="window.location.reload()">
-						</button>
-					</div>
-					
-					<div id="kb-selection-component2">
-						<select id="kb-course">
-							<option name="course" value="" onchange="this.form.submit;" type="submit">Select a Course</option>
+						<select id="kb-course" name="course" class="course-list" onChange="updateFiles()">
+							<option value="">Select a Course</option>
 							<?php
-								if(isset($department))
-								{
-									$courses = APIClient::getCourses(null, $department);
-									foreach($courses as $a){
-										echo "<option value=".$a->getID().">". $a->getName() ."</option>";
-									}
-								}
-								if(isset($_POST['course']))
-								{
-									$course= $_POST['course'];
+								foreach($courses as $c){
+									echo "<option value=\"{ 'deptID':" . $c->getDeptID() . ", 'ID':" . $c->getID() . "}\">". $c->getName() ."</option>";
 								}
 							?>
 						</select>
-						
-						<input id="kb-loadButton" type="submit" name="load-files" value='Load Files' onClick="window.location.reload()"></button>
-					</div>
-					
-					<div id="kb-selection-component3">
-						<select id="kb-filename">
-							<option name="file" value="" onchange="this.form.submit;" type="submit">Select a File</option>
+						<select id="kb-filename" name="file" class="file-list">
+							<option value="">Select a File</option>
 							<?php
-								if(isset($course))
-								{
-									$files = APIClient::getFiles($course, null);
-									foreach($files as $a){
-										echo "<option value=".$a->getID().">". $a->getFileName() ."</option>";
-									}
-								}
-								if(isset($_POST['file']))
-								{
-									$file= $_POST['file'];
+								foreach($files as $f){
+									echo "<option value=\"{ 'courseID':" . $f->getCourseID() . ", 'ID':" . $f->getID() . "}\">". $f->getFilename() ."</option>";
 								}
 							?>
 						</select>
-						
-						<input id="kb-loadButton" type='submit' name="load-file" value='Load File' onClick="window.location.reload()"></button>
+						<button id="kb-loadButton" type="submit" name="load-file">Load File</button>
 					</div>
 					</form>
 				</div>
-			</div>
-				<div id="kb-instructions">
-					<div id="kb-instructionsTitle">Knowledge Base Instructions</div>
-					<div id="kb-instructionsText"><p><span>1. Select a Department and click "Load Courses" to load a course.</span>
-					<span>2. Select a Course and click "Load Files" to load a course's files.</span>
-					<span>3. Select a File and click "Load File" to load a file.</span></p>
-					</div>
-				</div>
-			</div>
 				
 			<div id="kb-content">
 					<div class="courseName">
 						<?php
-							if(isset($file))
-							{
-								$filename = APIClient::getFiles($course, $file);
+							//if(isset($file))
+							//{
+								$filename = APIClient::getFiles(null, $course, $file);
 								foreach($file as $a){
 									echo $a->getName();
 								}
-							}
+							//}
 						?>
 					</div>
 					<div class="filesDisplay">
 						<?php
-							if(isset($filename))
-							{
-								$fileContents = APIClient::getFiles($course, $filename);
+							//if(isset($filename))
+							//{
+								$fileContents = APIClient::getFiles(null, $course, $filename);
 								foreach($file as $a){
 									echo $a->getContent();
 								}
-							}
+							//}
 						?>
 					</div>
 			</div>
 			
+			<script>
+				function updateCourses()
+				{
+					changedDepartment("selDeptForm");
+				}
+				function updateFiles()
+				{
+					changedCourse("selDeptForm");
+				}
+				function changedCourse(id) {
+					var form = document.getElementById(id);
+					var course = form.getElementsByClassName("course-list")[0];
+					var file = form.getElementsByClassName("file-list")[0];
+					file.options[0].selected=true;
+					hide(file, "'courseID':".concat(course.value));
+				}
+				//author: Chris Mariani
+				function changedDepartment(id) {
+					var form = document.getElementById(id);
+					var dept = form.getElementsByClassName("dept-list")[0];
+					var course = form.getElementsByClassName("course-list")[0];
+					course.options[0].selected=true;
+					hide(course, "'deptID':".concat(dept.value));
+				}
+				//author: Chris Mariani
+				function hide(drop, value) {
+					for(i = 1; i < drop.length; i++) {
+						var v = true;
+						if(drop.options[i].value.includes(value)) v = false;
+						drop.options[i].hidden=v;
+					}
+				}
+			</script>
 			<div id="kb-footer">
 			<?php
 				include("footer.php");

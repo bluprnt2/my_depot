@@ -1,4 +1,6 @@
 <?php
+    define('__ROOT__', dirname(__FILE__));
+    require_once(__ROOT__.'/oauth2-server-php/src/OAuth2/Autoloader.php');
     //namespace API;
     //Replace password depending on configuration (Please don't push any passwords to the public git repository...)
     date_default_timezone_set("UTC");
@@ -8,7 +10,7 @@
     //$dsn      = 'mysql:dbname=oauthtables;host=ec2-52-55-181-20.compute-1.amazonaws.com';
     $dsn      = 'mysql:dbname=' . $dbname . ';host=' . $host;
     $username = 'tutoradmin';
-    $password = '314Pip3R';
+    $password = '';
     Oauth2\Autoloader::register();
 
     $storage = new OAuth2\Storage\Pdo(array('dsn' => $dsn, 'username' => $username, 'password' => $password));

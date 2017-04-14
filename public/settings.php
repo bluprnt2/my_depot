@@ -14,6 +14,7 @@
     $depts=APIClient::getDepartments(null);
     $courses=APIClient::getCourses(null, null, null);
     $users=APIClient::getUser(null);
+    $coursetutors=APIClient::getCourseTutors(null, null);
 ?>
 
 <div class="w3-bar w3-border w3-light-grey w3-cell">
@@ -148,7 +149,13 @@
     		<?php
     			foreach($users as $t){
                     if(!$t->getAdmin())
-    				    echo "<option value=" . $t->getUserID() . ">". $t->getUsername() ."</option>";
+                        $courseids = " ";
+                        foreach($coursetutors as $c){
+                            if($c->{'tutorID'} == $t->getUserID){
+                                $courseids.concat("'courseID':" . $c->{'courseID'}. " ");
+                            }
+                        }
+    				    echo "<option value=\"{" . $courseids . "'ID':" . $t->getUserID() . "}\">". $t->getUsername() ."</option>";
     			}
     		?>
         </select>
@@ -174,7 +181,11 @@
     }
 
     function changeCourse(id) {
-        //Need to implement hide based on coursetutors endpoint
+        var form = document.getElementById(id);
+        var course = form.getElementsByClassName("course-list")[0];
+        var tutor = form.getElementsByClassName("tutor-list")[0];
+        tutor.options[0].selected=true;
+        hide(tutor, "'courseID':".concat(course.value));
     }
 
     function delClassUpdate() {
