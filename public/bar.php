@@ -64,7 +64,7 @@
                     { y: 21, label: "21%", indexLabel: "Announcements" },
                     { y: 25, label: "25%", indexLabel: "Courses" },
                     { y: 33, label: "33%", indexLabel: "TimeSlots" },
-                    { y: 36, label: "36%", indexLabel: "Department" },
+                    { y: 36, label: "36%", indexLabel: "Departments" },
                    
 
 
