@@ -1,5 +1,4 @@
-
-	<div id="kb-yellowbar"></div>
+<div id="kb-yellowbar"></div>
 	
 	<?php
 		require_once("../APIClient.php");
@@ -34,7 +33,7 @@
 				<?php
 					$departments = APIClient::getDepartments(null);
 					$courses = APIClient::getCourses(null, null, null);
-					$files = APIClient::getFiles(null, null, null, null);
+					$files = APIClient::getFiles(null, null, null);
 				?>
 					<form id="selDeptForm" method="POST">					
 					<div id="kb-selection-component1">
@@ -62,16 +61,7 @@
 								}
 							?>
 						</select>
-						<button id="kb-loadButton" type="submit" name="load-file">Load File
-						<?php
-							if(isset($_POST['load-file']))
-							{
-								$course = $_POST["course"];
-								$filename = $_POST["file"];
-								$file = APIClient::getFiles(null, $course, $filename);
-							}
-						?>
-						</button>
+						<button id="kb-loadButton" type="submit" name="load-file">Load File</button>
 					</div>
 					</form>
 				</div>
@@ -79,22 +69,24 @@
 			<div id="kb-content">
 					<div class="courseName">
 						<?php
-							if(isset($_POST['load-file']))
-							{
-								foreach($file as $f){
-									echo $f->getName();
+							//if(isset($file))
+							//{
+								$filename = APIClient::getFiles(null, $course, $file);
+								foreach($file as $a){
+									echo $a->getName();
 								}
-							}
+							//}
 						?>
 					</div>
-					<div class="fileContents">
+					<div class="filesDisplay">
 						<?php
-							if(isset($_POST['load-file']))
-							{
-								foreach($file as $f){
-									echo $f->getContent();
+							//if(isset($filename))
+							//{
+								$fileContents = APIClient::getFiles(null, $course, $filename);
+								foreach($file as $a){
+									echo $a->getContent();
 								}
-							}
+							//}
 						?>
 					</div>
 			</div>
@@ -132,9 +124,11 @@
 					}
 				}
 			</script>
+			<div id="kb-footer">
 			<?php
 				include("footer.php");
 			?>
+			</div>
 		</div>
 	</body>
 </html>
