@@ -61,14 +61,44 @@ echo "</table>";
  }//end IF
 
 
-// include ("header.php");
-// include("navbar.php");
+ if (isset($_POST['gen']) )
+
+    {
+
+  
+
+    $answer = $_POST['graph'];
+
+    if ( $answer=="pie")
+    {
+       
+        header("Location:pie.php ");
+    }
+    
+    else if ($answer=="bar")
+        
+    {
+        header("Location:bar.php ");
+    }
+    
+    else
+    {
+         header("Location:column.php ");   
+    
+    }
+
+
+
+ }//end IF
+
+
+
+
+ //include ("header.php");
+ //include("navbar.php");
  
 
 ?>
-
-
-
 
 
 <!DOCTYPE html>
@@ -139,19 +169,19 @@ and open the template in the editor.
 
           <h3><strong>Graph</h3>
 
-         <form>
+      <form action="#" method="post">
 
-    <input class="w3-radio"  type="radio" name="graph"  id="pie">Pie<br>
-    <input class="w3-radio"  type="radio" name="graph" id="bar">Bar<br>
-    <input class="w3-radio"  type="radio" name="graph" id="hist">Histogram<br>
+    <input class="w3-radio"  type="radio" name="graph"  value="pie"> Pie<br>
+    <input class="w3-radio"  type="radio" name="graph" value="bar" >Bar<br>
+    <input class="w3-radio"  type="radio" name="graph" value="col">Column<br>
 
 
-        </form>
+     
         <br></br> <!--skip line under histogram box-->
         </div>
 
-   <button class="w3-round-large w3-block w3-brown" style="width:100%"  >Generate</button>
-
+   <input type="submit" class="w3-round-large w3-block w3-brown" style="width:100%" value="Generate" name="gen" />
+     </form>
 
       <br></br>
         </div> <!--end graph box-->
@@ -174,7 +204,6 @@ and open the template in the editor.
     </div>
     <!--export button to csv-->
 
-    
 
     <input type="submit" class="w3-round-large w3-block w3-brown" style="width:100%" value="Export" name="exp" />
      </form>
