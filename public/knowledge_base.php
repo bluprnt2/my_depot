@@ -34,7 +34,7 @@
 				<?php
 					$departments = APIClient::getDepartments(null);
 					$courses = APIClient::getCourses(null, null, null);
-					$files = APIClient::getFiles(null, null, null);
+					$files = APIClient::getFiles(null, null, null, null);
 				?>
 					<form id="selDeptForm" method="POST">					
 					<div id="kb-selection-component1">
@@ -62,7 +62,16 @@
 								}
 							?>
 						</select>
-						<button id="kb-loadButton" type="submit" name="load-file">Load File</button>
+						<button id="kb-loadButton" type="submit" name="load-file">Load File
+						<?php
+							if(isset($_POST['load-file']))
+							{
+								$course = $_POST["course"];
+								$filename = $_POST["file"];
+								$file = APIClient::getFiles(null, $course, $filename);
+							}
+						?>
+						</button>
 					</div>
 					</form>
 				</div>
@@ -70,24 +79,22 @@
 			<div id="kb-content">
 					<div class="courseName">
 						<?php
-							//if(isset($file))
-							//{
-								$filename = APIClient::getFiles(null, $course, $file);
-								foreach($file as $a){
-									echo $a->getName();
+							if(isset($_POST['load-file']))
+							{
+								foreach($file as $f){
+									echo $f->getName();
 								}
-							//}
+							}
 						?>
 					</div>
-					<div class="filesDisplay">
+					<div class="fileContents">
 						<?php
-							//if(isset($filename))
-							//{
-								$fileContents = APIClient::getFiles(null, $course, $filename);
-								foreach($file as $a){
-									echo $a->getContent();
+							if(isset($_POST['load-file']))
+							{
+								foreach($file as $f){
+									echo $f->getContent();
 								}
-							//}
+							}
 						?>
 					</div>
 			</div>
@@ -103,7 +110,7 @@
 				}
 				function changedCourse(id) {
 					var form = document.getElementById(id);
-					var course = form.getElementsByClassName("course-list")[0];
+					var course = form.getElementsByClassName("course-list")[1];
 					var file = form.getElementsByClassName("file-list")[0];
 					file.options[0].selected=true;
 					hide(file, "'courseID':".concat(course.value));
@@ -125,11 +132,9 @@
 					}
 				}
 			</script>
-			<div id="kb-footer">
 			<?php
 				include("footer.php");
 			?>
-			</div>
 		</div>
 	</body>
 </html>
