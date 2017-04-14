@@ -30,7 +30,7 @@
 		//configuring a calendar
 		window.resizeTo(950,700)
 		modSchedHeight();
-		scheduler.config.xml_date="%Y-%m-%d %H:%i";
+		scheduler.config.api_date="%Y-%m-%d %H:%i";
 		scheduler.config.hour_date="%h:%i %A";
 		scheduler.config.first_hour = 8;
 		scheduler.config.last_hour = 18;
@@ -41,22 +41,34 @@
 		scheduler.setLoadMode("week")
 		scheduler.templates.event_class=function(s,e,ev)
 			{ return ev.custom?"custom":""; };
-		
-//Temporary inline events to be removed later(Demonstrating input format)
-scheduler.parse([
-	{ start_date: "2017-03-27 10:00", end_date: "2017-03-27 13:45", text:"Computer Science" },
-				],"json");
-	//Testing Functionality of adding from a db
-	<?php
-		require_once("../APIClient.php");
-		$events = APIClient::getTimeSlots(null, null, null, null, null);
-		/**Error on line 
-		*
-		*$events ->render_table("id","start_date,end_date,text");
-		*/
-		$events;
-		?>
-		
+			
+		var slots = <?php
+        require_once("../APIClient.php");
+        $events = APIClient::getTimeSlots(null, null, null, null, null, null);
+		//Need to implement names for each course ID
+		 $courses = APIClient::getCourses(null, null );
+        $obj_array = array();
+        foreach($events as $e) {
+            $obj_array[] = array(
+                "start_date" => $e['startTime'],
+                "end_date"   => $e['endTime'],
+				"text"		=>  $e['courseID']	
+			);
+        };	
+
+        echo json_encode($obj_array);
+					?>;
+		//Handy for testing			
+		//console.log(slots);
+
+		slots.forEach(event); 
+		function event(item) {
+				scheduler.addEvent({
+				start_date: item.start_date,//"2017-04-16 09:00"
+				end_date:   item.end_date,//"2017-04-16 12:00"
+				text:   	item.text,
+		});
+		}
 	}
 	</script>
 
@@ -117,9 +129,36 @@ scheduler.parse([
             <span></span>
         </li>
     </ul>
-	<script>
+<div class = "login-container">
+   <label>YYYY-MM-DD HH:II</label>
+    <form id="login-form" action="scheduler.php" method="post">
+        <div class="form-input">
+            <input type="datetime" name="startTime" placeholder="Start Time">
+        </div>
+        <div class ="form-input">
+            <input type="datetime" name="endTime" placeholder="End Time"><input type="int" name="courseID" placeholder="Course ID">
+        </div>
+        <input type="submit" name="submit" value="Submit" class="btn-login">
+		
+        <!-- <input type="reset" name="back" value="BACK" class="btn-login" formaction="index.php"> -->
+     
+	<?php
+	require_once("../APIClient.php");
+	if(isset($_POST['submit']))
+	{
+		$startTime = $_POST["startTime"];
+		$endTime = $_POST["endTime"];
+		$courseID = $_POST["courseID"];
 
-	</script>
+		
+		$tslot = array(null,$courseID, $startTime, $endTime);
+		APIClient::addTimeSlot($tslot);
+	}
+	?>	
+	</form><br>
+	</div>
+    
+</div>
 	<div id="scheduler_here" class="dhx_cal_container" 
 		style='width:100%;height:100%;'>
 			<div class="dhx_cal_navline">
