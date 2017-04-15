@@ -163,6 +163,37 @@
         <button type="submit" name="delTutorClass">Remove from Course</button>
         <button type="submit" name="delTutor">Delete Account</button>
     </form>
+	
+	<form id="addFileForm" method="POST">
+        <h3>Add File</h3>
+        Course ID: <input type="text" name="classID">
+		Author User ID: <input type="text" name="authorID">
+        Filename: <textarea type="filename" name="filename">
+    	File Contents: <input type="text" name="content" style = "width: 50%; height: 80%">	
+        <input type="submit" name="addFile" class="addFileButton" value="Add File">
+		<?php
+	
+		if(isset($_POST['submit']))
+		{
+		$CourseID = $_POST["classID"];
+		$UserID = $_POST["authorID"];
+		$Filename = $_POST["filename"];
+		$Content = $_POST["content"];
+		
+		$newFile = new KnowledgeFile( 
+			null,
+			$CourseID,
+			$UserID,
+			$Filename,
+			$_POST["content"],
+			null
+		);
+			 APIClient::addFile($newFile);
+		}
+
+		?>
+        <input type="reset" value="Clear Form" class="addFileButton">
+    </form>
 </div>
 <script>
     function hide(drop, value) {

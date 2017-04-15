@@ -62,34 +62,50 @@
 								}
 							?>
 						</select>
-						<button id="kb-loadButton" type="submit" name="load-file">Load File</button>
+						<input id="kb-loadButton" type="submit" name="load-file" value ="Load File">
+						<?php
+						if(isset($_POST['load-file']))
+						{
+							$file = $_POST['file'];
+							$fileExplode = explode(',', $file);
+							$fileExplode[0] = str_replace("{'courseID':", "", $fileExplode[0]);
+							$fileExplode[1] = str_replace(", 'ID':", "", $fileExplode[1]);
+							
+							$fileExp2 = explode('{', $file);
+							echo $fileExplode[1];
+							foreach($file as $f){
+								$File = APIClient::getFiles(null, $courseID, $ID);
+							}
+						}
+						?>
 					</div>
 					</form>
 				</div>
 				
+				<div>hello = <?php echo $fileExplode[1]?></div>
 			<div id="kb-content">
-					<div class="courseName">
-						<?php
-							//if(isset($file))
-							//{
-								$filename = APIClient::getFiles(null, $course, $file);
-								foreach($file as $a){
-									echo $a->getName();
-								}
-							//}
-						?>
-					</div>
-					<div class="filesDisplay">
-						<?php
-							//if(isset($filename))
-							//{
-								$fileContents = APIClient::getFiles(null, $course, $filename);
-								foreach($file as $a){
-									echo $a->getContent();
-								}
-							//}
-						?>
-					</div>
+				<div class="courseName">
+					<?php
+						if(isset($_POST['load-file']))
+						{
+							echo $fileExplode[0];
+							if(empty($file)){
+								echo '$var is either 0, empty, or not set at all';
+							}
+							if (isset($file)) {
+								echo '$var is set even though it is empty';
+							}							
+						}
+					?>
+				</div>
+				<div class="filesDisplay">
+					<?php
+						if(isset($_POST['load-file']))
+						{
+							//echo $file->getContent();
+						}
+					?>
+				</div>
 			</div>
 			
 			<script>
@@ -107,6 +123,7 @@
 					var file = form.getElementsByClassName("file-list")[0];
 					file.options[0].selected=true;
 					hide(file, "'courseID':".concat(course.value));
+					document.write(course);
 				}
 				//author: Chris Mariani
 				function changedDepartment(id) {
