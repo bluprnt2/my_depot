@@ -1,5 +1,4 @@
-
-	<div id="kb-yellowbar"></div>
+<div id="kb-yellowbar"></div>
 	
 	<?php
 		require_once("../APIClient.php");
@@ -119,7 +118,7 @@
 				}
 				function changedCourse(id) {
 					var form = document.getElementById(id);
-					var course = form.getElementsByClassName("course-list")[0];
+					var course = form.getElementsByClassName("course-list")[1];
 					var file = form.getElementsByClassName("file-list")[0];
 					file.options[0].selected=true;
 					hide(file, "'courseID':".concat(course.value));
