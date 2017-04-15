@@ -12,7 +12,7 @@
             'Notify:    ' . $item->getNotify() . '<br />';
 
     if(APIClient::isAdmin()) {
-        $u = new User(null, "sample - " . uniqid(), "John", "Doe", false, false);
+        $u = new User(null, "sample - " . uniqid(), "John", "Doe", false, false, null);
         APIClient::addUser($u, "password123");
     }
 ?>

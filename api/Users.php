@@ -1,17 +1,18 @@
 <?php
     require_once 'passwordLib.php';
     //Not Tested
-    function addUser($username, $firstName, $lastName, $password, $admin, $notify, $tutorserver) {
+    function addUser($username, $firstName, $lastName, $password, $admin, $notify, $email, $tutorserver) {
         $saltHash = password_hash($password, PASSWORD_BCRYPT);
-        $query = "INSERT INTO Users (userName, firstName, lastName, saltHash, admin, notify) VALUES (?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO Users (userName, firstName, lastName, saltHash, admin, notify, email) VALUES (?, ?, ?, ?, ?, ?, ?)";
         if($stmnt = $tutorserver->prepare($query)) {
-            $stmnt->bind_param('ssssii',
+            $stmnt->bind_param('ssssiis',
                 $username,
                 $firstName,
                 $lastName,
                 $saltHash,
                 $admin,
-                $notify
+                $notify,
+                $email
             );
             $stmnt->execute() or trigger_error($stmt->error, E_USER_ERROR);
             $stmnt->close();
@@ -20,7 +21,7 @@
 
     //Tested
     function getUsers($userid, $tutorserver) {
-        $query = "SELECT ID, userName, firstName, lastName, admin, notify FROM Users WHERE ID=COALESCE(?, ID)";
+        $query = "SELECT ID, userName, firstName, lastName, admin, notify, email FROM Users WHERE ID=COALESCE(?, ID)";
 
         $users = array();
         if($stmnt = $tutorserver->prepare($query)) {
@@ -36,7 +37,7 @@
     }
 
     //Not Tested
-    function setUser($userid, $username, $firstName, $lastName, $password, $admin, $notify, $tutorserver) {
+    function setUser($userid, $username, $firstName, $lastName, $password, $admin, $notify, $email, $tutorserver) {
         if ($password != NULL)
             $saltHash = password_hash($password, PASSWORD_BCRYPT); //Will be null if no new password
         //Coalesce makes sure null values are just ignored on the update
@@ -46,17 +47,19 @@
             lastName =COALESCE(?, lastName),
             saltHash =COALESCE(?, saltHash),
             admin    =COALESCE(?, admin),
-            notify   =COALESCE(?, notify)
+            notify   =COALESCE(?, notify),
+            email    =COALESCE(?, email)
         WHERE ID=?";
 
         if($stmnt = $tutorserver->prepare($query)) {
-            $stmnt->bind_param('ssssiii',
+            $stmnt->bind_param('ssssiisi',
                 $username,
                 $firstName,
                 $lastName,
                 $saltHash,
                 $admin,
                 $notify,
+                $email,
                 $userid
             );
             $stmnt->execute() or trigger_error($stmt->error, E_USER_ERROR);
