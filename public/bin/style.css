@@ -137,58 +137,60 @@
 }
 
 body{
-	background-color: #ffffff;
-	margin: 0 auto;
-	
+    background-color: #ffffff;
+    margin: 0 auto;
+
 }
 
 /*Knowledge Base CSS*/
 #yellowbar{
-	background-color: #ffd966;
-	content:"";
-	height: 8px;
-	width:100%;
+    background-color: #ffd966;
+    content:"";
+    height: 8px;
+    width:100%;
 }
 
 #kb-title
 {
-	background-color: #800000;
-	padding: 5px;
-	color:white;
-	padding: 10px 0px 10px 20px;
-	font-size:200%;
-	font-family: Arial;
-	font-weight: bold;
+    background-color: #800000;
+    padding: 5px;
+    color:white;
+    padding: 10px 0px 10px 20px;
+    font-size:200%;
+    font-family: Arial;
+    font-weight: bold;
+
 }
 
 #wrapper{
-	display:inline-block;
+    display:inline-block;
 }
 #kb-selection{
-	font-family: Arial, sans-serif;
-    font-size: 20px;
-	font-weight: bold;
-	margin: auto;
-	float:left;
-	background-color: #bfbfbf;
-	padding: 12px 12px 1px 12px;
-	display:block;
+    font-family: Arial, sans-serif;
+    font-size: 20px;    
+    font-weight: bold;
+    margin: auto;
+    float:left;
+    background-color: #bfbfbf;
+    padding: 12px 12px 1px 12px;
+    display:block;
 }
 
 #kb-selection-component{
-	padding: 6px;
-	padding-bottom: 0px;
+    padding: 6px;
+    padding-bottom: 0px;
 }
 
 #kb-department, #kb-course, #kb-file{
-	font-family: Arial, sans-serif;
-    	font-size: 18px;
-	font-weight: bold;
-	padding:5px;
-	width:320px;
-	text-align: left;
-	float: left;
-	margin: 0 auto;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    padding:5px;
+    width:320px;
+    text-align: left;
+    float: left;
+    margin: 0 auto;
+
 }
 
 #kb-loadButton {
@@ -196,102 +198,117 @@ body{
     border: 3px solid white;
     color: white;
     padding: .5px 5px;
-	width: 150px;
+    width: 150px;
     text-align: center;
     text-decoration: none;
     font-size: 18px;
-	font-weight: bold;
+    font-weight: bold;
 }
 
 #kb-name{
-	display:block;
-	background-color: #ffd966;
-	color: black;
-	font-family: Arial, sans-serif;
-	font-weight: bold;
-	padding:0px 15px 0px 15px;
+    display:block;
+    background-color: #ffd966;
+    color: black;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    padding:0px 15px 0px 15px;
 }
 
 #kb-content{
-	display:block;
-	background-color: #f5f5ef;
-	color: black;
-	font-family: Arial, sans-serif;
+    display:block;
+    background-color: #f5f5ef;
+    color: black;
+    font-family: Arial, sans-serif;
     font-size: 18px;
-	padding:15px 30px 15px 30px;
+    padding:15px 30px 15px 30px;
 }
 
-#"kb-footer"{
-	display:inline-block;
+#kb-footer{
+    display:inline-block;
+
 }
 
 #header .yellowBox
 {
-	background-color: #ffd966;
-	padding-bottom: 20px;
+    background-color: #ffd966;
+    padding-bottom: 20px;
 }
 
 #header #nav
 {
-	background-color: #ffffff;
-	padding: 5px 5px 5px 5px;
+    background-color: #ffffff;
+    padding: 5px 5px 5px 5px;
 }
 
 #nav a{
-	text-decoration: none;
-	font-weight: bold;
-	font-size:125%;
-	font-family: Arial;
-	padding: 0px 10px 5px 7.5px;
-	color: black;
+    text-decoration: none;
+    font-weight: bold;
+    font-size:125%;
+    font-family: Arial;
+    padding: 0px 10px 5px 7.5px;
+    color: black;
 }
 
 #title
 {
-	background-color: #800000;
-	color:white;
-	padding: 10px 0px 10px 12.5px;
-	font-size:175%;
-	font-family: Arial;
-	font-weight: bold;
+    background-color: #800000;
+    color:white;
+    padding: 10px 0px 10px 12.5px;
+    font-size:175%;
+    font-family: Arial;
+    font-weight: bold;
 }
 #nav input{
-	padding-left: 5px;
+    padding-left: 5px;
 }
 
 #divider{
-	background-color: white;
+    background-color: white;
 }
 
 #main{
-	background-color: #ffd966;
-	color: black;
-	font-family: Arial, sans-serif;
-   	font-size: 25px;
-	font-weight: bold;
-	padding:15px;
+    background-color: #ffd966;
+    color: black;
+    font-family: Arial, sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    padding:15px;
 }
+
+
+
+#navbar{    
+    letter-spacing: 1px;
+    font-weight: bold;    
+}
+
 
 #basic-bar, #tutor-bar, #admin-bar, #login-rowan-bar {
-    display: inline-block;    
-    padding: 10px 0px;
-    margin: 0px;
-    height: 100%;
-    border-right: 2px solid black;
+    display: inline-block;
+    padding: 5px 0;
+    margin-bottom: -6px;
 }
 
-#navbar{
-    
-}
+
 
 #basic-bar {
+    border-left: 2px solid black;
+    border-right: 2px solid black;
     margin-left: 2%;
 }
 
 #tutor-bar {
-    margin-left: 10%;
+    margin-left: 7%;
+    border-left: 2px solid black;
+
+}
+#admin-bar {    
+    border-right: 2px solid black;
 }
 
 #login-rowan-bar {
+    margin-right: 2%;
     float: right;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
 }
