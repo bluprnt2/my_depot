@@ -431,9 +431,6 @@
 
         //Not Tested
         public static function addSurvey($survey) {
-            //test line
-            echo $survey->getTitle();
-            
             if($survey != NULL) {
                 $params = array();
                 $params['courseID'] = $survey->getCourseID();
