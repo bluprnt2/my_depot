@@ -1,5 +1,5 @@
 <?php
-    require_once("../APIClient.php");
+    require_once("../../APIClient.php");
 
     if(APIClient::isAdmin()) {
         $logs = APIClient::getLogs(null, null, null, null, null);
