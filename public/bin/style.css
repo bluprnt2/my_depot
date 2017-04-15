@@ -143,7 +143,7 @@ body{
 }
 
 /*Knowledge Base CSS*/
-#kb-yellowbar{
+#yellowbar{
     background-color: #ffd966;
     content:"";
     height: 8px;
@@ -156,31 +156,32 @@ body{
     padding: 5px;
     color:white;
     padding: 10px 0px 10px 20px;
-    font-size:175%;
+    font-size:200%;
     font-family: Arial;
     font-weight: bold;
+
 }
 
+#wrapper{
+    display:inline-block;
+}
 #kb-selection{
     font-family: Arial, sans-serif;
-    font-size: 20px;
+    font-size: 20px;    
     font-weight: bold;
     margin: auto;
     float:left;
     background-color: #bfbfbf;
-    padding: 12px 12px 0px 12px;
+    padding: 12px 12px 1px 12px;
+    display:block;
 }
 
-#kb-selection-component1, #kb-selection-component2{
+#kb-selection-component{
     padding: 6px;
+    padding-bottom: 0px;
 }
 
-#kb-selection-component3{
-    padding: 6px 6px 0px 6px;
-}
-
-
-#kb-department, #kb-course, #kb-filename{
+#kb-department, #kb-course, #kb-file{
     font-family: Arial, sans-serif;
     font-size: 18px;
     font-weight: bold;
@@ -189,6 +190,7 @@ body{
     text-align: left;
     float: left;
     margin: 0 auto;
+
 }
 
 #kb-loadButton {
@@ -201,41 +203,29 @@ body{
     text-decoration: none;
     font-size: 18px;
     font-weight: bold;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
 }
 
-#kb-loadButton:hover{
-    background-color: #49E20E; /* Green */
-    color: white;
-}
-
-#kb-instructions{
-    background-color: #bfbfbf;
-    padding: 14px 14px 5px 14px;
-}
-
-#kb-instructionsTitle{
-    font-family: Arial, sans-serif;
-    font-size: 20px;
-    font-weight: bold;
-    text-decoration: underline;
-}
-
-#kb-instructionsText, span{
-    font-family: Arial, sans-serif;
-    font-size: 18px;
-    display: block;
-}
-
-#kb-content{
+#kb-name{
     display:block;
     background-color: #ffd966;
     color: black;
     font-family: Arial, sans-serif;
-    font-size: 20px;
     font-weight: bold;
-    padding:15px;
+    padding:0px 15px 0px 15px;
+}
+
+#kb-content{
+    display:block;
+    background-color: #f5f5ef;
+    color: black;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    padding:15px 30px 15px 30px;
+}
+
+#kb-footer{
+    display:inline-block;
+
 }
 
 #header .yellowBox

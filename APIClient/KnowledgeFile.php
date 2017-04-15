@@ -8,7 +8,7 @@
         private $content;
         private $approved;
 
-        public function _construct( $id, $courseID, $userID,
+        public function __construct( $id, $courseID, $userID,
                                     $filename, $content,
                                     $approved) {
             $this->id = $id;

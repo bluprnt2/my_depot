@@ -94,7 +94,7 @@
             $url = self::getAPIHost() . $url;
 
             $params['access_token'] = self::getToken();
-            
+
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
@@ -139,7 +139,8 @@
                     $u->{'firstName'},
                     $u->{'lastName'},
                     $u->{'admin'},
-                    $u->{'notify'}
+                    $u->{'notify'},
+                    $u->{'email'}
                 );
             }
             if($id != null) return $users[0];
@@ -156,6 +157,7 @@
                 $params['password'] = $password;
                 $params['admin'] = $user->getAdmin();
                 $params['notify'] = $user->getNotify();
+                $params['email'] = $user->getEmail();
                 $json_array = self::APICall("/Users/add.php", $params);
             } else return false;
         }
@@ -171,6 +173,7 @@
                 $params['password'] = $password;
                 $params['admin'] = $user->getAdmin();
                 $params['notify'] = $user->getNotify();
+                $params['email'] = $user->getEmail();
                 $json_array = self::APICall("/Users/set.php", $params);
             } else return false;
         }
@@ -409,13 +412,13 @@
             $json_array = self::APICall("/TimeSlots/get.php", $params);
             $tSlots = array();
             foreach($json_array as $item) {
-                $tSlots[] = new TimeSlot(
-                    $item->{'ID'},
-                    $item->{'locID'},
-                    $item->{'deptID'},
-                    $item->{'courseID'},
-                    $item->{'startTime'},
-                    $item->{'endTime'}
+                $tSlots[] = array(
+                    'ID'        => $item->{'ID'},
+                    'locID'     => $item->{'locID'},
+                    'deptID'    => $item->{'deptID'},
+                    'courseID'  => $item->{'courseID'},
+                    'startTime' => $item->{'startTime'},
+                    'endTime'   => $item->{'endTime'}
                 );
             }
             if($tSlotID != NULL) return $tSlots[0];

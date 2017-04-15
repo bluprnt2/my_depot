@@ -16,6 +16,7 @@
         userName  VARCHAR(32)  NOT NULL,
         firstName VARCHAR(32),
         lastName  VARCHAR(32),
+        email     VARCHAR(254),
         saltHash  VARCHAR(255) NOT NULL,  /* http://php.net/manual/en/function.password-hash.php (salt stored in same row!) */
         admin     BOOLEAN      NOT NULL,  /* Whether or not the user has admin privileges */
         notify    BOOLEAN      NOT NULL  DEFAULT 1,
