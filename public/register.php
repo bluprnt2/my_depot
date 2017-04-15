@@ -32,8 +32,11 @@
 	<label>User Name</label>
 	<input class="w3-input w3-border w3-round" type="text" name="username">
 
+    <label>Email</label>
+	<input class = "w3-input w3-border w3-round" type= "text" name= "email">
+
 	<label>Password</label>
-	<input class = "w3-input w3-border w3-round" type= "text" name= "password">
+	<input class = "w3-input w3-border w3-round" type= "password" name= "password">
 
 	<label>Admin        </label>
     	<input class="w3-radio" type="radio" name="isAdmin" value = "yes">
@@ -58,18 +61,19 @@
 		$password = $_POST["password"];
 		$firstname = $_POST["firstname"];
 		$lastname = $_POST["lastname"];
-		$isAdmin = true;
+        $email = $_POST["email"];
+		$isAdmin = false;
 		if($_POST["isAdmin"] == "yes")
 		{
-			$isAdmin = false;
+			$isAdmin = true;
 		}
-		$notify = true;
+		$notify = false;
 		if($_POST["notify"] == "yes")
 		{
-			$notify = false;
+			$notify = true;
 		}
 
-		$user = new User(null, $username, $firstname, $lastname, $isAdmin, $notify, null);
+		$user = new User(null, $username, $firstname, $lastname, $isAdmin, $notify, $email);
 		APIClient::addUser($user, $password);
 	}
 	?>
