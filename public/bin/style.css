@@ -1,4 +1,4 @@
-#feedback-form-container input, select {
+#feedback-form-container input[type="text"], select {
     float: right;
     clear: right;
     margin-right: 5%;
@@ -18,7 +18,7 @@
     margin: 2px;
 }
 
-#feedback-form-container div {
+#feedback-form-container label {
     font-size: 18px;
     text-align: left;
 
@@ -27,6 +27,20 @@
 #feedback-form-container {
     font-family: "Consolas", Times, serif;
     width: 50%;
+    margin: 10px auto;
+}
+
+#feedback-form input[type="radio"]{    
+    display: inline;
+    margin-left: 5px;
+}
+
+#radio-buttons {
+    font-size: 12px;
+    display: inline;    
+    //width: 75%;
+    float: right;
+    margin-right: 5%;
 }
 
 #login-form-body  {
@@ -60,7 +74,7 @@
 
 .login-container input[type = "text"], input[type = "password"] {
     height: 45px;
-    widht: 300px;
+    width: 300px;
     font-size: 18px;
     margin-bottom: 20px;
     background-color: #fff;
@@ -122,10 +136,10 @@
     color: blue
 }
 
-#container{
+body{
 	background-color: #ffffff;
 	margin: 0 auto;
-	width: 85%;
+	
 }
 
 /*Knowledge Base CSS*/
@@ -152,9 +166,9 @@
     font-size: 20px;
 	font-weight: bold;
 	margin: auto;
+	float:left;
 	background-color: #bfbfbf;
 	padding: 12px 12px 0px 12px;
-	display:block;
 }
 
 #kb-selection-component1, #kb-selection-component2{
@@ -164,6 +178,7 @@
 #kb-selection-component3{
 	padding: 6px 6px 0px 6px;
 }
+	
 
 #kb-department, #kb-course, #kb-filename{
 	font-family: Arial, sans-serif;
@@ -197,7 +212,7 @@
 
 #kb-instructions{
 	background-color: #bfbfbf;
-	padding: 14px 14px 20px 14px;
+	padding: 14px 14px 5px 14px;
 }
 
 #kb-instructionsTitle{
@@ -253,7 +268,6 @@
 	font-family: Arial;
 	font-weight: bold;
 }
-
 #nav input{
 	padding-left: 5px;
 }
@@ -271,8 +285,26 @@
 	padding:15px;
 }
 
-.settings-dropdown {
-    float:none;
-    width: auto;
-    margin-right:0;
+#basic-bar, #tutor-bar, #admin-bar, #login-rowan-bar {
+    display: inline-block;    
+    padding: 10px 0px;
+    margin: 0px;
+    height: 100%;
+    border-right: 2px solid black;
+}
+
+#navbar{
+    
+}
+
+#basic-bar {
+    margin-left: 2%;
+}
+
+#tutor-bar {
+    margin-left: 10%;
+}
+
+#login-rowan-bar {
+    float: right;
 }

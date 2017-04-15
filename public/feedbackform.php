@@ -5,8 +5,6 @@
  * Date: 3/29/2017
  * Time: 9:39 PM
  */
-
-
 /**
  * Feedback form structure
  *
@@ -31,16 +29,44 @@
  *
  *  
  */
-
-
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-}
-
 $title = "Drop-in Tutoring Feedback Form";
 include("header.php");
 
+
+if (isset($_POST['submit'])) {
+    include("../APIClient.php");
+    //include("../APICLient/Survey.php");
+
+    $id = 0;
+    $course_id = $_POST['course'];
+    $tutor_id = $_POST['tutor'];
+    $rating = $_POST['rating'];
+    $title = $_POST['subject'];
+    $comment = $_POST['comment'];
+    $viewed = 0;
+    $sur = new Survey($id, $course_id, $tutor_id, $rating, $title, $comment, $viewed);
+
+    if (!APIClient::addSurvey($sur)) {
+        die("Saving form to db failed");
+    }
+}
+//
+//if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+//    include("../APICLient/Survey.php");
+//
+//    $id = 0;
+//    $course_id = $_POST['course'];
+//    $tutor_id = $_POST['tutor'];
+//    $rating = $_POST['rating'];
+//    $title = $_POST['subject'];
+//    $comment = $_POST['comment'];
+//    $viewed = 0;
+//    $survey = new Survey($id, $course_id, $tutor_id, $rating, $title, $comment, $viewed);
+//
+//    if (!APIClient::addSurvey($survey)) {
+//        die("Saving form to db failed");
+//    }
+//}
 ?>
 
 <div class="w3-bar w3-border w3-light-grey">
@@ -52,33 +78,42 @@ include("header.php");
 <div class="w3-container w3-orange">
     <H3>Drop-in Tutoring Services</H3>
 </div>
-<div id="feedback-form-container" class="w3-container w3-display-middle w3-amber w3-leftbar w3-border w3-border-brown">
+<div id="feedback-form-container" class="w3-container w3-amber w3-leftbar w3-border w3-border-brown">
     <H1>Feedback Form</H1>
-    <form id="feedback-form" action="" method="">
-        <div class="w3-margin-bottom">Subject: <input type="text" name="subject"></div>
-        <div class="w3-margin-bottom">Course: 
-            <select name="courses">
+    <form id="feedback-form" action="testpage.php" method="POST">
+        <div class="w3-margin-bottom"><label>Subject: </label><input type="text" name="subject"></div>
+        <div class="w3-margin-bottom"><label>Course: </label>
+            <select name="course">
                 <?php
                 $allcourses = APIClient::getCourses(null, null);
-                foreach ($allcourses as $c){
-                    $cname = $c->getName();                
-                    echo "<option value=\"" . $c->getID() . "\">" . $cname . "</option>";
-                }            
+                foreach ($allcourses as $c) {
+                    $cname = $c->getName();
+                    echo "<option value=\"" . $cname . "\">" . $cname . "</option>";
+                }
                 ?>
             </select>
         </div>
-        <div class="w3-margin-bottom">Tutor: 
-            <select name="tutors">
+        <div class="w3-margin-bottom"><label>Tutor: </label>
+            <select name="tutor">
                 <?php
                 $allusers = APIClient::getUser(null);
-                foreach ($allusers as $u){
+                foreach ($allusers as $u) {
                     $username = $u->getFirstName();
                     echo "<option value=\"" . strtolower($username) . "\">" . $username . "</option>";
-                }            
+                }
                 ?>
             </select>
         </div>
-        
+        <div class="w3-margin-bottom"><label>Rating: </label>
+            <div id="radio-buttons">
+                <input type="radio" name="rating" value="5" checked> 5 (Great)
+                <input type="radio" name="rating" value="4"> 4 (Good)
+                <input type="radio" name="rating" value="3"> 3 (OK)
+                <input type="radio" name="rating" value="2"> 2 (Bad)
+                <input type="radio" name="rating" value="1"> 1 (Poor)
+            </div>        
+        </div>
+
         <textarea name="comment" rows="20" cols="50">
             Comments
         </textarea>
@@ -100,5 +135,12 @@ include("header.php");
          */
         ?>
 
-</form>
+    </form>
 </div>
+
+<div class="w3-container">
+    <?php include("footer.php"); ?>
+</div>
+
+</body>
+</html>
