@@ -412,13 +412,13 @@
             $json_array = self::APICall("/TimeSlots/get.php", $params);
             $tSlots = array();
             foreach($json_array as $item) {
-                $tSlots[] = new TimeSlot(
-                    $item->{'ID'},
-                    $item->{'locID'},
-                    $item->{'deptID'},
-                    $item->{'courseID'},
-                    $item->{'startTime'},
-                    $item->{'endTime'}
+                $tSlots[] = array(
+                    'ID'        => $item->{'ID'},
+                    'locID'     => $item->{'locID'},
+                    'deptID'    => $item->{'deptID'},
+                    'courseID'  => $item->{'courseID'},
+                    'startTime' => $item->{'startTime'},
+                    'endTime'   => $item->{'endTime'}
                 );
             }
             if($tSlotID != NULL) return $tSlots[0];
