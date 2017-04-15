@@ -36,6 +36,7 @@
 		scheduler.config.last_hour = 18;
 		scheduler.config.multi_day = true;
 		scheduler.config.date_step = "5"
+		scheduler.config.drag_move = false;
 		//initializing here
 		scheduler.init('scheduler_here', new Date(),"week");
 		scheduler.setLoadMode("week")
@@ -46,27 +47,79 @@
         require_once("../APIClient.php");
         $events = APIClient::getTimeSlots(null, null, null, null, null, null);
 		//Need to implement names for each course ID
-		 $courses = APIClient::getCourses(null, null );
-        $obj_array = array();
+        $e_array = array();
         foreach($events as $e) {
-            $obj_array[] = array(
+            $e_array[] = array(
                 "start_date" => $e['startTime'],
                 "end_date"   => $e['endTime'],
-				"text"		=>  $e['courseID']	
+				"text"		=>  $e['courseID'],
+				"location"	=>  $e['locID']			
 			);
         };	
-
-        echo json_encode($obj_array);
+        echo json_encode($e_array);
 					?>;
+		var cNames = <?php
+		require_once("../APIClient.php");
+		$courses = APIClient::getCourses(null, null);
+		$c_array = array();	
+        	foreach($courses as $co) {
+            $c_array[] = array(
+				"ID" => $co->getID(),
+                "Name" => $co->getName()	
+			);
+        };	
+		 echo json_encode($c_array);
+		?>	
+		var bNames = <?php
+		require_once("../APIClient.php");
+		$buildings = APIClient::getLocations(null, null, null);
+		$b_array = array();	
+        	foreach($buildings as $bld) {
+            $b_array[] = array(
+				"ID" => $bld->getID(),
+                "Name" => $bld->getBuildingName(),
+				"Room" => $bld->getRoomNumber()
+			);
+        };	
+		 echo json_encode($b_array);
+		?>
+		
 		//Handy for testing			
-		//console.log(slots);
-
+		console.log(slots);
+		console.log(bNames);
+		//console.log(cNames);
+		//////////////////////////
+		//adding to calendar
 		slots.forEach(event); 
+		
+		
 		function event(item) {
+
+				var courseName, buildName = "";
+				var index = 0;
+				var flag = true;
+				//discovering equivalent String for Course
+				while (flag == true) {
+					if(cNames[index].ID == item.text){
+						courseName = "(\n " + cNames[index].Name + " )";
+						flag = false;
+					}
+					index++;
+				};		
+				index = 0;
+				//discovering equivalent String for Building
+				while (flag == false) {
+					if(bNames[index].ID == item.location){
+						buildName = "( " + bNames[index].Name + " )" + bNames[index].Room;
+						flag = true;
+					}
+					index++;
+				};
 				scheduler.addEvent({
 				start_date: item.start_date,//"2017-04-16 09:00"
 				end_date:   item.end_date,//"2017-04-16 12:00"
-				text:   	item.text,
+				text:   	courseName + buildName,
+				
 		});
 		}
 	}
