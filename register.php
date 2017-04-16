@@ -49,8 +49,30 @@
     <p>
     <input type="submit" name="submit"  class="w3-block w3-brown w3-display-bottom-middle w3-large">
     </p>
-    
-    <input type="submit" name="submit" formaction = "index.php" class="w3-block w3-brown w3-display-bottom-middle w3-large">
+    <?php
+	require_once("../APIClient.php");
+	if(isset($_POST['submit']))
+	{
+		$username = $_POST["username"];
+		$password = $_POST["password"];
+		$firstname = $_POST["firstname"];
+		$lastname = $_POST["lastname"];
+		$isAdmin = false;
+		if($_POST["isAdmin"] == "yes")
+		{
+			$isAdmin = true;
+		}
+		$notify = false;
+		if($_POST["notify"] == "yes")
+		{
+			$notify = true; 
+		}
+		
+		$user = new User(null, $username, $firstname, $lastname, $isAdmin, $notify);
+		APIClient::addUser($user, $password);
+	}
+	?>	
+   
       
 	
     </form><br>
