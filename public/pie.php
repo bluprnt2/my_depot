@@ -31,10 +31,10 @@
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Task', 'Hours per Day'],
-          ['Announcement',     11],
-          ['Courses',      2],
-          ['TimeSlot',  2],
-          ['Departments', 2],
+          ['Announcement',     3],
+          ['Courses',      5],
+          ['TimeSlot',  6],
+          ['Departments', 7],
          
         ]);
 
