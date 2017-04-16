@@ -143,19 +143,15 @@ body{
 }
 
 /*Knowledge Base CSS*/
-#yellowbar{
-    background-color: #ffd966;
-    content:"";
-    height: 8px;
-    width:100%;
+#kb-container{
+	margin: 0 auto;
 }
-
 #kb-title
 {
     background-color: #800000;
     padding: 5px;
     color:white;
-    padding: 10px 0px 10px 20px;
+    padding: 10px 0px 10px 40px;
     font-size:200%;
     font-family: Arial;
     font-weight: bold;
@@ -172,13 +168,12 @@ body{
     margin: auto;
     float:left;
     background-color: #bfbfbf;
-    padding: 12px 12px 1px 12px;
+    padding: 12px 40px 1px 40px;
     display:block;
 }
 
 #kb-selection-component{
-    padding: 6px;
-    padding-bottom: 0px;
+    padding: 6px 6px 8px 0px;
 }
 
 #kb-department, #kb-course, #kb-file{
@@ -190,7 +185,6 @@ body{
     text-align: left;
     float: left;
     margin: 0 auto;
-
 }
 
 #kb-loadButton {
@@ -225,7 +219,7 @@ body{
 
 #kb-footer{
     display:inline-block;
-
+	padding-left: 40px;
 }
 
 #header .yellowBox

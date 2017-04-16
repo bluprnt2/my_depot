@@ -1,5 +1,3 @@
-
-	
 	<?php
 		require_once("../APIClient.php");
 		$title = "Knowledge Base";
