@@ -29,7 +29,7 @@
 <div class="login-container settings-container">
     <form id="addClassForm" method="POST">
         <h3>Add Class</h3>
-        <input type="text" name="class">
+        <input type="text" name="class" placeholder="Course Name">
         <select name="Department" class="dept-list settings-dropdown">
     		<option value="">Select a Department</option><?php
             foreach($depts as $d) {
@@ -75,7 +75,7 @@
 <div class="login-container settings-container">
     <form id="addDeptForm" method="POST">
         <h3>Add Department</h3>
-        <input type="text" name="deptName">
+        <input type="text" name="deptName" placeholder="Department Name">
         <br />
         <button type="submit" name="delClass">Add Department</button>
     </form>
@@ -98,12 +98,39 @@
         <button type="submit" name="delClass">Remove Department</button>
     </form>
 </div>
+
+<div class="login-container settings-container">
+    <form id="addLocForm" method="POST">
+        <h3>Add Location</h3>
+        <input type="text" name="locName" placeholder="Building Name">
+        <br />
+        <input type="text" name="locRoomNumber" placeholder="Room Number">
+        <br />
+        <button type="submit" name="locClass">Add Location</button>
+    </form>
+</div>
+
+<div class="login-container settings-container">
+    <form id="delLocForm" method="POST">
+        <h3>Remove Location</h3>
+        <select name="Location" class="loc-list settings-dropdown">
+    		<option value="">Select a Location</option><?php
+            foreach($locs as $l) {
+                $name = $l->getBuildingName() . " Rm. " . $l->getRoomNumber();
+                $id = $d->getID();
+                echo "<option value=" . $id . ">" . $name . "</option>";
+            }
+        ?></select>
+        <br />
+        <button type="submit" name="delClass">Remove Department</button>
+    </form>
+</div>
     <!-- Form for associating tutors with courses -->
 
 <div class="login-container settings-container">
     <form id="assocTutorForm" method="POST">
         <h3>Associate Tutor w/ Class</h3>
-        Department: <select name="Department" onChange="assocTutorUpdate()" class="dept-list settings-dropdown">
+        <select name="Department" onChange="assocTutorUpdate()" class="dept-list settings-dropdown">
     		<option value="">Select a Department</option><?php
             foreach($depts as $d) {
                 $name = $d->getName();
@@ -111,7 +138,7 @@
                 echo "<option value=" . $id . ">" . $name . "</option>";
             }
         ?></select>
-    	Class: <select name="Course" class="course-list settings-dropdown">
+    	<select name="Course" class="course-list settings-dropdown">
     		<option value="">Select a Course</option>
     		<?php
     			foreach($courses as $a){
@@ -119,7 +146,7 @@
     			}
     		?>
     	</select>
-        Tutor: <select name="Tutor" class="tutor-list settings-dropdown">
+        <select name="Tutor" class="tutor-list settings-dropdown">
     		<option value="">Select a Tutor</option>
     		<?php
     			foreach($users as $t){
@@ -132,19 +159,12 @@
     </form>
 </div>
 
-<div class="login-container settings-container">
-    <form action="./register.php">
-        <h3>Add User</h3>
-        <button type="submit">Add new User</button>
-    </form>
-</div>
-
     <!-- Form for removing tutors from classes or completely-->
 
 <div class="login-container settings-container">
     <form id="delTutorForm" method="POST">
         <h3>Remove User</h3>
-        Department: <select name="Department" onChange="delTutorUpdate()" class="dept-list settings-dropdown">
+        <select name="Department" onChange="delTutorUpdate()" class="dept-list settings-dropdown">
     		<option value="">Select a Department</option><?php
             foreach($depts as $d) {
                 $name = $d->getName();
@@ -152,7 +172,7 @@
                 echo "<option value=" . $id . ">" . $name . "</option>";
             }
         ?></select>
-    	Class: <select name="Course" onChange="delTutorUpdate()" class="course-list settings-dropdown">
+    	<select name="Course" onChange="delTutorUpdate()" class="course-list settings-dropdown">
     		<option value="">Select a Course</option>
     		<?php
     			foreach($courses as $a){
@@ -160,7 +180,7 @@
     			}
     		?>
     	</select>
-        Tutor: <select name="Tutor" class="tutor-list settings-dropdown">
+        <select name="Tutor" class="tutor-list settings-dropdown">
     		<option value="">Select a Tutor</option>
     		<?php
     			foreach($users as $t){
@@ -168,7 +188,7 @@
                         $courseids = " ";
                         foreach($coursetutors as $c){
                             if($c->{'tutorID'} == $t->getUserID){
-                                $courseids.concat("'courseID':" . $c->{'courseID'}. " ");
+                                //$courseids.concat("'courseID':" . $c->{'courseID'}. " ");
                             }
                         }
     				    echo "<option value=\"{" . $courseids . "'ID':" . $t->getUserID() . "}\">". $t->getUsername() ."</option>";
@@ -180,37 +200,55 @@
         <button type="submit" name="delTutor">Delete Account</button>
     </form>
 </div>
+<div class="login-container settings-container">
+   <form id="rmFileForm" method="POST">
+       <h3>Remove File</h3>
+       <select name="Department" class="dept-list settings-dropdown">
+           <option value="">Select a Department</option>
+       </select>
+       <select name="Course" class="dept-list settings-dropdown">
+           <option value="">Select a Course</option>
+       </select>
+       <select name="File" class="dept-list settings-dropdown">
+           <option value="">Select a File</option>
+       </select>
+       <button type="submit" name="delFile">Delete File</button>
+   </form>
+</div>
+
 
 <div class="login-container settings-container">
 	<form id="addFileForm" method="POST">
         <h3>Add File</h3>
-        Course ID: <input type="text" name="classID">
-		Author User ID: <input type="text" name="authorID">
-        Filename: <textarea type="filename" name="filename">
-    	File Contents: <input type="text" name="content" style = "width: 50%; height: 80%">
-        <input type="submit" name="addFile" class="addFileButton" value="Add File">
+        <input type="text" name="classID" placeholder="classID" />
+		<input type="text" name="authorID" placeholder="userID" />
+    	<input type="text" name="content" placeholder="Title" />
+        <textarea type="filename" name="filename" placeholder="Content" style="width:100%; height: 320px; resize: none"></textarea>
+        <br />
+        <button type="submit" name="addFile">Add File</button>
+        <button type="reset">Clear Form</button>
 		<?php
 
-		if(isset($_POST['submit']))
+		if(isset($_POST['addFile']))
 		{
-		$CourseID = $_POST["classID"];
-		$UserID = $_POST["authorID"];
-		$Filename = $_POST["filename"];
-		$Content = $_POST["content"];
+    		$CourseID = $_POST["classID"];
+    		$UserID = $_POST["authorID"];
+    		$Filename = $_POST["filename"];
+    		$Content = $_POST["content"];
 
-		$newFile = new KnowledgeFile(
-			null,
-			$CourseID,
-			$UserID,
-			$Filename,
-			$_POST["content"],
-			null
-		);
-			 APIClient::addFile($newFile);
+    		$newFile = new KnowledgeFile(
+    			null,
+    			$CourseID,
+    			$UserID,
+    			$Filename,
+    			$_POST["content"],
+    			null
+    		);
+
+			APIClient::addFile($newFile);
 		}
 
 		?>
-        <input type="reset" value="Clear Form" class="addFileButton">
     </form>
 </div>
 </div>

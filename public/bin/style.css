@@ -312,7 +312,8 @@ body{
 }
 
 .settings-container  {
-    height: 350px;
+    min-height: 350px;
+    height:auto;
     padding: 20px;
     margin: 10px;
     text-align: center;
