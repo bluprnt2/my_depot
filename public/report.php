@@ -69,23 +69,24 @@ echo "</table>";
 
     $answer = $_POST['graph'];
 
-    if ( $answer=="pie")
-    {
-       
-        header("Location:pie.php ");
-    }
-    
-    else if ($answer=="bar")
-        
-    {
-        header("Location:bar.php ");
-    }
-    
-    else
-    {
-         header("Location:column.php ");   
-    
-    }
+ switch($answer)
+
+     {
+
+     case 'pie':
+     header("Location:pie.php ");
+     break;
+     case 'bar':
+     header("Location:bar.php ");
+     break;
+     case 'col':
+     header("Location:column.php ");
+     break;
+
+
+
+     }
+
 
 
 
