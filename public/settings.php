@@ -3,6 +3,7 @@
     $title = "Settings";
     include("header.php");
 
+    include("navbar.php");
 	if(!APIClient::isLoggedIn())
 	{
 		//make note to update navbar on login
@@ -16,20 +17,20 @@
     $users=APIClient::getUser(null);
     $coursetutors=APIClient::getCourseTutors(null, null);
 ?>
-
-<div class="w3-bar w3-border w3-light-grey w3-cell">
-    <?php include("navbar.php"); ?>
+<div class="w3-container w3-brown" >
+    <h2>Settings</h2>
 </div>
 
-<div class="w3-contianer">
-    <h1>Settings</h1>
+
+<div id="settings-page-container" class="w3-contianer">
 
     <!-- Form for adding a class to the database -->
 
+<div class="login-container settings-container">
     <form id="addClassForm" method="POST">
         <h3>Add Class</h3>
-        Class: <input type="text" name="class">
-        Department: <select name="Department" class="dept-list settings-dropdown">
+        <input type="text" name="class">
+        <select name="Department" class="dept-list settings-dropdown">
     		<option value="">Select a Department</option><?php
             foreach($depts as $d) {
                 $name = $d->getName();
@@ -37,15 +38,17 @@
                 echo "<option value=" . $id . ">" . $name . "</option>";
             }
         ?></select>
+        <br /><br />
         <button type="submit" name="addClass">Add Class</button>
     </form>
+</div>
 
     <!-- Form for removing a class from the database -->
-
+<div class="login-container settings-container">
     <form id="delClassForm" method="POST">
         <h3>Remove Class</h3>
         <!-- Allows for narrowing down classes by department -->
-        Department: <select name="Department" onChange="delClassUpdate()" class="dept-list settings-dropdown">
+        <select name="Department" onChange="delClassUpdate()" class="dept-list settings-dropdown">
     		<option value="">Select a Department</option><?php
             foreach($depts as $d) {
                 $name = $d->getName();
@@ -53,7 +56,8 @@
                 echo "<option value=" . $id . ">" . $name . "</option>";
             }
         ?></select>
-    	Class: <select name="Course" class="course-list settings-dropdown">
+        <br />
+    	<select name="Course" class="course-list settings-dropdown">
     		<option value="">Select a Course</option>
     		<?php
     			foreach($courses as $a){
@@ -61,22 +65,28 @@
     			}
     		?>
     	</select>
+        <br /><br />
         <button type="submit" name="delClass">Remove Class</button>
     </form>
+</div>
 
     <!-- Form for adding a department to the database -->
 
+<div class="login-container settings-container">
     <form id="addDeptForm" method="POST">
         <h3>Add Department</h3>
-        Department: <input type="text" name="deptName">
+        <input type="text" name="deptName">
+        <br />
         <button type="submit" name="delClass">Add Department</button>
     </form>
+</div>
 
     <!-- Form for removing a department from the database -->
 
+<div class="login-container settings-container">
     <form id="delDeptForm" method="POST">
         <h3>Remove Department</h3>
-        Department: <select name="Department" class="dept-list settings-dropdown">
+        <select name="Department" class="dept-list settings-dropdown">
     		<option value="">Select a Department</option><?php
             foreach($depts as $d) {
                 $name = $d->getName();
@@ -84,11 +94,13 @@
                 echo "<option value=" . $id . ">" . $name . "</option>";
             }
         ?></select>
+        <br />
         <button type="submit" name="delClass">Remove Department</button>
     </form>
-
+</div>
     <!-- Form for associating tutors with courses -->
 
+<div class="login-container settings-container">
     <form id="assocTutorForm" method="POST">
         <h3>Associate Tutor w/ Class</h3>
         Department: <select name="Department" onChange="assocTutorUpdate()" class="dept-list settings-dropdown">
@@ -118,14 +130,18 @@
         </select>
         <button type="submit" name="assocTutor">Assign Tutor</button>
     </form>
+</div>
 
+<div class="login-container settings-container">
     <form action="./register.php">
         <h3>Add User</h3>
         <button type="submit">Add new User</button>
     </form>
+</div>
 
     <!-- Form for removing tutors from classes or completely-->
 
+<div class="login-container settings-container">
     <form id="delTutorForm" method="POST">
         <h3>Remove User</h3>
         Department: <select name="Department" onChange="delTutorUpdate()" class="dept-list settings-dropdown">
@@ -163,24 +179,26 @@
         <button type="submit" name="delTutorClass">Remove from Course</button>
         <button type="submit" name="delTutor">Delete Account</button>
     </form>
-	
+</div>
+
+<div class="login-container settings-container">
 	<form id="addFileForm" method="POST">
         <h3>Add File</h3>
         Course ID: <input type="text" name="classID">
 		Author User ID: <input type="text" name="authorID">
         Filename: <textarea type="filename" name="filename">
-    	File Contents: <input type="text" name="content" style = "width: 50%; height: 80%">	
+    	File Contents: <input type="text" name="content" style = "width: 50%; height: 80%">
         <input type="submit" name="addFile" class="addFileButton" value="Add File">
 		<?php
-	
+
 		if(isset($_POST['submit']))
 		{
 		$CourseID = $_POST["classID"];
 		$UserID = $_POST["authorID"];
 		$Filename = $_POST["filename"];
 		$Content = $_POST["content"];
-		
-		$newFile = new KnowledgeFile( 
+
+		$newFile = new KnowledgeFile(
 			null,
 			$CourseID,
 			$UserID,
@@ -194,6 +212,7 @@
 		?>
         <input type="reset" value="Clear Form" class="addFileButton">
     </form>
+</div>
 </div>
 <script>
     function hide(drop, value) {
@@ -231,7 +250,8 @@
         changeCourse("delTutorForm");
     }
 </script>
-
-<?php
-    include("footer.php");
-?>
+<div id="kb-footer">
+    <?php
+        include("footer.php");
+    ?>
+</div>

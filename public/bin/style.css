@@ -30,14 +30,14 @@
     margin: 10px auto;
 }
 
-#feedback-form input[type="radio"]{    
+#feedback-form input[type="radio"]{
     display: inline;
     margin-left: 5px;
 }
 
 #radio-buttons {
     font-size: 12px;
-    display: inline;    
+    display: inline;
     //width: 75%;
     float: right;
     margin-right: 5%;
@@ -163,7 +163,7 @@ body{
 }
 #kb-selection{
     font-family: Arial, sans-serif;
-    font-size: 20px;    
+    font-size: 20px;
     font-weight: bold;
     margin: auto;
     float:left;
@@ -176,7 +176,7 @@ body{
     padding: 6px 6px 8px 0px;
 }
 
-#kb-department, #kb-course, #kb-file{
+#kb-department, #kb-course, #kb-file, .settings-dropdown{
     font-family: Arial, sans-serif;
     font-size: 18px;
     font-weight: bold;
@@ -271,9 +271,9 @@ body{
 
 
 
-#navbar{    
+#navbar{
     letter-spacing: 1px;
-    font-weight: bold;    
+    font-weight: bold;
 }
 
 
@@ -296,7 +296,7 @@ body{
     border-left: 2px solid black;
 
 }
-#admin-bar {    
+#admin-bar {
     border-right: 2px solid black;
 }
 
@@ -305,4 +305,36 @@ body{
     float: right;
     border-left: 2px solid black;
     border-right: 2px solid black;
+}
+
+#settings-page-container {
+    text-align: center;
+}
+
+.settings-container  {
+    height: 350px;
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+    display: inline-grid;
+}
+
+.settings-dropdown {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    padding:5px;
+    width:320px;
+    float:none;
+}
+
+.settings-container button {
+    margin: 10px;
+}
+.settings-container input {
+    margin: 10px;
+}
+
+.settings-container select {
+    margin: 10px;
 }
