@@ -29,6 +29,7 @@
             }
         }
     }
+    $locs = APIClient::getLocations(null, null, null);
     $users=APIClient::getUser(null);
     $coursetutors=APIClient::getCourseTutors(null, null);
 ?>
@@ -149,8 +150,16 @@
         <br />
         <input type="text" name="locRoomNumber" placeholder="Room Number">
         <br />
-        <button type="submit" name="locClass">Add Location</button>
+        <button type="submit" name="addLoc">Add Location</button>
     </form>
+    <?php
+        if(isset($_POST['addLoc'])) {
+            $locName = $_POST["locName"];
+            $roomNumber = $_POST["locRoomNumber"];
+            $location = new Location(null, $locName, $roomNumber);
+            APIClient::addLocation($location);
+        }
+    ?>
 </div>
 
 <div class="login-container settings-container admin-form">
@@ -160,12 +169,18 @@
     		<option value="">Select a Location</option><?php
             foreach($locs as $l) {
                 $name = $l->getBuildingName() . " Rm. " . $l->getRoomNumber();
-                $id = $d->getID();
+                $id = $l->getID();
                 echo "<option value=" . $id . ">" . $name . "</option>";
             }
         ?></select>
         <br />
-        <button type="submit" name="delClass">Remove Department</button>
+        <button type="submit" name="delLoc">Remove Location</button>
+        <?php
+            if(isset($_POST['delLoc'])){
+                $locID = $_POST["Location"];
+                APIClient::delLocation($locID);
+            }
+        ?>
     </form>
 </div>
     <!-- Form for associating tutors with courses -->
