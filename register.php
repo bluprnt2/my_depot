@@ -33,20 +33,59 @@
 	<input class="w3-input w3-border w3-round" type="text" name="username">
     
 	<label>Enter Password</label>
-    <input class="w3-input w3-border w3-round" type="password" name="password1">
+    <input class="w3-input w3-border w3-round" type="password" name="password">
     
-	<label>Re-Enter Password</label>
-	<input class="w3-input w3-border w3-round" type="password" name="password2">
-    
-    <input type="submit" name="submit" formaction = "index.php" class="w3-block w3-brown w3-display-bottom-middle w3-large">
-         
+	<label>Admin</label>
+	<input class="w3-radio" type = "radio" name="isAdmin" value = "yes">
+	<label>Yes</label>
+	<input class = "w3-radio" type = "radio" name = "isAdmin" value = "no">
+	<label>No</label><br>
+		
+	<label>Allow notification </label>
+	<input class="w3-radio" type="radio" name="notify" value = "yes">
+	<label>Yes</label>
+	<input class = "w3-radio" type = "radio" name = "notify" value = "no">
+	<label>No</label>
+    <p>
+    <input type="submit" name="submit"  class="w3-block w3-brown w3-display-bottom-middle w3-large">
+    </p>
+    <?php
+	require_once("../APIClient.php");
+	if(isset($_POST['submit']))
+	{
+		$username = $_POST["username"];
+		$password = $_POST["password"];
+		$firstname = $_POST["firstname"];
+		$lastname = $_POST["lastname"];
+		$isAdmin = false;
+		if($_POST["isAdmin"] == "yes")
+		{
+			$isAdmin = true;
+		}
+		$notify = false;
+		if($_POST["notify"] == "yes")
+		{
+			$notify = true; 
+		}
+		
+		$user = new User(null, $username, $firstname, $lastname, $isAdmin, $notify);
+		APIClient::addUser($user, $password);
+	}
+	?>	
+   
+      
+	
     </form><br>
+		
+		
 	
 	</div>
 	
 	<?php
 	include("footer.php");
 	?>
+</body>
+</html>
 	
 		 
 		

@@ -12,6 +12,7 @@
                                     $startTime, $endTime){
             $this->id = $id;
             $this->location_id = $location_id;
+            $this->course_id = $course_id;
             $this->department_id = $department_id;
             $this->startTime = $startTime;
             $this->endTime = $endTime;

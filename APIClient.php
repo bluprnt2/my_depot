@@ -139,7 +139,8 @@
                     $u->{'firstName'},
                     $u->{'lastName'},
                     $u->{'admin'},
-                    $u->{'notify'}
+                    $u->{'notify'},
+                    $u->{'email'}
                 );
             }
             if($id != null) return $users[0];
@@ -156,6 +157,7 @@
                 $params['password'] = $password;
                 $params['admin'] = $user->getAdmin();
                 $params['notify'] = $user->getNotify();
+                $params['email'] = $user->getEmail();
                 $json_array = self::APICall("/Users/add.php", $params);
             } else return false;
         }
@@ -171,6 +173,7 @@
                 $params['password'] = $password;
                 $params['admin'] = $user->getAdmin();
                 $params['notify'] = $user->getNotify();
+                $params['email'] = $user->getEmail();
                 $json_array = self::APICall("/Users/set.php", $params);
             } else return false;
         }
