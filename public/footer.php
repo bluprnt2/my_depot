@@ -1,3 +1,3 @@
 <?php
-    echo "<p>Copyright &copy; 2017-" . date("Y") . " rowan.edu</p>";
+    echo "<p id=\"site-footer\">Copyright &copy; 2017-" . date("Y") . " rowan.edu</p>";
 ?>
