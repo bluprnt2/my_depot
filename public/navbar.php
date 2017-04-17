@@ -58,6 +58,7 @@ if (APIClient::isLoggedIn()) {
 $login_rowan = $login_rowan . '</div>';
 ?>
 
+<div style="height: 10px" class="w3-container w3-yellow"> </div>
 <div id="navbar" class="w3-bar w3-border w3-light-grey w3-large">
 <?php
 echo $basic_bar . $tutor_bar . $admin_bar . $login_rowan;
