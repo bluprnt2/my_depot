@@ -3,7 +3,7 @@
     require_once('../server.php');
     require_once('../Auth.php');
     require_once('../KnowledgeBase.php');
-	
+
     if (!$server->verifyResourceRequest($global_request)) {
         $server->getResponse()->send();
         die;
@@ -11,11 +11,10 @@
         $userid = checkLogin($_POST['access_token'], $oauthsql);
         if($userid != NULL) {
             echo json_encode(addFile(
-                $userid,
                 $_POST['courseID'],
-                $_POST['userID'],
+                $userid,
                 $_POST['fileName'],
-		$_POST['content'],
+        		$_POST['content'],
                 $tutorsql
             ));
         }
