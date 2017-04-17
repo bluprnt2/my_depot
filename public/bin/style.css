@@ -30,14 +30,14 @@
     margin: 10px auto;
 }
 
-#feedback-form input[type="radio"]{    
+#feedback-form input[type="radio"]{
     display: inline;
     margin-left: 5px;
 }
 
 #radio-buttons {
     font-size: 12px;
-    display: inline;    
+    display: inline;
     //width: 75%;
     float: right;
     margin-right: 5%;
@@ -143,19 +143,15 @@ body{
 }
 
 /*Knowledge Base CSS*/
-#yellowbar{
-    background-color: #ffd966;
-    content:"";
-    height: 8px;
-    width:100%;
+#kb-container{
+	margin: auto;
 }
-
 #kb-title
 {
     background-color: #800000;
     padding: 5px;
     color:white;
-    padding: 10px 0px 10px 20px;
+    padding: 10px 0px 10px 40px;
     font-size:200%;
     font-family: Arial;
     font-weight: bold;
@@ -163,25 +159,23 @@ body{
 }
 
 #wrapper{
-    display:inline-block;
+    display:block;
 }
+
 #kb-selection{
     font-family: Arial, sans-serif;
-    font-size: 20px;    
+    font-size: 20px;
     font-weight: bold;
-    margin: auto;
-    float:left;
     background-color: #bfbfbf;
-    padding: 12px 12px 1px 12px;
+    padding: 12px 40px 1px 40px;
     display:block;
 }
 
 #kb-selection-component{
-    padding: 6px;
-    padding-bottom: 0px;
+    padding: 6px 6px 8px 0px;
 }
 
-#kb-department, #kb-course, #kb-file{
+#kb-department, #kb-course, #kb-file, .settings-dropdown{
     font-family: Arial, sans-serif;
     font-size: 18px;
     font-weight: bold;
@@ -190,7 +184,10 @@ body{
     text-align: left;
     float: left;
     margin: 0 auto;
+}
 
+#selDeptForm{
+	display: block;
 }
 
 #kb-loadButton {
@@ -212,6 +209,7 @@ body{
     font-family: Arial, sans-serif;
     font-weight: bold;
     padding:0px 15px 0px 15px;
+	margin: auto;
 }
 
 #kb-content{
@@ -225,7 +223,7 @@ body{
 
 #kb-footer{
     display:inline-block;
-
+	padding-left: 40px;
 }
 
 #header .yellowBox
@@ -277,9 +275,9 @@ body{
 
 
 
-#navbar{    
+#navbar{
     letter-spacing: 1px;
-    font-weight: bold;    
+    font-weight: bold;
 }
 
 
@@ -302,7 +300,7 @@ body{
     border-left: 2px solid black;
 
 }
-#admin-bar {    
+#admin-bar {
     border-right: 2px solid black;
 }
 
@@ -312,7 +310,6 @@ body{
     border-left: 2px solid black;
     border-right: 2px solid black;
 }
-
 
 #site-footer {    
     position: fixed;
@@ -361,4 +358,45 @@ body{
     
 }
 
+/*------------------------------------------*/
+
+
+
+
+
+
+/* -------------- SETTINGS PAGE --------------*/
+
+#settings-page-container {
+    text-align: center;
+}
+
+.settings-container  {
+    min-height: 350px;
+    height:auto;
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+    display: inline-grid;
+}
+
+.settings-dropdown {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    padding:5px;
+    width:320px;
+    float:none;
+}
+
+.settings-container button {
+    margin: 10px;
+}
+.settings-container input {
+    margin: 10px;
+}
+
+.settings-container select {
+    margin: 10px;
+}
 /*------------------------------------------*/

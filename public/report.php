@@ -32,6 +32,8 @@ if (isset($_POST['exp']) )
     
     }
 
+
+
     $output = fopen('php://output', 'w');
 
 
@@ -60,43 +62,32 @@ echo "</table>";
 
  }//end IF
 
-
  if (isset($_POST['gen']) )
 
-    {
+    {  
 
-  
 
     $answer = $_POST['graph'];
 
-    if ( $answer=="pie")
-    {
-       
-        header("Location:pie.php ");
-    }
-    
-    else if ($answer=="bar")
-        
-    {
-        header("Location:bar.php ");
-    }
-    
-    else
-    {
-         header("Location:column.php ");   
-    
-    }
+ 
+ switch($answer)
 
+     {
 
+     case 'pie':
+     header("Location:pie.php ");
+     break;
+     case 'bar':
+     header("Location:bar.php ");
+     break;
+     case 'col':
+     header("Location:column.php ");
+     break;
+
+     }
 
  }//end IF
 
-
-
-
- //include ("header.php");
- //include("navbar.php");
- 
 
 ?>
 
@@ -205,11 +196,45 @@ and open the template in the editor.
     <!--export button to csv-->
 
 
-    <input type="submit" class="w3-round-large w3-block w3-brown" style="width:100%" value="Export" name="exp" />
+    <input type="submit" class="w3-round-large w3-block w3-brown" onclick="text(); move();" style="width:100%" value="Export"  name="exp" />
      </form>
 
       <br></br>
     </div><!--end checkedbox generate-->
 
     <br></br>
-    </div><!--end grey panel-->
+  
+<body>
+
+<p id="demo"></p>
+
+  
+ <div class=" w3-grey" style="width:50%">
+  <div id="myBar" class="w3-container w3-green w3-center"></div>
+</div>
+
+<br>
+
+
+<script>
+function move() {
+  var elem = document.getElementById("myBar");   
+  var width = 10;
+  var id = setInterval(frame, 20);
+  function frame() {
+    if (width >= 100) {
+      clearInterval(id);
+    } else {
+      width++; 
+      elem.style.width = width + '%'; 
+      elem.innerHTML = width * 1  + '%';
+    }
+  }
+}
+
+function text() {
+    document.getElementById("demo").innerHTML = "Please wait a moment...the file is being exported";
+}
+</script>
+
+
