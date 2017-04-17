@@ -35,8 +35,10 @@
         private static $token_expires;
 
         private static function setToken($t_string, $t_expires) {
-            self::getInstance()::$token = $t_string;
-            self::getInstance()::$token_expires = $t_expires;
+            #self::getInstance()::$token = $t_string;
+            #self::getInstance()::$token_expires = $t_expires;
+            self::$token = $t_string;
+            self::$token_expires = $t_expires;
         }
 
         //Tested
@@ -54,9 +56,10 @@
 
         //Tested
         public static function getAPIHost() {
-            $server = "http://" . $_SERVER['SERVER_NAME'] . ":";
-            $api_url = $server . "8080";
-            return $api_url;
+            #$server = "http://" . $_SERVER['SERVER_NAME'] . ":";
+            #$api_url = $server . "8080";
+            #return $api_url;
+	    return 'http://ec2-54-172-36-252.compute-1.amazonaws.com';
         }
 
         //Tested
@@ -84,7 +87,8 @@
                 setCookie('token', $temp_token);
                 setCookie('token_expires', $temp_token_expires);
             }
-            return self::getInstance()::$token;
+            #return self::getInstance()::$token;
+            return self::$token;
         }
 
         //Tested
@@ -94,7 +98,7 @@
             $url = self::getAPIHost() . $url;
 
             $params['access_token'] = self::getToken();
-            
+           
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
@@ -139,7 +143,8 @@
                     $u->{'firstName'},
                     $u->{'lastName'},
                     $u->{'admin'},
-                    $u->{'notify'}
+                    $u->{'notify'},
+		    $u->{'email'}
                 );
             }
             if($id != null) return $users[0];
@@ -577,5 +582,20 @@
 			$params['file_ID'] = $fileID;
 			$json_array = self::APICall("/KnowledgeBase/delete.php", $params);
 		}
+
+	public static function feedbackNotify(){
+	    $emails = array();
+	    $code = null;
+	    $users = self::getUser($code);
+
+            foreach($users as $u) {
+		if($u->getNotify() == 1 and $u->getEmail() != null){
+		    $emails[] = $u->getEmail();
+		}
+            }
+
+	   $params['emails'] = $emails;
+	   return self::APICall("/EmailService/send_alerts.php", $params);
+	}
     }
 ?>

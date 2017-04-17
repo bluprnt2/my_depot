@@ -20,7 +20,7 @@
 
     //Tested
     function getUsers($userid, $tutorserver) {
-        $query = "SELECT ID, userName, firstName, lastName, admin, notify FROM Users WHERE ID=COALESCE(?, ID)";
+        $query = "SELECT ID, userName, firstName, lastName, admin, notify, email FROM Users WHERE ID=COALESCE(?, ID)";
 
         $users = array();
         if($stmnt = $tutorserver->prepare($query)) {
