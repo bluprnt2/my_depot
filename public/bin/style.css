@@ -311,6 +311,62 @@ body{
     border-right: 2px solid black;
 }
 
+#site-footer {    
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 300px;
+}
+
+/* -------------- HOME PAGE --------------*/
+
+#home-header {
+    display: block;
+    margin-top: 2%;
+    padding: 10px;
+    width: 100%;
+    text-indent: 25px;
+}
+
+#home-container {
+    display: block;
+    margin: 10% auto;
+    width: 75%;
+}
+
+#home-announce, #home-info {
+    display: inline-block;
+    width: 45%;
+    
+}
+
+#home-info {
+    text-align: justify;
+    font-size: 1.25em;
+    line-height: 2em;
+    float: left;
+    padding: 50px 25px;
+}
+
+#home-announce {
+    float: right;
+    padding: 30px 25px 50px 25px;
+}
+
+#home-announce a {
+    margin-top: -49px;
+    
+}
+
+/*------------------------------------------*/
+
+
+
+
+
+
+/* -------------- SETTINGS PAGE --------------*/
+
 #settings-page-container {
     text-align: center;
 }
@@ -343,3 +399,4 @@ body{
 .settings-container select {
     margin: 10px;
 }
+/*------------------------------------------*/
