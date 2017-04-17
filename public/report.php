@@ -1,4 +1,30 @@
-
+	<?php
+		require_once("../APIClient.php");
+		$title = "Generate Report";
+		include("header.php");
+	?>
+	<div id="kb-yellowbar"></div>
+	<?php
+		include("navbar.php");
+		//only tutors and admins should be able to
+		//access and modify the knowledge base.
+		//check if the user is logged in,
+		//if not, redirect them.
+		
+		if(!APIClient::isLoggedIn())
+		{
+			if(APIClient::isLoggedIn()) {
+				echo "Logged In!";
+			} else {
+				echo "Login failed...";
+			}
+			//make note to update navbar on login
+			//admin has option to view knowledge base but can remove files
+			header('Location: ./index.php');
+			echo '<p><a href="index.php">Only Tutors and Admins have access to the Knowledge Base</a><p>';
+			exit();
+		}
+	?>
 
 <?php
 
@@ -90,19 +116,23 @@ echo "</table>";
 
 
 ?>
-<?php
-    require_once("../APIClient.php");
-    $title = "Settings";
-    include("header.php");
-    include("navbar.php");
-?>
+
+
+         <!--add nav bar -->
+
+        <div class="w3-container">
+
+
+</div>
+
   <!--brown bar -->
-    <div class="w3-container w3-brown">
+        <div class="w3-container" style="background-color: #800000; color: white;">
+       <h1></h1>
        <h2>Report</h2>
     </div>
 
 
-  <div class="w3-panel w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border-white w3-light-grey">
+  <div class="w3-panel w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border-grey w3-light-grey">
 
       <h2><strong>Generating a Report</h2>
       <p>Select the type of report you want to generate and the type of information you want to display,<br></br>
@@ -118,7 +148,7 @@ echo "</table>";
 
          <div class="w3-container w3-lightgrey w3-cell">
 
-        <div class="w3-panel w3-border w3-border-white">
+        <div class="w3-panel w3-border w3-border-black">
 
           <h3><strong>Graph</h3>
 
@@ -133,7 +163,7 @@ echo "</table>";
         <br></br> <!--skip line under histogram box-->
         </div>
 
-   <input type="submit" class="w3-round-large w3-block w3-brown" style="width:100%" value="Generate" name="gen" />
+   <input type="submit" class="w3-round-large w3-block" style="width:100%; background-color: #800000; color: white;" value="Generate" name="gen" />
      </form>
 
       <br></br>
@@ -142,7 +172,7 @@ echo "</table>";
 
     <div class="w3-container w3-light-grey w3-cell ">
 
-    <div class="w3-panel w3-border w3-border-white">
+    <div class="w3-panel w3-border w3-border-black">
 
         <h3><strong>Export</h3>
 
@@ -158,7 +188,7 @@ echo "</table>";
     <!--export button to csv-->
 
 
-    <input type="submit" class="w3-round-large w3-block w3-brown" onclick="text(); move();" style="width:100%" value="Export"  name="exp" />
+    <input type="submit" class="w3-round-large w3-block" onclick="text(); move();" style="width:100%; background-color: #800000; color: white;" value="Export"  name="exp" />
      </form>
 
       <br></br>

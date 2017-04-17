@@ -29,8 +29,8 @@
     
     </div>
     <!-- Brown bar with heading-->    
-    <div class="w3-container w3-brown">
-    <h2>Session Logging - Drop In Tutoring Services</h2>
+    <div class="w3-container" style="background-color: #800000; color: white;">
+    <h2>Log Tutor Session</h2>
     </div>
     <img src ="bin/images/background.jpg" alt = "Background" style="width:100%">
     <div id = "main" class = "w3-display-container w3-display-middle w3-light-grey" 
@@ -68,7 +68,7 @@
 	    <textarea name="Comment" style = "width: 50%; height: 80%">Additional Comments</textarea><br>
             
         </p>
-	<input type ="submit" value = " Log Session " class = "w3-btn w3-brown", name = "submit">
+	<input type ="submit" value = " Log Session " style="background-color: #800000; color: white;" class = "w3-btn", name = "submit">
 	<?php
 	
 	require_once("../APIClient.php");
@@ -87,7 +87,7 @@
 	}
 
 	?>
-        <input type="reset" value = " Clear Form " class = "w3-btn w3-brown">
+        <input type="reset" value = " Clear Form " class = "w3-btn" style="background-color: #800000; color: white;">
 	</form>
 	</div>
 	

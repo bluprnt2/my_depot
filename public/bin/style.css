@@ -152,8 +152,6 @@ body{
     padding: 10px 0px 10px 40px;
     font-size:200%;
     font-family: Arial;
-    font-weight: bold;
-
 }
 
 #wrapper{
@@ -208,6 +206,7 @@ body{
     font-weight: bold;
     padding:0px 15px 0px 15px;
 	margin: auto;
+margin-top: 10px;
 }
 
 #kb-content{

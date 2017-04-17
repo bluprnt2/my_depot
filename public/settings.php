@@ -33,7 +33,7 @@
     $users=APIClient::getUser(null);
     $coursetutors=APIClient::getCourseTutors(null, null);
 ?>
-<div class="w3-container w3-brown" >
+<div class="w3-container" style="background-color: #800000; color: white;">
     <h2>Settings</h2>
 </div>
 
