@@ -2,7 +2,7 @@
 require_once("../APIClient.php");
 
 
-//NEW NAVBAR DESIGN    
+//NEW NAVBAR DESIGN
 //
 //1 Home
 //2 About
@@ -39,6 +39,7 @@ if (APIClient::isLoggedIn()) {
     $tutor_bar = '<div id="tutor-bar">'
             . '<a class="w3-bar-item w3-button" href="logbook.php">Logbook</a>'
             . '<a class="w3-bar-item w3-button" href="knowledge_base.php">Shared Knowledgebase</a>'
+            . '<a class= "w3-bar-item w3-button" href="settings.php">Settings</a>'
             . '</div>';
     $login_rowan = $login_rowan . '<a class="w3-bar-item w3-button" href="logout.php">Logout</a>';
 
@@ -46,7 +47,6 @@ if (APIClient::isLoggedIn()) {
         $admin_bar = '<div id="admin-bar">'
                 . '<a class="w3-bar-item w3-button" href="report.php">Reports</a>'
                 . '<a class= "w3-bar-item w3-button" href="register.php">Register</a>'
-                . '<a class= "w3-bar-item w3-button" href="settings.php">Settings</a>'
                 . '</div>';
     } else {
         $admin_bar = '';
@@ -62,5 +62,5 @@ $login_rowan = $login_rowan . '</div>';
 <div id="navbar" class="w3-bar w3-border w3-light-grey w3-large">
 <?php
 echo $basic_bar . $tutor_bar . $admin_bar . $login_rowan;
-?>    
+?>
 </div>

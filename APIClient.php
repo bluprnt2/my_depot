@@ -57,6 +57,7 @@
             $server = "http://" . $_SERVER['SERVER_NAME'] . ":";
             $api_url = $server . "8080";
             return $api_url;
+	    //return 'http://ec2-54-172-36-252.compute-1.amazonaws.com';
         }
 
         //Tested
@@ -94,7 +95,6 @@
             $url = self::getAPIHost() . $url;
 
             $params['access_token'] = self::getToken();
-
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
@@ -140,7 +140,7 @@
                     $u->{'lastName'},
                     $u->{'admin'},
                     $u->{'notify'},
-                    $u->{'email'}
+		    $u->{'email'}
                 );
             }
             if($id != null) return $users[0];
@@ -306,6 +306,12 @@
             } else return false;
         }
 
+        public static function deleteCourse($id) {
+            $params = array();
+            $params['courseID'] = $id;
+            $json_array = self::APICall("/Courses/delete.php", $params);
+        }
+
         //Tested
         public static function getCourses($courseID, $deptID) {
             $params = array();
@@ -346,6 +352,12 @@
                 $params['deptName'] = $department->getName();
                 $json_array = self::APICall("/Departments/add.php", $params);
             } else return false;
+        }
+
+        public static function deleteDepartment($id) {
+            $params = array();
+            $params['deptID'] = $id;
+            $json_array = self::APICall("/Departments/delete.php", $params);
         }
 
         //Not Tested
@@ -574,11 +586,27 @@
 
 		}
 
-		public static function removeFile($fileID)
+		public static function removeFile($userID, $fileID)
 		{
 			$params = array();
-			$params['file_ID'] = $fileID;
+			$params['userID'] = $userID;
+			$params['fileID'] = $fileID;
 			$json_array = self::APICall("/KnowledgeBase/remove.php", $params);
 		}
+
+	public static function feedbackNotify(){
+	    $emails = array();
+	    $code = null;
+	    $users = self::getUser($code);
+
+            foreach($users as $u) {
+		if($u->getNotify() == 1 and $u->getEmail() != null){
+		    $emails[] = $u->getEmail();
+		}
+            }
+
+	   $params['emails'] = $emails;
+	   return self::APICall("/EmailService/send_alerts.php", $params);
+	}
     }
 ?>
