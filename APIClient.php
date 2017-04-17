@@ -574,10 +574,11 @@
 
 		}
 
-		public static function removeFile($fileID)
+		public static function removeFile($userID, $fileID)
 		{
 			$params = array();
-			$params['file_ID'] = $fileID;
+			$params['userID'] = $userID;
+			$params['fileID'] = $fileID;
 			$json_array = self::APICall("/KnowledgeBase/remove.php", $params);
 		}
     }
