@@ -393,23 +393,6 @@
         tutor.options[0].selected=true;
         hide(tutor, "courseID", JSON.parse(course.value).ID);
     }
-
-    function delClassUpdate() {
-        changedDepartment("delClassForm");
-    }
-    function assocTutorUpdate(){
-        changedDepartment("assocTutorForm");
-    }
-
-    function delTutorUpdate() {
-        changedDepartment("delTutorForm");
-        changeCourse("delTutorForm");
-    }
-
-    function delFileUpdate() {
-        //changedDepartment("rmFileForm");
-        changedCourse("rmFileForm");
-    }
 </script>
 <div id="kb-footer">
     <?php
