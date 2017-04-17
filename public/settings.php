@@ -208,7 +208,7 @@
 			<option value="">Select a Department</option>
            <?php
 				foreach($depts as $d) {
-					echo "<option value=" . $d->getID() . ">" . $d->getName() . "</option>";
+					echo "<option value=".$d->getID().">" . $d->getName() . "</option>";
 				}					
 			?>
        </select>
@@ -216,7 +216,7 @@
 			<option value="">Select a Course</option>
            <?php
 				foreach($courses as $c){
-					echo "<option value=" . $c->getID() . ">" . $c->getName() ."</option>";
+					echo "<option value=".$c->getID().">" . $c->getName() ."</option>";
 				}
 			?>
        </select>
@@ -224,7 +224,7 @@
 			<option value="">Select a File</option>
            <?php
 				foreach($files as $f){
-					echo "<option value=" . $f->getID() . ">".$f->getFilename()."</option>";
+					echo "<option value=".$f->getID().">".$f->getFilename()."</option>";
 				}
 			?>
        </select>
@@ -233,6 +233,7 @@
 			if(isset($_POST['delFile']))
 			{
 				$file = $_POST['File'];
+
 				APIClient::removeFile($file);
 			}
 			?>
@@ -248,7 +249,7 @@
 			<option value="">Select a Course</option>
            <?php
 				foreach($courses as $c){
-					echo "<option value=" . $c->getID() . ">" . $c->getName() ."</option>";
+					echo "<option value=".$c->getID().">" . $c->getName() ."</option>";
 				}
 			?>
        </select>
@@ -257,7 +258,7 @@
     		<?php
     			foreach($users as $t){
                     if(!$t->getAdmin()){
-    				    echo "<option value=" . $t->getUserID() . ">". $t->getUsername() ."</option>";
+    				    echo "<option value=".$t->getUserID().">". $t->getUsername() ."</option>";
 					}
 				}
     		?>
