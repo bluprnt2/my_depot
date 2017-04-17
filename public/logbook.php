@@ -14,10 +14,8 @@
 	<link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
 	<!--link rel = "stylesheet" href = "bin/style.css"-->
 	  
-        <!--Yellow bar -->
-    <div class="w3-container w3-yellow">
-       <p></p>  
-    </div>
+    
+    
         <!--add nav bar -->
     <div class="w3-container">
         
@@ -28,7 +26,7 @@
     <?php
     include("navbar.php"); 
     ?>
-    <input class="w3-input w3-border " type="text" placeholder="Search Rowan" style="width:15%" >
+    
     </div>
     <!-- Brown bar with heading-->    
     <div class="w3-container w3-brown">

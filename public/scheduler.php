@@ -2,9 +2,7 @@
 $title = "Scheduler";
 include("header.php");
 ?>
-    <div class="w3-container w3-yellow">
-        <p></p>  
-    </div>
+
     <div class="w3-container">
 	</div>
 <div class="w3-bar w3-border w3-light-grey">
