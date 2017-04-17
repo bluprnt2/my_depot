@@ -2,9 +2,6 @@
 $title = "Scheduler";
 include("header.php");
 ?>
-    <div class="w3-container w3-yellow">
-        <p></p>
-    </div>
     <div class="w3-container">
 	</div>
 	<div class="w3-bar w3-border w3-light-grey">
@@ -28,9 +25,10 @@ include("header.php");
 		</div>
     </div>
 	</div>
-	
 
-	<div id="addTimeSlotForm" class = "login-container">
+
+	<div id="addTimeSlotForm" class = "login-container settings-container" style="margin: 10px auto; display: block">
+        <h3>Add Timeslot</h3>
    <label>YYYY-MM-DD HH:MM:SS</label>
     <form id="login-form" action="scheduler.php" method="post">
         <div class="form-input">
@@ -98,7 +96,7 @@ include("header.php");
 	* The following Javascript calls the restful API to
 	* create all timeslots and populate them in the scheduler.
 	*/
-	
+
     document.addEventListener("DOMContentLoaded", function () {
         init();
 		var slots = <?php
