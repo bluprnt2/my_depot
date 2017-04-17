@@ -1,13 +1,14 @@
-<h1 id="home-header" class="w3-yellow">Rowan University Drop-in Tutoring Application</h1>
+<h1 class="page-header w3-yellow">Rowan University Drop-in Tutoring Application</h1>
 <div id="home-container" class="w3-container">
     
     <div id="home-info" class="w3-panel w3-khaki w3-margin">
         <h2>Welcome</h2>
-        <p>Drop-In Tutoring Services offers academic support in a variety of subjects 
-            from different departments in order to improve educational achievement. 
-            Tutoring is available free of charge to all Rowan University undergraduate 
-            students. Drop-in tutoring is available in most subject areas. Students 
-            can login to see the session available.</p>
+        <p>
+           Drop-in Tutoring Services are offered in a variety of departments for 
+           numerous courses. Tutoring is available free of charge to all Rowan 
+           University undergraduate students. Students can hit the 'Schedule'
+           button to see a list of all available times.
+        </p>        
     </div>
     <div id="home-announce" class="w3-panel w3-gray">
         <a class="w3-bar-item w3-button w3-yellow " href="https://www.facebook.com/RowanUniversity/">Facebook</a>

@@ -23,7 +23,7 @@ require_once("../APIClient.php");
 
 $basic_bar = '<div id="basic-bar">'
         . '<a class="w3-bar-item w3-button" href="index.php">Home</a>'
-        . '<a class="w3-bar-item w3-button" href="#">About</a>'
+        . '<a class="w3-bar-item w3-button" href="about.php">About</a>'
         . '<a class="w3-bar-item w3-button" href="scheduler.php">Schedule</a>'
         . '<a class="w3-bar-item w3-button" href="feedbackform.php">Feedback</a>'
         . '</div>';

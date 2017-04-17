@@ -318,17 +318,11 @@ body{
 
 /* -------------- HOME PAGE --------------*/
 
-#home-header {
-    display: block;
-    margin-top: 2%;
-    padding: 10px;
-    width: 100%;
-    text-indent: 25px;
-}
+
 
 #home-container {
     display: block;
-    margin: 10% auto;
+    margin: 8% auto;
     width: 75%;
 }
 
@@ -396,5 +390,37 @@ body{
 
 .settings-container select {
     margin: 10px;
+}
+/*------------------------------------------*/
+
+
+.page-header {
+    display: block;
+    margin-top: 2%;
+    padding: 10px;
+    width: 100%;
+    text-indent: 25px;
+}
+
+
+/* --------------- ABOUT PAGE --------------*/
+#about-info {
+    display: block;
+    width: 50%;
+    height: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
+    padding: 25px;
+}
+
+#about-info p {
+/*    font-size: .75em;*/
+    letter-spacing: 1px;
+    line-height: 2em;
+/*    display: block;
+    height: 200px;
+    margin-top: auto;
+    margin-bottom: auto;*/
 }
 /*------------------------------------------*/
