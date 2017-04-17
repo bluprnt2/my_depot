@@ -1,11 +1,10 @@
-
-	<div id="kb-yellowbar"></div>
-	
 	<?php
 		require_once("../APIClient.php");
-		//include ("connectiondb.php");
 		$title = "Knowledge Base";
 		include("header.php");
+	?>
+	<div id="kb-yellowbar"></div>
+	<?php
 		include("navbar.php");
 		//only tutors and admins should be able to
 		//access and modify the knowledge base.
@@ -14,6 +13,11 @@
 		
 		if(!APIClient::isLoggedIn())
 		{
+			if(APIClient::isLoggedIn()) {
+				echo "Logged In!";
+			} else {
+				echo "Login failed...";
+			}
 			//make note to update navbar on login
 			//admin has option to view knowledge base but can remove files
 			header('Location: ./index.php');
@@ -24,10 +28,7 @@
 		
 		<!--kb = knowledge base-->
 		<div id="kb-container">
-			<div id="kb-title">
-				<div class="">Knowledge Base</div>
-			</div>
-			
+			<div id="kb-title">Knowledge Base</div>
 			
 			<div id="wrapper">
 				<div id="kb-selection">
@@ -37,7 +38,7 @@
 					$files = APIClient::getFiles(null, null, null);
 				?>
 					<form id="selDeptForm" method="POST">					
-					<div id="kb-selection-component1">
+					<div id="kb-selection-component">
 						<select id="kb-department" name="department" class="dept-list" onChange="updateCourses()">
 							<option value="">Select a Department</option>
 							<?php
@@ -54,7 +55,7 @@
 								}
 							?>
 						</select>
-						<select id="kb-filename" name="file" class="file-list">
+						<select id="kb-file" name="file" class="file-list">
 							<option value="">Select a File</option>
 							<?php
 								foreach($files as $f){
@@ -62,36 +63,46 @@
 								}
 							?>
 						</select>
-						<button id="kb-loadButton" type="submit" name="load-file">Load File</button>
+						<input id="kb-loadButton" type="submit" name="load-file" value ="Load File">
+						<?php
+						if(isset($_POST['load-file']))
+						{
+							$file = $_POST['file'];
+							$fileExplode = explode(',', $file);
+							$fileExplode[0] = preg_replace('/[^0-9.]+/', '', $fileExplode[0]);
+							$fileExplode[1] = preg_replace('/[^0-9.]+/', '', $fileExplode[1]);
+							$File = APIClient::getFiles((int)$fileExplode[1], (int)$fileExplode[0], null);
+						}
+						?>
 					</div>
 					</form>
+					
+					<h3 id="kb-name">
+						<?php
+							if(isset($_POST['load-file']))
+							{
+								foreach($File as $f) {
+									echo $f->getFilename();
+								}						
+							}
+						?>
+					</h3>
+					<p id="kb-content">
+						<?php
+							if(isset($_POST['load-file']))
+							{
+								foreach($File as $f) {
+									echo $f->getContent();
+								}	
+							}
+							else
+							{
+								echo "Select and Load a File using the dropdown lists above.";
+							}
+						?>
+					</p>	
 				</div>
-				
-			<div id="kb-content">
-					<div class="courseName">
-						<?php
-							//if(isset($file))
-							//{
-								$filename = APIClient::getFiles(null, $course, $file);
-								foreach($file as $a){
-									echo $a->getName();
-								}
-							//}
-						?>
-					</div>
-					<div class="filesDisplay">
-						<?php
-							//if(isset($filename))
-							//{
-								$fileContents = APIClient::getFiles(null, $course, $filename);
-								foreach($file as $a){
-									echo $a->getContent();
-								}
-							//}
-						?>
-					</div>
 			</div>
-			
 			<script>
 				function updateCourses()
 				{
@@ -103,10 +114,10 @@
 				}
 				function changedCourse(id) {
 					var form = document.getElementById(id);
-					var course = form.getElementsByClassName("course-list")[0];
+					var course = form.getElementsByClassName("course-list")[1];
 					var file = form.getElementsByClassName("file-list")[0];
 					file.options[0].selected=true;
-					hide(file, "'courseID':".concat(course.value));
+					hide(file, "'course':".concat(course.value));
 				}
 				//author: Chris Mariani
 				function changedDepartment(id) {

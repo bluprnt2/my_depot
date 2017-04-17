@@ -35,10 +35,8 @@
         private static $token_expires;
 
         private static function setToken($t_string, $t_expires) {
-            #self::getInstance()::$token = $t_string;
-            #self::getInstance()::$token_expires = $t_expires;
-            self::$token = $t_string;
-            self::$token_expires = $t_expires;
+            self::getInstance()::$token = $t_string;
+            self::getInstance()::$token_expires = $t_expires;
         }
 
         //Tested
@@ -87,8 +85,7 @@
                 setCookie('token', $temp_token);
                 setCookie('token_expires', $temp_token_expires);
             }
-            #return self::getInstance()::$token;
-            return self::$token;
+            return self::getInstance()::$token;
         }
 
         //Tested
@@ -98,7 +95,6 @@
             $url = self::getAPIHost() . $url;
 
             $params['access_token'] = self::getToken();
-           
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
@@ -161,6 +157,7 @@
                 $params['password'] = $password;
                 $params['admin'] = $user->getAdmin();
                 $params['notify'] = $user->getNotify();
+                $params['email'] = $user->getEmail();
                 $json_array = self::APICall("/Users/add.php", $params);
             } else return false;
         }
@@ -176,6 +173,7 @@
                 $params['password'] = $password;
                 $params['admin'] = $user->getAdmin();
                 $params['notify'] = $user->getNotify();
+                $params['email'] = $user->getEmail();
                 $json_array = self::APICall("/Users/set.php", $params);
             } else return false;
         }
@@ -414,13 +412,13 @@
             $json_array = self::APICall("/TimeSlots/get.php", $params);
             $tSlots = array();
             foreach($json_array as $item) {
-                $tSlots[] = new TimeSlot(
-                    $item->{'ID'},
-                    $item->{'locID'},
-                    $item->{'deptID'},
-                    $item->{'courseID'},
-                    $item->{'startTime'},
-                    $item->{'endTime'}
+                $tSlots[] = array(
+                    'ID'        => $item->{'ID'},
+                    'locID'     => $item->{'locID'},
+                    'deptID'    => $item->{'deptID'},
+                    'courseID'  => $item->{'courseID'},
+                    'startTime' => $item->{'startTime'},
+                    'endTime'   => $item->{'endTime'}
                 );
             }
             if($tSlotID != NULL) return $tSlots[0];
@@ -576,11 +574,12 @@
 
 		}
 
-		public static function removeFile($fileID)
+		public static function removeFile($userID, $fileID)
 		{
 			$params = array();
-			$params['file_ID'] = $fileID;
-			$json_array = self::APICall("/KnowledgeBase/delete.php", $params);
+			$params['userID'] = $userID;
+			$params['fileID'] = $fileID;
+			$json_array = self::APICall("/KnowledgeBase/remove.php", $params);
 		}
 
 	public static function feedbackNotify(){

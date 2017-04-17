@@ -3,17 +3,16 @@
     require_once('../server.php');
     require_once('../Auth.php');
     require_once('../KnowledgeBase.php');
-	
+
     if (!$server->verifyResourceRequest($global_request)) {
         $server->getResponse()->send();
         die;
     } else {
         $userid = checkLogin($_POST['access_token'], $oauthsql);
-        if($userid != NULL && checkAdmin($userid, $tutorsql)) {
+        if($userid != NULL && (checkAdmin($userid, $tutorsql) || $userid == $_POST['userID'])) {
             echo json_encode(removeFile(
-                $userid,
-                $_POST['courseID'],
-                $_POST['fileName'],
+                $_POST['userID'],
+                $_POST['fileID'],
                 $tutorsql
             ));
         }

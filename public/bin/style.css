@@ -1,4 +1,8 @@
-#feedback-form-container input, select {
+body{
+    background-color: #FDF5E6;
+}
+
+#feedback-form-container input[type="text"], select {
     float: right;
     clear: right;
     margin-right: 5%;
@@ -18,7 +22,7 @@
     margin: 2px;
 }
 
-#feedback-form-container div {
+#feedback-form-container label {
     font-size: 18px;
     text-align: left;
 
@@ -27,6 +31,20 @@
 #feedback-form-container {
     font-family: "Consolas", Times, serif;
     width: 50%;
+    margin: 10px auto;
+}
+
+#feedback-form input[type="radio"]{
+    display: inline;
+    margin-left: 5px;
+}
+
+#radio-buttons {
+    font-size: 12px;
+    display: inline;
+    //width: 75%;
+    float: right;
+    margin-right: 5%;
 }
 
 #login-form-body  {
@@ -60,7 +78,7 @@
 
 .login-container input[type = "text"], input[type = "password"] {
     height: 45px;
-    widht: 300px;
+    width: 300px;
     font-size: 18px;
     margin-bottom: 20px;
     background-color: #fff;
@@ -122,58 +140,52 @@
     color: blue
 }
 
-#container{
-	background-color: #ffffff;
-	margin: 0 auto;
-	width: 85%;
-}
-
 /*Knowledge Base CSS*/
-#kb-yellowbar{
-	background-color: #ffd966;
-	content:"";
-	height: 8px;
-	width:100%;
+#kb-container{
+	margin: auto;
 }
-
 #kb-title
 {
-	background-color: #800000;
-	padding: 5px;
-	color:white;
-	padding: 10px 0px 10px 20px;
-	font-size:175%;
-	font-family: Arial;
-	font-weight: bold;
+    background-color: #800000;
+    padding: 5px;
+    color:white;
+    padding: 10px 0px 10px 40px;
+    font-size:200%;
+    font-family: Arial;
+    font-weight: bold;
+
+}
+
+#wrapper{
+    display:block;
 }
 
 #kb-selection{
-	font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif;
     font-size: 20px;
-	font-weight: bold;
-	margin: auto;
-	background-color: #bfbfbf;
-	padding: 12px 12px 0px 12px;
-	display:block;
+    font-weight: bold;
+    background-color: #bfbfbf;
+    padding: 12px 40px 1px 40px;
+    display:block;
 }
 
-#kb-selection-component1, #kb-selection-component2{
-	padding: 6px;
+#kb-selection-component{
+    padding: 6px 6px 8px 0px;
 }
 
-#kb-selection-component3{
-	padding: 6px 6px 0px 6px;
-}
-
-#kb-department, #kb-course, #kb-filename{
-	font-family: Arial, sans-serif;
+#kb-department, #kb-course, #kb-file, .settings-dropdown{
+    font-family: Arial, sans-serif;
     font-size: 18px;
-	font-weight: bold;
-	padding:5px;
-	width:320px;
-	text-align: left;
-	float: left;
-	margin: 0 auto;
+    font-weight: bold;
+    padding:5px;
+    width:320px;
+    text-align: left;
+    float: left;
+    margin: 0 auto;
+}
+
+#selDeptForm{
+	display: block;
 }
 
 #kb-loadButton {
@@ -181,98 +193,208 @@
     border: 3px solid white;
     color: white;
     padding: .5px 5px;
-	width: 150px;
+    width: 150px;
     text-align: center;
     text-decoration: none;
     font-size: 18px;
-	font-weight: bold;
-	-webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
+    font-weight: bold;
 }
 
-#kb-loadButton:hover{
-	background-color: #49E20E; /* Green */
-    color: white;
-}
-
-#kb-instructions{
-	background-color: #bfbfbf;
-	padding: 14px 14px 20px 14px;
-}
-
-#kb-instructionsTitle{
-	font-family: Arial, sans-serif;
-    font-size: 20px;
-	font-weight: bold;
-	text-decoration: underline;
-}
-
-#kb-instructionsText, span{
-	font-family: Arial, sans-serif;
-    font-size: 18px;
-	display: block;
+#kb-name{
+    display:block;
+    background-color: #ffd966;
+    color: black;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    padding:0px 15px 0px 15px;
+	margin: auto;
 }
 
 #kb-content{
-	display:block;
-	background-color: #ffd966;
-	color: black;
-	font-family: Arial, sans-serif;
-    font-size: 20px;
-	font-weight: bold;
-	padding:15px;
+    display:block;
+    background-color: #f5f5ef;
+    color: black;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    padding:15px 30px 15px 30px;
+}
+
+#kb-footer{
+    display:inline-block;
+	padding-left: 40px;
 }
 
 #header .yellowBox
 {
-	background-color: #ffd966;
-	padding-bottom: 20px;
+    background-color: #ffd966;
+    padding-bottom: 20px;
 }
 
 #header #nav
 {
-	background-color: #ffffff;
-	padding: 5px 5px 5px 5px;
+    background-color: #ffffff;
+    padding: 5px 5px 5px 5px;
 }
 
 #nav a{
-	text-decoration: none;
-	font-weight: bold;
-	font-size:125%;
-	font-family: Arial;
-	padding: 0px 10px 5px 7.5px;
-	color: black;
+    text-decoration: none;
+    font-weight: bold;
+    font-size:125%;
+    font-family: Arial;
+    padding: 0px 10px 5px 7.5px;
+    color: black;
 }
 
 #title
 {
-	background-color: #800000;
-	color:white;
-	padding: 10px 0px 10px 12.5px;
-	font-size:175%;
-	font-family: Arial;
-	font-weight: bold;
+    background-color: #800000;
+    color:white;
+    padding: 10px 0px 10px 12.5px;
+    font-size:175%;
+    font-family: Arial;
+    font-weight: bold;
 }
-
 #nav input{
-	padding-left: 5px;
+    padding-left: 5px;
 }
 
 #divider{
-	background-color: white;
+    background-color: white;
 }
 
 #main{
-	background-color: #ffd966;
-	color: black;
-	font-family: Arial, sans-serif;
-   	font-size: 25px;
-	font-weight: bold;
-	padding:15px;
+    background-color: #ffd966;
+    color: black;
+    font-family: Arial, sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    padding:15px;
+}
+
+
+
+#navbar{
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+
+#basic-bar, #tutor-bar, #admin-bar, #login-rowan-bar {
+    display: inline-block;
+    padding: 5px 0;
+    margin-bottom: -6px;
+}
+
+
+
+#basic-bar {
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    margin-left: 2%;
+}
+
+#tutor-bar {
+    margin-left: 7%;
+    border-left: 2px solid black;
+
+}
+#admin-bar {
+    border-right: 2px solid black;
+}
+
+#login-rowan-bar {
+    margin-right: 2%;
+    float: right;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+}
+
+#site-footer {    
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 300px;
+}
+
+/* -------------- HOME PAGE --------------*/
+
+#home-header {
+    display: block;
+    margin-top: 2%;
+    padding: 10px;
+    width: 100%;
+    text-indent: 25px;
+}
+
+#home-container {
+    display: block;
+    margin: 10% auto;
+    width: 75%;
+}
+
+#home-announce, #home-info {
+    display: inline-block;
+    width: 45%;
+    
+}
+
+#home-info {
+    text-align: justify;
+    font-size: 1.25em;
+    line-height: 2em;
+    float: left;
+    padding: 50px 25px;
+}
+
+#home-announce {
+    float: right;
+    padding: 30px 25px 50px 25px;
+}
+
+#home-announce a {
+    margin-top: -49px;
+    
+}
+
+/*------------------------------------------*/
+
+
+
+
+
+
+/* -------------- SETTINGS PAGE --------------*/
+
+#settings-page-container {
+    text-align: center;
+}
+
+.settings-container  {
+    min-height: 350px;
+    height:auto;
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+    display: inline-grid;
 }
 
 .settings-dropdown {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    padding:5px;
+    width:320px;
     float:none;
-    width: auto;
-    margin-right:0;
 }
+
+.settings-container button {
+    margin: 10px;
+}
+.settings-container input {
+    margin: 10px;
+}
+
+.settings-container select {
+    margin: 10px;
+}
+/*------------------------------------------*/
