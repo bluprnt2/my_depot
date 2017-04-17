@@ -54,10 +54,10 @@
 
         //Tested
         public static function getAPIHost() {
-            #$server = "http://" . $_SERVER['SERVER_NAME'] . ":";
-            #$api_url = $server . "8080";
-            #return $api_url;
-	    return 'http://ec2-54-172-36-252.compute-1.amazonaws.com';
+            $server = "http://" . $_SERVER['SERVER_NAME'] . ":";
+            $api_url = $server . "8080";
+            return $api_url;
+	    //return 'http://ec2-54-172-36-252.compute-1.amazonaws.com';
         }
 
         //Tested
@@ -306,6 +306,12 @@
             } else return false;
         }
 
+        public static function deleteCourse($id) {
+            $params = array();
+            $params['courseID'] = $id;
+            $json_array = self::APICall("/Courses/delete.php", $params);
+        }
+
         //Tested
         public static function getCourses($courseID, $deptID) {
             $params = array();
@@ -346,6 +352,12 @@
                 $params['deptName'] = $department->getName();
                 $json_array = self::APICall("/Departments/add.php", $params);
             } else return false;
+        }
+
+        public static function deleteDepartment($id) {
+            $params = array();
+            $params['deptID'] = $id;
+            $json_array = self::APICall("/Departments/delete.php", $params);
         }
 
         //Not Tested

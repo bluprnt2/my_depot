@@ -44,7 +44,7 @@
 <div class="login-container settings-container admin-form">
     <form id="addClassForm" method="POST">
         <h3>Add Class</h3>
-        <input type="text" name="class" placeholder="Course Name">
+        <input type="text" name="className" placeholder="Course Name">
         <select name="Department" class="dept-list settings-dropdown">
     		<option value="">Select a Department</option><?php
             foreach($depts as $d) {
@@ -56,6 +56,15 @@
         <br /><br />
         <button type="submit" name="addClass">Add Class</button>
     </form>
+    <?php
+        if(isset($_POST['addClass'])) {
+            $className = $_POST['className'];
+            $deptID = $_POST['Department'];
+
+            $newClass = new Course(null, $className, $deptID);
+            APIClient::addCourse($newClass);
+        }
+    ?>
 </div>
 
     <!-- Form for removing a class from the database -->
@@ -63,7 +72,7 @@
     <form id="delClassForm" method="POST">
         <h3>Remove Class</h3>
         <!-- Allows for narrowing down classes by department -->
-        <select name="Department" onChange="delClassUpdate()" class="dept-list settings-dropdown">
+        <select name="Department" onChange="changeDepartment('delClassForm')" class="dept-list settings-dropdown">
     		<option value="">Select a Department</option><?php
             foreach($depts as $d) {
                 $name = $d->getName();
@@ -76,13 +85,20 @@
     		<option value="">Select a Course</option>
     		<?php
     			foreach($courses as $a){
-    				echo "<option value=\"{ 'deptID':" . $a->getDeptID() . ", 'ID':" . $a->getID() . "}\">". $a->getName() ."</option>";
+                    $courseValues = array("deptID"=>$a->getDeptID(), "ID"=>$a->getID());
+    				echo "<option value=". json_encode($courseValues) . ">". $a->getName() ."</option>";
     			}
     		?>
     	</select>
         <br /><br />
         <button type="submit" name="delClass">Remove Class</button>
     </form>
+    <?php
+        if(isset($_POST['delClass'])) {
+            $courseID = json_decode($_POST["Course"])->{'ID'};
+            APIClient::deleteCourse($courseID);
+        }
+    ?>
 </div>
 
     <!-- Form for adding a department to the database -->
@@ -92,8 +108,14 @@
         <h3>Add Department</h3>
         <input type="text" name="deptName" placeholder="Department Name">
         <br />
-        <button type="submit" name="delClass">Add Department</button>
+        <button type="submit" name="addDept">Add Department</button>
     </form>
+    <?php
+        if(isset($_POST['addDept'])) {
+            $deptName = new Department(null, $_POST["deptName"]);
+            APIClient::addDepartment($deptName);
+        }
+    ?>
 </div>
 
     <!-- Form for removing a department from the database -->
@@ -110,8 +132,14 @@
             }
         ?></select>
         <br />
-        <button type="submit" name="delClass">Remove Department</button>
+        <button type="submit" name="delDept">Remove Department</button>
     </form>
+    <?php
+        if(isset($_POST['delDept'])) {
+            $deptID = $_POST["Department"];
+            APIClient::deleteDepartment($deptID);
+        }
+    ?>
 </div>
 
 <div class="login-container settings-container admin-form">

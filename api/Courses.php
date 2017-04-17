@@ -30,4 +30,16 @@
         }
     }
 
+    function delCourse($id, $tutorserver) {
+        $query = "DELETE FROM Courses WHERE ID=?";
+
+        if($stmnt = $tutorserver->prepare($query)) {
+            $stmnt->bind_param('i',
+                $id
+            );
+            $stmnt->execute() or trigger_error($stmt->error, E_USER_ERROR);
+            $stmnt->close();
+        }
+    }
+
 ?>
