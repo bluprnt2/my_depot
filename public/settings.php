@@ -14,6 +14,7 @@
 	}
     $depts=APIClient::getDepartments(null);
     $courses=APIClient::getCourses(null, null, null);
+	$files = APIClient::getFiles(null, null, null);
     $users=APIClient::getUser(null);
     $coursetutors=APIClient::getCourseTutors(null, null);
 ?>
@@ -204,15 +205,38 @@
    <form id="rmFileForm" method="POST">
        <h3>Remove File</h3>
        <select name="Department" class="dept-list settings-dropdown">
-           <option value="">Select a Department</option>
+			<option value="">Select a Department</option>
+           <?php
+				foreach($depts as $d) {
+					echo "<option value=" . $d->getID() . ">" . $d->getName() . "</option>";
+				}					
+			?>
        </select>
        <select name="Course" class="dept-list settings-dropdown">
-           <option value="">Select a Course</option>
+			<option value="">Select a Course</option>
+           <?php
+				foreach($courses as $c){
+					echo "<option value=" . $c->getID() . ">" . $c->getName() ."</option>";
+				}
+			?>
        </select>
        <select name="File" class="dept-list settings-dropdown">
-           <option value="">Select a File</option>
+			<option value="">Select a File</option>
+           <?php
+				foreach($files as $f){
+					echo "<option value=" . $f->getID() . ">".$f->getFilename()."</option>";
+				}
+			?>
        </select>
-       <button type="submit" name="delFile">Delete File</button>
+       <button type="submit" name="delFile">Delete File
+		   <?php
+			if(isset($_POST['delFile']))
+			{
+				$file = $_POST['File'];
+				APIClient::removeFile($file);
+			}
+			?>
+		</button>
    </form>
 </div>
 
@@ -220,21 +244,35 @@
 <div class="login-container settings-container">
 	<form id="addFileForm" method="POST">
         <h3>Add File</h3>
-        <input type="text" name="classID" placeholder="classID" />
-		<input type="text" name="authorID" placeholder="userID" />
-    	<input type="text" name="content" placeholder="Title" />
-        <textarea type="filename" name="filename" placeholder="Content" style="width:100%; height: 320px; resize: none"></textarea>
+        <select name="CourseID" class="dept-list settings-dropdown">
+			<option value="">Select a Course</option>
+           <?php
+				foreach($courses as $c){
+					echo "<option value=" . $c->getID() . ">" . $c->getName() ."</option>";
+				}
+			?>
+       </select>
+		<select name="AuthorID" class="tutor-list settings-dropdown">
+    		<option value="">Select a Author of File</option>
+    		<?php
+    			foreach($users as $t){
+                    if(!$t->getAdmin()){
+    				    echo "<option value=" . $t->getUserID() . ">". $t->getUsername() ."</option>";
+					}
+				}
+    		?>
+        </select>
+    	<input type="text" name="filename" placeholder="Title" />
+        <textarea name="content" placeholder="Content" style="width:100%; height: 320px; resize: none"></textarea>
         <br />
-        <button type="submit" name="addFile">Add File</button>
-        <button type="reset">Clear Form</button>
+        <button type="submit" name="addFile">Add File
 		<?php
 
 		if(isset($_POST['addFile']))
 		{
-    		$CourseID = $_POST["classID"];
-    		$UserID = $_POST["authorID"];
+    		$CourseID = $_POST["CourseID"];
+    		$UserID = $_POST["AuthorID"];
     		$Filename = $_POST["filename"];
-    		$Content = $_POST["content"];
 
     		$newFile = new KnowledgeFile(
     			null,
@@ -247,8 +285,9 @@
 
 			APIClient::addFile($newFile);
 		}
-
 		?>
+		</button>
+        <button type="reset">Clear Form</button>
     </form>
 </div>
 </div>
