@@ -144,7 +144,7 @@ body{
 
 /*Knowledge Base CSS*/
 #kb-container{
-	margin: 0 auto;
+	margin: auto;
 }
 #kb-title
 {
@@ -159,14 +159,13 @@ body{
 }
 
 #wrapper{
-    display:inline-block;
+    display:block;
 }
+
 #kb-selection{
     font-family: Arial, sans-serif;
     font-size: 20px;
     font-weight: bold;
-    margin: auto;
-    float:left;
     background-color: #bfbfbf;
     padding: 12px 40px 1px 40px;
     display:block;
@@ -185,6 +184,10 @@ body{
     text-align: left;
     float: left;
     margin: 0 auto;
+}
+
+#selDeptForm{
+	display: block;
 }
 
 #kb-loadButton {
@@ -206,6 +209,7 @@ body{
     font-family: Arial, sans-serif;
     font-weight: bold;
     padding:0px 15px 0px 15px;
+	margin: auto;
 }
 
 #kb-content{
