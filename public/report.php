@@ -16,20 +16,20 @@ if (isset($_POST['exp']) )
 
     if ( $answer=="html")
     {
-        header('Content-Disposition: attachment; filename=report.html');  
-        
+        header('Content-Disposition: attachment; filename=report.html');
+
     }
-    
+
     else if ($answer=="txt")
-        
+
     {
-            header('Content-Disposition: attachment; filename=report.txt');  
+            header('Content-Disposition: attachment; filename=report.txt');
     }
-    
+
     else
     {
           header('Content-Disposition: attachment; filename=report.csv');
-    
+
     }
 
 
@@ -64,12 +64,12 @@ echo "</table>";
 
  if (isset($_POST['gen']) )
 
-    {  
+    {
 
 
     $answer = $_POST['graph'];
 
- 
+
  switch($answer)
 
      {
@@ -90,54 +90,16 @@ echo "</table>";
 
 
 ?>
-
-
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-
- <head>
-        <title>Report</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
-    </head>
-   
-    <body>
-
-        <!--Yellow bar -->
-      <div class="w3-container w3-yellow">
-       <p></p>
-</div>
-
-         <!--add nav bar -->
-
-        <div class="w3-container">
-
-
-</div>
-<!--<br> skip a line-->
-<div class="w3-bar w3-border w3-light-grey">
-
-  <a class="w3-bar-item w3-button " href="#">Home</a>
-  <a class="w3-bar-item w3-button " href="#">About</a>
-  <a class="w3-bar-item w3-button " href="#">Schedule</a>
-  <a class="w3-bar-item w3-button" href="#">Feedback</a>
-   <a class="w3-bar-item w3-button " href="#">RowanHome</a>
-   <a class="w3-bar-item w3-button " href="#">Login</a>
-   <input class="w3-input w3-border " type="text" placeholder="Search Rowan" style="width:15%" >
-
-</div>
-
+<?php
+    require_once("../APIClient.php");
+    $title = "Settings";
+    include("header.php");
+    include("navbar.php");
+?>
   <!--brown bar -->
-        <div class="w3-container w3-brown">
-       <h1></h1>
+    <div class="w3-container w3-brown">
        <h2>Report</h2>
-        </div>
+    </div>
 
 
   <div class="w3-panel w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border-white w3-light-grey">
@@ -167,7 +129,7 @@ and open the template in the editor.
     <input class="w3-radio"  type="radio" name="graph" value="col">Column<br>
 
 
-     
+
         <br></br> <!--skip line under histogram box-->
         </div>
 
@@ -189,7 +151,7 @@ and open the template in the editor.
     <input class="w3-radio" type="radio" name="color" value="txt">.txt<br>
     <input class="w3-radio" type="radio" name="color" value="csv">.csv<br>
     <input class="w3-radio" type="radio" name="color" value="html">.html<br>
-    
+
     <br></br> <!--skip line under html-->
 
     </div>
@@ -203,12 +165,12 @@ and open the template in the editor.
     </div><!--end checkedbox generate-->
 
     <br></br>
-  
+
 <body>
 
 <p id="demo"></p>
 
-  
+
  <div class=" w3-grey" style="width:50%">
   <div id="myBar" class="w3-container w3-green w3-center"></div>
 </div>
@@ -218,15 +180,15 @@ and open the template in the editor.
 
 <script>
 function move() {
-  var elem = document.getElementById("myBar");   
+  var elem = document.getElementById("myBar");
   var width = 10;
   var id = setInterval(frame, 20);
   function frame() {
     if (width >= 100) {
       clearInterval(id);
     } else {
-      width++; 
-      elem.style.width = width + '%'; 
+      width++;
+      elem.style.width = width + '%';
       elem.innerHTML = width * 1  + '%';
     }
   }
@@ -237,4 +199,8 @@ function text() {
 }
 </script>
 
-
+<div id="kb-footer">
+    <?php
+        include("footer.php");
+    ?>
+</div>
