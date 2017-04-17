@@ -1,3 +1,7 @@
+body{
+    background-color: #FDF5E6;
+}
+
 #feedback-form-container input[type="text"], select {
     float: right;
     clear: right;
@@ -134,12 +138,6 @@
 
 #login-form-body .footer-text:hover {
     color: blue
-}
-
-body{
-    background-color: #ffffff;
-    margin: 0 auto;
-
 }
 
 /*Knowledge Base CSS*/

@@ -2,10 +2,7 @@
 	$title = "Register";
 	include("header.php");
 ?>
-   <!--Yellow bar -->
-    <div class="w3-container w3-yellow">
-       <p></p>
-    </div>
+
         <!--add nav bar -->
     <div class="w3-container">
 

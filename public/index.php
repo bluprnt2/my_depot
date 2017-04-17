@@ -11,7 +11,7 @@ include("navbar.php");
 ?>
 
 
-<div class="w3-container w3-sand">
+<div class="w3-container">
     <?php include("home.php"); ?>
 </div>
 
