@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <!DOCTYPE html>
 <!-- Just tagging for potential usage in Senior Proj-->
 <!-- GNU GPL License -->
@@ -127,6 +128,8 @@
 	</script>
 
 =======
+=======
+>>>>>>> refs/remotes/origin/master
 <?php
 $title = "Scheduler";
 include("header.php");
@@ -141,6 +144,9 @@ include("header.php");
     include("navbar.php");
     ?>
 </div>
+<<<<<<< HEAD
+>>>>>>> refs/remotes/origin/master
+=======
 >>>>>>> refs/remotes/origin/master
 
 <style type="text/css" media="screen">
@@ -157,6 +163,7 @@ include("header.php");
 </div>
 </div>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	<!--<br> skip a line. -->
 	<div class="w3-bar w3-border w3-light-grey">
@@ -251,6 +258,22 @@ include("header.php");
         <div class="dhx_cal_tab" name="month_tab" 
              style="right:204px;"></div>	
 
+=======
+<div id="scheduler_here" class="dhx_cal_container" 
+     style='width:100%;height:100%;'>
+    <div class="dhx_cal_navline">
+        <div class="dhx_cal_prev_button">&nbsp;</div>
+        <div class="dhx_cal_next_button">&nbsp;</div>
+        <div class="dhx_cal_today_button"></div>
+        <div class="dhx_cal_date"></div>
+        <div class="dhx_cal_tab" name="day_tab" 
+             style="right:332px;"></div>
+        <div class="dhx_cal_tab" name="week_tab" 
+             style="right:268px;"></div>
+        <div class="dhx_cal_tab" name="month_tab" 
+             style="right:204px;"></div>	
+
+>>>>>>> refs/remotes/origin/master
     </div>
     <div class="dhx_cal_header"></div>
     <div class="dhx_cal_data"></div>		
@@ -343,5 +366,8 @@ include("header.php");
     });
 </script>
 </body>
+<<<<<<< HEAD
+>>>>>>> refs/remotes/origin/master
+=======
 >>>>>>> refs/remotes/origin/master
 </html>
