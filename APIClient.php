@@ -578,7 +578,7 @@
 		{
 			$params = array();
 			$params['file_ID'] = $fileID;
-			$json_array = self::APICall("/KnowledgeBase/delete.php", $params);
+			$json_array = self::APICall("/KnowledgeBase/remove.php", $params);
 		}
     }
 ?>

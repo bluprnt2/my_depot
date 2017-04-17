@@ -11,9 +11,7 @@
         $userid = checkLogin($_POST['access_token'], $oauthsql);
         if($userid != NULL && checkAdmin($userid, $tutorsql)) {
             echo json_encode(removeFile(
-                $userid,
-                $_POST['courseID'],
-                $_POST['fileName'],
+                $_POST['fileID'],
                 $tutorsql
             ));
         }
