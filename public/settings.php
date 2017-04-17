@@ -33,7 +33,7 @@
     $users=APIClient::getUser(null);
     $coursetutors=APIClient::getCourseTutors(null, null);
 ?>
-<div class="w3-container" style="background-color: #800000; color: white;">
+<div class="w3-container" style="background-color: #800000; color: white;" >
     <h2>Settings</h2>
 </div>
 
@@ -188,19 +188,18 @@
 <div class="login-container settings-container admin-form">
     <form id="assocTutorForm" method="POST">
         <h3>Associate Tutor w/ Class</h3>
-        <select name="Department" onChange="assocTutorUpdate()" class="dept-list settings-dropdown">
+        <select name="Department" onChange="changeDepartment('assocTutorForm')" class="dept-list settings-dropdown">
     		<option value="">Select a Department</option><?php
             foreach($depts as $d) {
-                $name = $d->getName();
-                $id = $d->getID();
-                echo "<option value=" . $id . ">" . $name . "</option>";
+                echo "<option value=" . $d->getID() . ">" . $d->getName() . "</option>";
             }
         ?></select>
     	<select name="Course" class="course-list settings-dropdown">
     		<option value="">Select a Course</option>
     		<?php
     			foreach($courses as $a){
-    				echo "<option value=\"{ 'deptID':" . $a->getDeptID() . ", 'ID':" . $a->getID() . "}\">". $a->getName() ."</option>";
+                    $courseValues = array("deptID"=>$a->getDeptID(), "ID"=>$a->getID());
+    				echo "<option value=" . json_encode($courseValues) . ">". $a->getName() ."</option>";
     			}
     		?>
     	</select>
@@ -215,14 +214,21 @@
         </select>
         <button type="submit" name="assocTutor">Assign Tutor</button>
     </form>
+    <?php
+        if(isset($_POST['assocTutor'])) {
+            $tutorID = $_POST['Tutor'];
+            $courseID = json_decode($_POST['Course'])->{'ID'};
+            APIClient::addCourseTutors($tutorID, $courseID);
+        }
+    ?>
 </div>
 
     <!-- Form for removing tutors from classes or completely-->
 
 <div class="login-container settings-container admin-form">
     <form id="delTutorForm" method="POST">
-        <h3>Remove User</h3>
-        <select name="Department" onChange="delTutorUpdate()" class="dept-list settings-dropdown">
+        <h3>Remove User from Class</h3>
+        <select name="Department" onChange="changeDepartment('delTutorForm')" class="dept-list settings-dropdown">
     		<option value="">Select a Department</option><?php
             foreach($depts as $d) {
                 $name = $d->getName();
@@ -230,11 +236,12 @@
                 echo "<option value=" . $id . ">" . $name . "</option>";
             }
         ?></select>
-    	<select name="Course" onChange="delTutorUpdate()" class="course-list settings-dropdown">
+    	<select name="Course" onChange="changeCourse('delTutorForm')" class="course-list settings-dropdown">
     		<option value="">Select a Course</option>
     		<?php
     			foreach($courses as $a){
-    				echo "<option value=\"{ 'deptID':" . $a->getDeptID() . ", 'ID':" . $a->getID() . "}\">". $a->getName() ."</option>";
+                    $courseValues = array("deptID"=>$a->getDeptID(), "ID"=>$a->getID());
+    				echo "<option value=" . json_encode($courseValues) . ">". $a->getName() ."</option>";
     			}
     		?>
     	</select>
@@ -242,21 +249,29 @@
     		<option value="">Select a Tutor</option>
     		<?php
     			foreach($users as $t){
-                    if(!$t->getAdmin())
-                        $courseids = " ";
+                    if(!$t->getAdmin()) {
+                        $courseids = array();
                         foreach($coursetutors as $c){
-                            if($c->{'tutorID'} == $t->getUserID){
-                                //$courseids.concat("'courseID':" . $c->{'courseID'}. " ");
+                            if($c->{'userID'} == $t->getUserID()){
+                                $courseids[] = $c->{'courseID'};
                             }
                         }
-    				    echo "<option value=\"{" . $courseids . "'ID':" . $t->getUserID() . "}\">". $t->getUsername() ."</option>";
+                    }
+                    $courseTutorValues = array("tutorID"=>$t->getUserID(), "courseID"=>$courseids);
+				    echo "<option value=" . json_encode($courseTutorValues) . ">". $t->getUsername() ."</option>";
     			}
     		?>
         </select>
         <br /><br />
-        <button type="submit" name="delTutorClass">Remove from Course</button>
-        <button type="submit" name="delTutor">Delete Account</button>
+        <button type="submit" name="delTutorClass">Remove Association</button>
     </form>
+    <?php
+        if(isset($_POST['delTutorClass'])) {
+            $tutorID = json_decode($_POST['Tutor'])->{'tutorID'};
+            $courseID = json_decode($_POST['Course'])->{'ID'};
+            APIClient::delCourseTutors($tutorID, $courseID);
+        }
+    ?>
 </div>
 <div class="login-container settings-container">
    <form id="rmFileForm" method="POST">
@@ -349,9 +364,17 @@
     }
 
     function hide(drop, value_name, value) {
-        for(i = 1; i < drop.length; i++) {
+        for(i = 1; i <= drop.length; i++) {
             var v = true;
-            if(drop.options[i].value.includes("\"" + value_name + "\"" + ":" + "\"" + value + "\"")) v = false;
+            var checking = JSON.parse(drop.options[i].value);
+            var checked = checking[value_name];
+            if(!(checked instanceof Array)) {
+                if(checked == value) v = false;
+            } else {
+                for(j = 0; j < checked.length; j++) {
+                    if(checked[j] == value) v = false;
+                }
+            }
             drop.options[i].hidden=v;
         }
     }

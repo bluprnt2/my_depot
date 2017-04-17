@@ -29,7 +29,7 @@
 
     //Not Tested
     function delCourseTutors($courseID, $tutorID, $tutorserver) {
-        $query = "DELETE FROM CourseTutors WHERE courseID=? AND tutorID=?";
+        $query = "DELETE FROM CourseTutors WHERE courseID=? AND userID=?";
 
         if($stmnt = $tutorserver->prepare($query)) {
             $stmnt->bind_param('ii', $courseID, $tutorID);

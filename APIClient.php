@@ -504,10 +504,10 @@
 
         //Not Tested
         public static function addCourseTutors($tutorID, $courseID) {
-            if($tutorid != null && $courseid != null) {
+            if($tutorID != null && $courseID != null) {
                 $params = array();
-                $params['tutorID'] = $tutorID;
-                $params['courseID'] = $courseID;
+                $params['tutor_id'] = $tutorID;
+                $params['course_id'] = $courseID;
                 $json_array = self::APICall("/CourseTutors/add.php", $params);
             } else return false;
         }
@@ -515,8 +515,8 @@
         //Not Tested
         public static function delCourseTutors($tutorID, $courseID) {
             $params = array();
-            $params['tutorID'] = $tutorID;
-            $params['courseID'] = $courseID;
+            $params['tutor_id'] = $tutorID;
+            $params['course_id'] = $courseID;
             $json_array = self::APICall("/CourseTutors/delete.php", $params);
         }
 
