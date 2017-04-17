@@ -53,10 +53,10 @@ if (isset($_POST['submit'])) {
 </div>
 
 
-<div class="w3-container w3-orange">
+<div class="w3-container w3-brown">
     <H3>Drop-in Tutoring Services</H3>
 </div>
-<div id="feedback-form-container" class="w3-container w3-amber w3-leftbar w3-border w3-border-brown">
+<div id="feedback-form-container" class="w3-container w3-light-grey w3-leftbar w3-border w3-border-brown">
     <H1>Feedback Form</H1>
     <form id="feedback-form" action="feedbackform.php" method="POST">
         <div class="w3-margin-bottom"><label>Subject: </label><input type="text" name="subject"></div>
