@@ -64,7 +64,7 @@
                 ?>
             </select>
         </div>
-        <input type="password" id="newPass" name="newPass" placeholder="New Password">
+        <input type="password" id="newPass" onkeyup="this.onchange()" onchange="checkPassword()" name="newPass" placeholder="New Password">
         <input type="password" id="confirmPass" onkeyup="this.onchange()" onchange="checkPassword()" placeholder="Confirm New Password">
         <br />
         <button type="submit" id="setPassButton" name="setPassword" disabled>Apply</button>
@@ -481,11 +481,14 @@
         var newPass = document.getElementById("newPass");
         var confirmPass = document.getElementById("confirmPass");
         var passbutton = document.getElementById("setPassButton");
-        var color = "Red";
+        var color = "Black";
         passbutton.disabled = true;
-        if(newPass.value == confirmPass.value && confirmPass.value != "") {
+        var emptyPass = confirmPass.value == "" || newPass.value == "";
+        if(newPass.value == confirmPass.value && !emptyPass) {
             color = "Green";
             passbutton.disabled = false;
+        } else if (!emptyPass){
+            color = "Red";
         }
         newPass.style.color = color;
         confirmPass.style.color = color;
