@@ -3,7 +3,7 @@
     $title = "Settings";
     include("header.php");
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['setPassword']))
+    if ($_SERVER["REQUEST_METHOD"] == "POST")
         echo "<meta http-equiv='refresh' content='0'>";
 
     include("navbar.php");
@@ -32,6 +32,7 @@
     $locs = APIClient::getLocations(null, null, null);
     $users=APIClient::getUser(null);
     $coursetutors=APIClient::getCourseTutors(null, null);
+    $c_user  = APIClient::getCurrentUser();
 ?>
 <div class="w3-container" style="background-color: #800000; color: white;" >
     <h2>Settings</h2>
@@ -47,7 +48,6 @@
         <h3>Change Password</h3>
         <div class="admin-form">
             <!--put dropdown for tutorselect here -->
-            <?php $c_user = APIClient::getCurrentUser(); ?>
             <select name="User" class="settings-dropdown">
                 <option value=<?php echo $c_user->getUserID(); ?>>
                     Select User (Default: <?php echo $c_user->getUserName(); ?>)
@@ -55,9 +55,10 @@
                 <?php
                     if($is_admin) {
                         foreach($users as $u) {
-                            if($u->getUserID() != $c_user->getUserID())
+                            if($u->getUserID() != $c_user->getUserID()) {
                                 echo "<option value=" . $u->getUserID() . ">";
                                 echo $u->getUserName() . "</option>";
+                            }
                         }
                     }
                 ?>
@@ -74,6 +75,52 @@
             $userid = $_POST['User'];
             $user = new User($userid, null, null, null, null, null, null);
             APIClient::setUser($user, $newPassword);
+        }
+    ?>
+</div>
+<div class="login-container settings-container">
+    <form id="changeEmailForm" method="POST">
+        <h3>Change Email</h3>
+        <div class="admin-form">
+            <!--put dropdown for tutorselect here -->
+            <?php
+            $c_user_values = array("ID"=>$c_user->getUserID(),
+                                   "Email"=>$c_user->getEmail(),
+                                   "Notify"=>$c_user->getNotify()); ?>
+            <select name="User" id="userEmail" class="settings-dropdown" onchange="userEmailChange()">
+                <option value=<?php echo json_encode($c_user_values); ?>>
+                    Select User (Default: <?php echo $c_user->getUserName(); ?>)
+                </option>
+                <?php
+                    if($is_admin) {
+                        foreach($users as $u) {
+                            if($u->getUserID() != $c_user->getUserID()) {
+                                $userValues = array("ID"=>$u->getUserID(),
+                                                    "Email"=>$u->getEmail(),
+                                                    "Notify"=>$u->getNotify());
+                                echo "<option value=" . json_encode($userValues) . ">";
+                                echo $u->getUserName() . "</option>";
+                            }
+                        }
+                    }
+                ?>
+            </select>
+        </div>
+        <input type="text" id="currentEmailSel" name="EmailAddr" placeholder="Email Address">
+        <div class="admin-form">
+            <input type="checkBox" id="userNotify" name="userNotify" value="0"/>
+            <label for="userNotify">Notify?</label>
+        </div>
+        <br />
+        <button type="submit" id="setEmailButton" name="setEmail">Apply</button>
+    </form>
+    <?php
+        if(isset($_POST['setEmail'])){
+            $emailAddr = $_POST['EmailAddr'];
+            $notify = isset($_POST['userNotify'])? true : false;
+            $userid = json_decode($_POST['User'])->{'ID'};
+            $user = new User($userid, null, null, null, null, $notify, $emailAddr);
+            APIClient::setUser($user, null);
         }
     ?>
 </div>
@@ -397,6 +444,7 @@
             admin_forms.item(i).style.display = "none";
         }
     }
+    userEmailChange();
 
     function hide(drop, value_name, value) {
         for(i = 1; i <= drop.length; i++) {
@@ -435,12 +483,20 @@
         var passbutton = document.getElementById("setPassButton");
         var color = "Red";
         passbutton.disabled = true;
-        if(newPass.value == confirmPass.value) {
+        if(newPass.value == confirmPass.value && confirmPass.value != "") {
             color = "Green";
             passbutton.disabled = false;
         }
         newPass.style.color = color;
         confirmPass.style.color = color;
+    }
+
+    function userEmailChange() {
+        var selectedEmail = document.getElementById("currentEmailSel");
+        var selectedNotify = document.getElementById("userNotify");
+        var userEmail = JSON.parse(document.getElementById("userEmail").value);
+        selectedEmail.value = userEmail.Email;
+        selectedNotify.checked = userEmail.Notify == "1";
     }
 </script>
 <div id="kb-footer">
