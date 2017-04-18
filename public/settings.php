@@ -3,7 +3,7 @@
     $title = "Settings";
     include("header.php");
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST")
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['setPassword']))
         echo "<meta http-equiv='refresh' content='0'>";
 
     include("navbar.php");
@@ -42,6 +42,41 @@
 
     <!-- Form for adding a class to the database -->
 
+<div class="login-container settings-container">
+    <form id="changePassForm" method="POST">
+        <h3>Change Password</h3>
+        <div class="admin-form">
+            <!--put dropdown for tutorselect here -->
+            <?php $c_user = APIClient::getCurrentUser(); ?>
+            <select name="User" class="settings-dropdown">
+                <option value=<?php echo $c_user->getUserID(); ?>>
+                    Select User (Default: <?php echo $c_user->getUserName(); ?>)
+                </option>
+                <?php
+                    if($is_admin) {
+                        foreach($users as $u) {
+                            if($u->getUserID() != $c_user->getUserID())
+                                echo "<option value=" . $u->getUserID() . ">";
+                                echo $u->getUserName() . "</option>";
+                        }
+                    }
+                ?>
+            </select>
+        </div>
+        <input type="password" id="newPass" name="newPass" placeholder="New Password">
+        <input type="password" id="confirmPass" onkeyup="this.onchange()" onchange="checkPassword()" placeholder="Confirm New Password">
+        <br />
+        <button type="submit" id="setPassButton" name="setPassword" disabled>Apply</button>
+    </form>
+    <?php
+        if(isset($_POST['setPassword'])) {
+            $newPassword = $_POST['newPass'];
+            $userid = $_POST['User'];
+            $user = new User($userid, null, null, null, null, null, null);
+            APIClient::setUser($user, $newPassword);
+        }
+    ?>
+</div>
 <div class="login-container settings-container admin-form">
     <form id="addClassForm" method="POST">
         <h3>Add Class</h3>
@@ -392,6 +427,20 @@
         var tutor = form.getElementsByClassName("tutor-list")[0];
         tutor.options[0].selected=true;
         hide(tutor, "courseID", JSON.parse(course.value).ID);
+    }
+
+    function checkPassword() {
+        var newPass = document.getElementById("newPass");
+        var confirmPass = document.getElementById("confirmPass");
+        var passbutton = document.getElementById("setPassButton");
+        var color = "Red";
+        passbutton.disabled = true;
+        if(newPass.value == confirmPass.value) {
+            color = "Green";
+            passbutton.disabled = false;
+        }
+        newPass.style.color = color;
+        confirmPass.style.color = color;
     }
 </script>
 <div id="kb-footer">
