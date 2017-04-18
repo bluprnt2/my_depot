@@ -33,8 +33,8 @@
     <h2>Log Tutor Session</h2>
     </div>
     <img src ="bin/images/background.jpg" alt = "Background" style="width:100%">
-    <div id = "main" class = "w3-display-container w3-display-middle w3-light-grey" 
-          style ="height:400px; width:600px;margin-top:150px;margin:0 auto;text-align: center; border-radius: 10px; border-color: solid brown">
+    <div id = "main" class = "w3-display-container w3-light-grey w3-display-bottommiddle w3-third" 
+          style ="height:425px; width:600px;margin-top:50px;margin:0 auto;text-align: center; border-radius: 10px; border-color: solid brown;">
          <form class = "w3-container" method = "POST">
              <h2><b>Tutor Check-In</b></h2>
     <!------------------------ Code for the two drop down menus- Courses, Tutors------------------------------>
@@ -65,7 +65,7 @@
 	 </p>
 	<p style = "font-size: 80%">
 	    
-	    <textarea name="Comment" style = "width: 50%; height: 80%">Additional Comments</textarea><br>
+	    <textarea name="Comment" style = "padding: 10px; font-size: 14px; font-weight:normal; width: 100%; height: 120px;">Additional Comments</textarea><br>
             
         </p>
 	<input type ="submit" value = " Log Session " style="background-color: #800000; color: white;" class = "w3-btn", name = "submit">
@@ -87,7 +87,7 @@
 	}
 
 	?>
-        <input type="reset" value = " Clear Form " class = "w3-btn" style="background-color: #800000; color: white;">
+        <input type="reset" value = " Clear Form " class = "w3-btn" style=" background-color: #800000; color: white;">
 	</form>
 	</div>
 	

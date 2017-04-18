@@ -188,9 +188,10 @@ body{
 
 #kb-loadButton {
     background-color: #800000;
-    border: 3px solid white;
+    border: 2px solid white;
     color: white;
-    padding: .5px 5px;
+	margin-top: 1px;
+    padding: 1px 5px;
     width: 150px;
     text-align: center;
     text-decoration: none;

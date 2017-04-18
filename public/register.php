@@ -18,7 +18,7 @@
     </div>
 	<img src ="bin/images/background1.jpg" alt = "Background" style="width:100%">
 	<!--- Form begins here ----->
-	<div class = "w3-container w3-light-grey w3-display-middle" style = "width:50%; height:50%; padding: 15px;">
+	<div class = "w3-container w3-light-grey w3-display-bottommiddle w3-third" style = "width:50%; height:490px; padding: 20px;">
 	<form id="register" action="register.php" method="post">
 	<label>First Name</label>
     <input class="w3-input w3-border w3-round" type="text" name="firstname">
@@ -47,7 +47,8 @@
 	<input class = "w3-radio" type = "radio" name = "notify" value = "no">
 	<label>No</label>
     <p>
-    <input type="submit" name="submit"  class="w3-block w3-display-bottom-middle w3-large" style="background-color: #800000; color: white;">
+    <input type="submit" name="submit"  class="w3-btn w3-display-bottom-middle w3-large" style="background-color: #800000; color: white; margin: center;">
+	<input type="reset" value = "Reset" class = "w3-btn w3-large" style="width: 90px; background-color: #800000; color: white;">
     </p>
 
 	<?php
