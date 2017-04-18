@@ -12,44 +12,46 @@
 
 
  <?php
-                require_once("../APIClient.php");
-   
-          $numDept=0;
-              $departments = APIClient::getDepartments(null);
-                foreach($departments as $d) {
+require_once("../APIClient.php");
+
+$numDept     = 0;
+$departments = APIClient::getDepartments(null);
+foreach ($departments as $d) {
+    
+    
+    
+    $numDept++;
+}
+
+// echo $numDept;
 
 
-                  $numDept++;
-                }
 
-              // echo $numDept;
+$numCourses = 0;
 
-
-
-                $numCourses = 0 ;
-
-                     $courses = APIClient::getCourses(null, null, null);
-                    
-                
-                //  num of counrses per detp
-
-                      foreach($departments as $d) {
-                       foreach($courses as $a){
-                
-                          
-                          $numCourses++;
-                 
-                  }
+$courses = APIClient::getCourses(null, $departments);
 
 
-                }
+//  num of counrses p
 
-           //   echo "Total courses per :  $numCourses" ;
 
-       $cPd = $numCourses/$numDept; 
+foreach ($courses as $a) {
+    
+  
+    
+    $numCourses++;
+    
+}
 
-               //  echo round($cPd,0);
-                  ?> 
+//echo "Total courses  :  $numCourses" ;
+
+
+
+
+$cPd = $numCourses / $numDept;
+
+//  echo round($cPd,0);
+?> 
 
 
 
@@ -78,24 +80,25 @@
 
       function drawChart() {
 
-        var C = <?php echo $numCourses ?>;
-        var CperD = <?php echo $cPd ?>;
-        var D = <?php echo $numDept ?>;
+        var C = <?php echo $numCourses; ?>;
+        var CperD = <?php echo $cPd; ?>;
+        var D = <?php echo $numDept; ?>;
 
         var data = google.visualization.arrayToDataTable(
           [
            ['Task', 'Courses per Departments'],
 
-           [' Total Courses ',  C ],
-           ['Average Courses per Department',  CperD ],
+           ['Total Courses: <?php echo $numCourses ; ?> ',  C ],
+           ['Total Departments: <?php echo $numDept; ?>',  D],
+         
  
 
 
-])
+            ])
 
 
         var options = {
-          title: 'Tutoring Report Activities :  Courses and Departments',
+          title: 'Tutoring Report Activities : Courses and Departments',
           is3D: true,
         };
 
