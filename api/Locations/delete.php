@@ -11,7 +11,7 @@
         $userid = checkLogin($_POST['access_token'], $oauthsql);
         if($userid != NULL && checkAdmin($userid, $tutorsql)) {
             echo json_encode(
-                delLocation(
+                delLoc(
                     $_POST['locID'],
                     $tutorsql
                 )

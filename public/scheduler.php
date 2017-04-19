@@ -17,10 +17,10 @@ include("header.php");
     </style>
 
 
-	<div style="height:50px;background-color:#92543f">
+	<div style="height:50px;background-color:#800000;">
     <div id="contbox" style="position: relative; font: bold 17px Arial">
         <div
-            style="position: absolute; left: 10px; top: -4px; color:#fafafa">
+            style="position: absolute; left: 10px; top: -4px; color:white">
             <h3>Schedule Viewer</h3>
 		</div>
     </div>
@@ -65,7 +65,7 @@ include("header.php");
     			}
             ?></select>
         </div>
-        <input type="submit" name="addTimeSlotForm" value="Submit" class="btn-login">
+        <input type="submit" name="addTimeSlotForm" value="Submit" class="btn-login" style="background-color: #800000; color: white;">
     </form><br />
 	</div>
 

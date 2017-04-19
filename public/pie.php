@@ -10,8 +10,55 @@
 </head>
 <body>
 
-<div class="w3-bar w3-border w3-light-grey">
+
+ <?php
+require_once("../APIClient.php");
+
+$numDept     = 0;
+$departments = APIClient::getDepartments(null);
+foreach ($departments as $d) {
     
+    
+    
+    $numDept++;
+}
+
+// echo $numDept;
+
+
+
+$numCourses = 0;
+
+$courses = APIClient::getCourses(null, $departments);
+
+
+//  num of counrses p
+
+
+foreach ($courses as $a) {
+    
+  
+    
+    $numCourses++;
+    
+}
+
+//echo "Total courses  :  $numCourses" ;
+
+
+
+
+$cPd = $numCourses / $numDept;
+
+//  echo round($cPd,0);
+?> 
+
+
+
+<div class="w3-bar w3-border w3-light-grey">
+  
+  
+  
         <a class="w3-bar-item w3-button" href="index.php">Home</a>
         <a class="w3-bar-item w3-button" href="#">About</a>
         <a class="w3-bar-item w3-button" href="scheduler.php">Schedule</a>
@@ -28,18 +75,30 @@
     <script type="text/javascript">
       google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
+
+
+
       function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['Announcement',     3],
-          ['Courses',      5],
-          ['TimeSlot',  6],
-          ['Departments', 7],
+
+        var C = <?php echo $numCourses; ?>;
+        var CperD = <?php echo $cPd; ?>;
+        var D = <?php echo $numDept; ?>;
+
+        var data = google.visualization.arrayToDataTable(
+          [
+           ['Task', 'Courses per Departments'],
+
+           ['Total Courses: <?php echo $numCourses ; ?> ',  C ],
+           ['Total Departments: <?php echo $numDept; ?>',  D],
          
-        ]);
+ 
+
+
+            ])
+
 
         var options = {
-          title: 'Tutoring Report Activities',
+          title: 'Tutoring Report Activities : Courses and Departments',
           is3D: true,
         };
 
@@ -50,5 +109,9 @@
   </head>
   <body>
     <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+
+
+
+
   </body>
 </html>

@@ -53,10 +53,10 @@ if (isset($_POST['submit'])) {
 </div>
 
 
-<div class="w3-container w3-brown">
-    <H3>Drop-in Tutoring Services</H3>
+<div class="w3-container" style="background-color: #800000; color: white;">
+    <H3>Feedback</H3>
 </div>
-<div id="feedback-form-container" class="w3-container w3-light-grey w3-leftbar w3-border w3-border-brown">
+<div id="feedback-form-container" class="w3-container w3-light-grey w3-leftbar w3-border w3-border-grey">
     <H1>Feedback Form</H1>
     <form id="feedback-form" action="feedbackform.php" method="POST">
         <div class="w3-margin-bottom"><label>Subject: </label><input type="text" name="subject"></div>
@@ -94,8 +94,8 @@ if (isset($_POST['submit'])) {
 
         <textarea onfocus="clearText(this)" name="comment" rows="20" cols="50">     Enter any comments here!</textarea>
 
-        <button type="submit" name="submit">Submit</button>
-        <button type="reset" name="clear">Clear</button>
+        <button type="submit" name="submit" style="background-color: #800000; color: white; font: Arial;">Submit</button>
+        <button type="reset" name="clear" style="background-color: #800000; color: white; font: Arial;">Clear</button>
 
         <?php
         /**
