@@ -10,14 +10,9 @@ include("header.php");
 include("navbar.php");
 ?>
 
+<?php include("home.php"); ?>
 
-<div class="w3-container">
-    <?php include("home.php"); ?>
-</div>
-
-<div class="w3-container">
-    <?php include("footer.php"); ?>
-</div>
+<?php include("footer.php"); ?>
 
 </body>
 </html>

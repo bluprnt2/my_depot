@@ -329,11 +329,12 @@ body{
     border-right: 2px solid black;
 }
 
-#site-footer {    
+#site-footer {
+    font-size: 0.75em;
     position: fixed;
     bottom: 0;
     right: 0;
-    width: 300px;
+    width: 375px;
 }
 
 /* -------------- HOME PAGE --------------*/
@@ -444,3 +445,5 @@ body{
     margin-bottom: auto;*/
 }
 /*------------------------------------------*/
+
+
