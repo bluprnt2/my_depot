@@ -36,3 +36,7 @@ function openModal(){
 function closeModal(){
     document.getElementById('modal').style.display='none';
 }
+
+function clearText(e){
+   e.value = '';
+}

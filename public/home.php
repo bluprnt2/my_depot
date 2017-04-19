@@ -1,4 +1,7 @@
-<h1 class="page-header w3-yellow">Rowan University Drop-in Tutoring Application</h1>
+<div class="w3-container w3-brown">
+    <h1 class="">Rowan University Drop-in Tutoring Application</h1>
+</div>
+
 <div id="home-container" class="w3-container">
     
     <div id="home-info" class="w3-panel w3-khaki w3-margin">

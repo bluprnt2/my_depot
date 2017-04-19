@@ -42,8 +42,8 @@ if (isset($_POST['submit'])) {
     $title = $_POST['subject'];
     $comment = $_POST['comment'];
     $viewed = 0;
-    $survey = new Survey($id, $course_id, $tutor_id, $rating, $title, $comment, $viewed);    
-    APIClient::addSurvey($survey);    
+    $survey = new Survey($id, $course_id, $tutor_id, $rating, $title, $comment, $viewed);
+    APIClient::addSurvey($survey);
 }
 ?>
 <div class="w3-bar w3-border w3-light-grey">
@@ -92,9 +92,7 @@ if (isset($_POST['submit'])) {
             </div>        
         </div>
 
-        <textarea name="comment" rows="20" cols="50">
-            Comments
-        </textarea>
+        <textarea onfocus="clearText(this)" name="comment" rows="20" cols="50">     Enter any comments here!</textarea>
 
         <button type="submit" name="submit">Submit</button>
         <button type="reset" name="clear">Clear</button>
@@ -116,29 +114,28 @@ if (isset($_POST['submit'])) {
     </form>
 
     <div id="modal" class="w3-modal">
-        <div class="w3-modal-content">
+        <div class="w3-modal-content w3-display-middle">
             <div class="w3-container">
                 <span onclick="closeModal()" class="w3-button w3-display-topright">&times;</span>
-                <p>Thank you for sending us feedback!</p>
+                <p style="font-size: 3em;">Thank you for sending us feedback!</p>
             </div>
         </div>
     </div>
-</div>
 
-<div class="w3-container">
-    <?php include("footer.php"); ?>
-</div>
+    <div class="w3-container">
+        <?php include("footer.php"); ?>
+    </div>
 
-<?php
-if (isset($_POST['submit'])) {
-    echo '<script>'
-    . 'openModal()'
-    . '</script>';
-} else {
-    echo '<script>'
-    . 'closeModal()'
-    . '</script>';
-}
-?>
+    <?php
+    if (isset($_POST['submit'])) {
+        echo '<script>'
+        . 'openModal()'
+        . '</script>';
+    } else {
+        echo '<script>'
+        . 'closeModal()'
+        . '</script>';
+    }
+    ?>
 </body>
 </html>
