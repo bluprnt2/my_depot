@@ -127,9 +127,9 @@
 <div class="login-container settings-container admin-form">
     <form id="addClassForm" method="POST">
         <h3>Add Class</h3>
-        <input type="text" name="className" placeholder="Course Name">
+        <input type="text" name="className" placeholder="Course Name (Required)">
         <select name="Department" class="dept-list settings-dropdown">
-    		<option value="">Select a Department</option><?php
+    		<option value="">Select a Department (Required)</option><?php
             foreach($depts as $d) {
                 $name = $d->getName();
                 $id = $d->getID();
@@ -165,7 +165,7 @@
         ?></select>
         <br />
     	<select name="Course" class="course-list settings-dropdown">
-    		<option value="">Select a Course</option>
+    		<option value="">Select a Course (Required)</option>
     		<?php
     			foreach($courses as $a){
                     $courseValues = array("deptID"=>$a->getDeptID(), "ID"=>$a->getID());
@@ -228,9 +228,9 @@
 <div class="login-container settings-container admin-form">
     <form id="addLocForm" method="POST">
         <h3>Add Location</h3>
-        <input type="text" name="locName" placeholder="Building Name">
+        <input type="text" name="locName" placeholder="Building Name (Required)">
         <br />
-        <input type="text" name="locRoomNumber" placeholder="Room Number">
+        <input type="text" name="locRoomNumber" placeholder="Room Number (Required)">
         <br />
         <button type="submit" name="addLoc">Add Location</button>
     </form>
@@ -277,7 +277,7 @@
             }
         ?></select>
     	<select name="Course" class="course-list settings-dropdown">
-    		<option value="">Select a Course</option>
+    		<option value="">Select a Course (Required)</option>
     		<?php
     			foreach($courses as $a){
                     $courseValues = array("deptID"=>$a->getDeptID(), "ID"=>$a->getID());
@@ -286,7 +286,7 @@
     		?>
     	</select>
         <select name="Tutor" class="tutor-list settings-dropdown">
-    		<option value="">Select a Tutor</option>
+    		<option value="">Select a Tutor (Required)</option>
     		<?php
     			foreach($users as $t){
                     if(!$t->getAdmin())
@@ -319,7 +319,7 @@
             }
         ?></select>
     	<select name="Course" onChange="changeCourse('delTutorForm')" class="course-list settings-dropdown">
-    		<option value="">Select a Course</option>
+    		<option value="">Select a Course (Required)</option>
     		<?php
     			foreach($courses as $a){
                     $courseValues = array("deptID"=>$a->getDeptID(), "ID"=>$a->getID());
@@ -328,7 +328,7 @@
     		?>
     	</select>
         <select name="Tutor" class="tutor-list settings-dropdown">
-    		<option value="">Select a Tutor</option>
+    		<option value="">Select a Tutor (Required)</option>
     		<?php
     			foreach($users as $t){
                     if(!$t->getAdmin()) {
@@ -376,7 +376,7 @@
 			?>
        </select>
        <select name="File" class="tutor-list settings-dropdown">
-			<option value="">Select a File</option>
+			<option value="">Select a File (Required)</option>
            <?php
 				foreach($files as $f){
                     $fileValues = array("ID"=>$f->getID(), "userID"=>$f->getUserID(), "courseID"=>$f->getCourseID());
@@ -400,11 +400,20 @@
 <div class="login-container settings-container">
 	<form id="addFileForm" method="POST">
         <h3>Add File</h3>
-        <select name="CourseID" class="dept-list settings-dropdown">
-			<option value="">Select a Course</option>
+       <select name="Department" class="dept-list settings-dropdown" onChange="changeDepartment('addFileForm')">
+			<option value="">Select a Department</option>
+           <?php
+				foreach($depts as $d) {
+					echo "<option value=" . $d->getID() . ">" . $d->getName() . "</option>";
+				}
+			?>
+       </select>
+        <select name="CourseID" class="course-list settings-dropdown">
+			<option value="">Select a Course (Required)</option>
            <?php
 				foreach($courses as $c){
-					echo "<option value=" . $c->getID() . ">" . $c->getName() ."</option>";
+                    $courseValues = array("deptID"=>$c->getDeptID(), "ID"=>$c->getID());
+					echo "<option value=" . json_encode($courseValues) . ">" . $c->getName() ."</option>";
 				}
 			?>
        </select>
@@ -416,7 +425,7 @@
 
 		if(isset($_POST['addFile']))
 		{
-    		$CourseID = $_POST["CourseID"];
+    		$CourseID = json_decode($_POST["CourseID"])->{'ID'};
     		$Filename = $_POST["filename"];
             $Content = $_POST["content"];
 
