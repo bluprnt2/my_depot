@@ -37,21 +37,25 @@
 					$courses = APIClient::getCourses(null, null, null);
 					$files = APIClient::getFiles(null, null, null);
 				?>
-					<form id="selDeptForm" method="POST">					
+									
 					<div id="kb-selection-component">
-						<select id="kb-department" name="department" class="dept-list" onChange="updateCourses()">
+					<form id="selDeptForm" method="POST">	
+						<select id="kb-department" name="department" class="dept-list" onChange="changeDepartment('selDeptForm')">
 							<option value="">Select a Department</option>
 							<?php
 								foreach($departments as $d) {
-									echo "<option value=" . $d->getID() . ">" . $d->getName() . "</option>";
-								}					
+									$name = $d->getName();
+									$id = $d->getID();
+									echo "<option value=" . $id . ">" . $name . "</option>";		
+								}									
 							?>
 						</select>
-						<select id="kb-course" name="course" class="course-list" onChange="updateFiles()">
+						<select id="kb-course" name="course" class="course-list" onChange="changeCourse('selDeptForm')">
 							<option value="">Select a Course</option>
 							<?php
 								foreach($courses as $c){
-									echo "<option value=\"{ 'deptID':" . $c->getDeptID() . ", 'ID':" . $c->getID() . "}\">". $c->getName() ."</option>";
+									$courseValues = array("deptID"=>$c->getDeptID(), "ID"=>$c->getID());
+									echo "<option value=" . json_encode($courseValues) . ">". $c->getName() ."</option>";
 								}
 							?>
 						</select>
@@ -59,11 +63,15 @@
 							<option value="">Select a File</option>
 							<?php
 								foreach($files as $f){
-									echo "<option value=\"{ 'courseID':" . $f->getCourseID() . ", 'ID':" . $f->getID() . "}\">". $f->getFilename() ."</option>";
+									$fileValues = array("fileID"=>$f->getID(), "courseID"=>$f->getCourseID());
+									echo "<option value=" . json_encode($fileValues) . ">". $f->getFilename() ."</option>";
 								}
 							?>
 						</select>
-						<input id="kb-loadButton" type="submit" name="load-file" value ="Load File">
+						<div id="kb-buttons">
+							<input id="kb-loadButton" type="submit" name="load-file" value ="Load File">
+							<input id="kb-clearButton" type="reset" value = "Clear Form">
+						</div>
 						<?php
 						if(isset($_POST['load-file']))
 						{
@@ -71,11 +79,12 @@
 							$fileExplode = explode(',', $file);
 							$fileExplode[0] = preg_replace('/[^0-9.]+/', '', $fileExplode[0]);
 							$fileExplode[1] = preg_replace('/[^0-9.]+/', '', $fileExplode[1]);
-							$File = APIClient::getFiles((int)$fileExplode[1], (int)$fileExplode[0], null);
+							$File = APIClient::getFiles((int)$fileExplode[0], (int)$fileExplode[1], null);
 						}
 						?>
-					</div>
 					</form>
+					</div>
+					
 					
 					<h3 id="kb-name">
 						<?php
@@ -100,38 +109,38 @@
 								echo "Select and Load a File using the dropdown lists above.";
 							}
 						?>
-					</p>	
+					</p>
 				</div>
 			</div>
-			<script>
-				function updateCourses()
-				{
-					changedDepartment("selDeptForm");
-				}
-				function updateFiles()
-				{
-					changedCourse("selDeptForm");
-				}
-				function changedCourse(id) {
-					var form = document.getElementById(id);
-					var course = form.getElementsByClassName("course-list")[1];
-					var file = form.getElementsByClassName("file-list")[0];
-					file.options[0].selected=true;
-					hide(file, "'course':".concat(course.value));
-				}
-				//author: Chris Mariani
-				function changedDepartment(id) {
+			<script> //author: Chris Mariani
+				function changeDepartment(id) {
 					var form = document.getElementById(id);
 					var dept = form.getElementsByClassName("dept-list")[0];
 					var course = form.getElementsByClassName("course-list")[0];
 					course.options[0].selected=true;
-					hide(course, "'deptID':".concat(dept.value));
+					hide(course, "deptID", dept.value);
 				}
-				//author: Chris Mariani
-				function hide(drop, value) {
-					for(i = 1; i < drop.length; i++) {
+				
+				function changeCourse(id) {
+					var form = document.getElementById(id);
+					var course = form.getElementsByClassName("course-list")[0];
+					var file = form.getElementsByClassName("file-list")[0];
+					file.options[0].selected=true;
+					hide(file, "courseID", JSON.parse(course.value).ID);
+				}
+				
+				function hide(drop, value_name, value) {
+					for(i = 1; i <= drop.length; i++) {
 						var v = true;
-						if(drop.options[i].value.includes(value)) v = false;
+						var checking = JSON.parse(drop.options[i].value);
+						var checked = checking[value_name];
+						if(!(checked instanceof Array)) {
+							if(checked == value) v = false;
+						} else {
+							for(j = 0; j < checked.length; j++) {
+								if(checked[j] == value) v = false;
+							}
+						}
 						drop.options[i].hidden=v;
 					}
 				}

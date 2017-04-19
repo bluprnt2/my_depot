@@ -140,7 +140,7 @@ body{
     color: blue
 }
 
-/*Knowledge Base CSS*/
+/* -------------- KNOWLEDGE BASE --------------*/
 #kb-container{
 	margin: auto;
 }
@@ -169,6 +169,8 @@ body{
 
 #kb-selection-component{
     padding: 6px 6px 8px 0px;
+	display: block;
+	height: 15px;
 }
 
 #kb-department, #kb-course, #kb-file, .settings-dropdown{
@@ -186,17 +188,35 @@ body{
 	display: block;
 }
 
-#kb-loadButton {
+#kb-buttons{
+	display: inline-block;
+	margin-left: 10px;
+}
+#kb-loadButton{
     background-color: #800000;
     border: 2px solid white;
     color: white;
-	margin-top: 1px;
-    padding: 1px 5px;
+    padding-top: 1px;
     width: 150px;
     text-align: center;
     text-decoration: none;
     font-size: 18px;
     font-weight: bold;
+	float: left;
+}
+
+#kb-clearButton {
+    background-color: #800000;
+    border: 2px solid white;
+    color: white;
+	margin-left: 8px;
+    padding-top: 1px;
+    width: 150px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+	float: left;
 }
 
 #kb-name{
@@ -206,11 +226,11 @@ body{
     font-family: Arial, sans-serif;
     font-weight: bold;
     padding:0px 15px 0px 15px;
-	margin: auto;
-margin-top: 10px;
+	margin-top: 44px;
 }
 
 #kb-content{
+	margin-top: 10px;
     display:block;
     background-color: #f5f5ef;
     color: black;
