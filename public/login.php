@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <link rel = "stylesheet" type = "text/css" href ="bin/font-awesome.css">
     </head>
     <body id="login-form-body">
-        <div class = "login-container">
+        <div class = "login-container" style="height:auto;">
             <img src ="bin/images/RowanSeal.png"/>
             <form id="login-form" action="login.php" method="post">
                 <div class="form-input">
@@ -45,7 +45,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <button type="submit" formaction="index.php">BACK</button>
                 <!-- <input type="reset" name="back" value="BACK" class="btn-login" formaction="index.php"> -->
             </form><br>
-            <a href ="#">Forgot Password?</a>
             <p>Login Form powered by <a class="footer-text" href="http://www.rowan.edu/home/">Rowan University </a></p>
         </div>
     </body>
