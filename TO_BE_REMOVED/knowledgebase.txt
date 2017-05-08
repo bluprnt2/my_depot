@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+        <title>Knowledge Base | Rowan University</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="style.css"/>
+    </head>
+	<body>
+		<div id="container">
+			<!--Yellow bar -->
+			<div class="w3-container w3-yellow">
+				<p></p>
+			</div>
+			<div class="w3-container>
+			</div>
+			
+			<div class="w3-bar w3-border w3-white">
+				<a class="w3-bar-item w3-button " href="#">Home</a>
+				<a class="w3-bar-item w3-button " href="#">About</a>
+				<a class="w3-bar-item w3-button " href="#">Schedule</a>
+				<a class="w3-bar-item w3-button" href="#">Feedback</a>
+				<a class="w3-bar-item w3-button " href="#">RowanHome</a>
+				<a class="w3-bar-item w3-button " href="#">Login</a>
+				<input class="w3-input w3-border " type="text" placeholder="Search Rowan" style="width:15%" >	  
+			</div>
+			
+			<div class="w3-container w3-brown">
+				<h1></h1>
+				<h2>KNOWLEDGE BASE</h2>
+				</div>
+		
+			<div id="content">
+				<div id="courseSelection">
+				
+				</div>
+				
+				<div id="main">
+				
+				</div>
+			</div>
+			
+			<div id="footer">
+			
+			</div>
+		</div>
+	</body>
+</html>
