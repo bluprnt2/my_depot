@@ -1,0 +1,63 @@
+Hello everyone, welcome to the video demonstration for our Senior Project design. 
+
+What we set out to do is create a web application to serve as as a drop-in tutoring resource at Rowan University
+
+Our site is hosted on an Amazon AWS domain, which gave us the freedom to come up with a unique 2-server architecture
+
+We wil go into more detail on said architecture after the video
+
+There are three views when it comes to the site: a student's view, the tutor's, and lastly the administrator's view
+
+Students have a basic view to the site and can only access the about us page, schedule page, and the feedback form
+
+And now here's Aanchal to tell us more about these three pages, starting with the About page
+
+
+
+==== Back @ Home ====
+
+And now we're going to show the tutor's view. We will start by logging in with  tutor account
+
+As you can see, three new links are made available once a tutor has logged in. 
+
+The first is the logbook, which has a form that allows the tutor to log each and every session they hold during their hours. 
+
+The course and tutor fields are populated via API retrievals, and addiditonal comments can be made on the session if necessary
+
+Next is the shared knowledgebase. With this page, tutors can easily share vital information with one another, to better assist any student that comes in for help.
+
+Notes are filtered by Department, Course, and then file name
+
+Lastly, tutors can access the settings page to make any changes to their user account. As well as add or remove files to the knowledgebase
+
+==== Back @ Home ====
+
+And now we are going to log in as an administrator to get a look at what other features are available to them
+
+Think of administrators as someone like the department secretary or chair. 
+
+Someone whose concern is how frequently the drop in tutoring services are being utilized
+
+When an administrator is logged in, the navigation menu reveals extra features next to the ones already available for tutors. 
+
+In the settings page, more options are unlocked to give the administrator more control over the functionality of the site
+
+These options include: adding and removing classes, departments, or tutoring locations
+
+An administrator can also assign or remove tutors from a specific course
+
+The reports page allows an administrator to generate a report on all of the sessions that have taken place so far
+
+Lastly, the register page allows for an administrator to add new tutors and administrators to the database of current users
+
+==== Back @ Home ====
+
+This concludes the video demonstration of our web application. 
+
+We hope it served as a good description of what we created for the course
+
+Next, our backend developers will go into detail about the 2-server architecutre we've implemented into the site
+
+After that, we will go into more detail about the Schedule page, which uses an open sourced javascript package
+
+Thank you  
