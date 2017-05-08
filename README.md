@@ -15,4 +15,5 @@ The main goal is to make drop-in tutoring services offered by various department
 	
 ### Team Members
    Front-end: Bryan Nunez, Aanchal Chaturvedi, Eric Carpizo, Huy Ly, Jeremiah Caban
+
    Back-end: Chris Mariani, Tim Baker
